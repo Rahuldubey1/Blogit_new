@@ -1,0 +1,8 @@
+.navbar-nav{
+    margin-left: 590px;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 2.5rem;
+    padding-left: 2.5rem;
+}

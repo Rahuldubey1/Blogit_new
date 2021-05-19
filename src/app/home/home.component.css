@@ -1,0 +1,27 @@
+.navbar {
+    float: right;
+    /* padding: 0.5rem 10rem; */
+}
+
+#rahul{
+    top: 30%;
+    color: orange;
+    left: 50%;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    font-size: 5em;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 2.5rem;
+    padding-left: 2.5rem;
+}
+#sect1 {  
+    height: 650 px;  
+    color: #fff;
+    background-image: url("../../assets/images/1.png");  
+    background-size: 100% ;  
+    background-size: cover;  
+}  
