@@ -1,0 +1,12 @@
+.setting{
+    text-align: center;
+    color:blue;
+}
+.setting button {
+    float: right;
+    margin:  97px 100px 100px 100px;
+}
+
+.detail{
+    margin:  100px 100px 100px 200px;
+}

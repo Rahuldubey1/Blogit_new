@@ -1,0 +1,20 @@
+<div class="container" *ngIf="token != null">
+    <a href="www.google.com">Your Blogs</a>
+    <hr>
+    <!-- <div *ngfor="let blog of userPost"> -->
+        <p>Title</p>
+        <p>Slogs</p>
+        <p>Body</p>
+        <p>Description</p>
+        <p>Author</p>
+    <!-- </div> -->
+</div>
+<div class="container" *ngIf="token == null">
+    <a href="www.youtube.com">Global Blogs</a>
+    <hr>
+    <p>Title</p>
+    <p>Slogs</p>
+    <p>Body</p>
+    <p>Description</p>
+    <p>Author</p>
+</div>
