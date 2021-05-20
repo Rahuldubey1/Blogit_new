@@ -2,3 +2,11 @@
     text-align: center;
     color:blue;
 }
+.setting h2 {
+    float: right;
+    margin:  97px 100px 100px 100px;
+}
+
+.detail{
+    margin:  100px 100px 100px 200px;
+}

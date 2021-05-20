@@ -10,14 +10,16 @@
                         <a class="nav-link" routerLink="/blogs" routerLinkActive="active">Blogs</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="/sign" routerLinkActive="active">Sign In</a>
+                        <a class="nav-link" routerLink="/login" routerLinkActive="active">Sign In</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="/signup" routerLinkActive="active">Sign up</a>
+                        <a class="nav-link" routerLink="/register" routerLinkActive="active">Sign up</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" routerLink="/Settings" routerLinkActive="active">Settings</a>
-                    </li>
+                    <div *ngIf="token != null">
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/settings" routerLinkActive="active">Settings</a>
+                        </li>
+                    </div>    
                 </ul>
             </div>
         </div>

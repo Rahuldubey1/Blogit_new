@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component , OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthServiceService } from './auth-service.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'social-blogging-site';
+  token:any;
+  
+  ngOnInit(): void {
+    this.token = localStorage.getItem("token");
+  }
 }

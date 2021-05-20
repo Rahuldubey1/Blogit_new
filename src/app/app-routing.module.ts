@@ -9,9 +9,9 @@ import { SettingsComponent } from './settings/settings.component';
 const routes: Routes = [
   {path:"", component:HomeComponent},
   {path:"blogs", component:BlogsComponent},
-  {path:"sign", component:SignInComponent},
-  {path:"signup", component:SignUpComponent},
-  {path:"Settings", component:SettingsComponent}
+  {path:"login", component:SignInComponent},
+  {path:"register", component:SignUpComponent},
+  {path:"settings", component:SettingsComponent}
 ];
 
 @NgModule({

@@ -25,7 +25,7 @@ export class SignUpComponent implements OnInit {
      });
   }
   alreadyRegister() {
-    this.router.navigateByUrl('/sign')
+    this.router.navigateByUrl('/login')
   }
   onSubmit() {
     if (this.mySignupForm.valid){

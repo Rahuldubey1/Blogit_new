@@ -22,7 +22,7 @@ export class SignInComponent implements OnInit {
     });
   }
   register(){
-    this.router.navigateByUrl('/signup');
+    this.router.navigateByUrl('/register');
   }
   onSubmit() {
     if (this.mySignupForm.valid){

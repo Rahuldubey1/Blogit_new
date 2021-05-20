@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -25,7 +25,11 @@ export class AuthServiceService {
     return this.http.post(`https://conduit.productionready.io/api/users`,user);
   }
   getUser(data:any):Observable<any>{
-    return this.http.post(`https://conduit.productionready.io/api/user`,user);
+    return this.http.get(`https://conduit.productionready.io/api/user`,{
+      headers: new HttpHeaders({
+        'Authorization': 'Token '+ data
+      })
+    });
 
   }
 }
