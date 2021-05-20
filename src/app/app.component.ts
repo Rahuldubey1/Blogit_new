@@ -11,7 +11,10 @@ export class AppComponent {
   title = 'social-blogging-site';
   token:any;
   
+  constructor(public authService:AuthServiceService){}
+  
   ngOnInit(): void {
-    this.token = localStorage.getItem("token");
+    console.log(this.authService.getToken())
+    // this.token = localStorage.getItem("token");
   }
 }

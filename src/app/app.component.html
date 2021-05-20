@@ -15,7 +15,7 @@
                     <li class="nav-item">
                         <a class="nav-link" routerLink="/register" routerLinkActive="active">Sign up</a>
                     </li>
-                    <div *ngIf="token != null">
+                    <div *ngIf="authService.getToken()">
                         <li class="nav-item">
                             <a class="nav-link" routerLink="/settings" routerLinkActive="active">Settings</a>
                         </li>

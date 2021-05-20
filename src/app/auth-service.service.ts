@@ -32,4 +32,10 @@ export class AuthServiceService {
     });
 
   }
+  getPost(data:any):Observable<any> {
+    return this.http.get(`https://conduit.productionready.io/api/articles`)
+  }
+  getToken() {
+    return  localStorage.getItem("token");
+  }
 }

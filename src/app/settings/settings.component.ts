@@ -10,7 +10,7 @@ import { AuthServiceService } from '../auth-service.service';
 export class SettingsComponent implements OnInit {
   token:any;
   userData:any;
-  constructor(private authService:AuthServiceService,private route:Router) { 
+  constructor(private authService:AuthServiceService,private router:Router) { 
     this.token = localStorage.getItem("token");
   }
 
@@ -18,11 +18,16 @@ export class SettingsComponent implements OnInit {
     this.authService.getUser(this.token).subscribe(result=> {
       if(result && result.user) {
         this.userData = result.user
-        console.log(this.userData)
+      } else {
+        alert("sdfg")
       }
-  })
-  
+    })
   }
 
+  public logout()
+  {
+    localStorage.removeItem('token');
+    this.router.navigateByUrl('/login')
+  }
 
 }

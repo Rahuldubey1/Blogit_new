@@ -29,7 +29,10 @@ export class SignInComponent implements OnInit {
       this.authService.login(this.mySignupForm.value).subscribe(result=> {
         if( result && result.user) {
           localStorage.setItem("token",result.user.token)
+        } else {
+          alert("sdfg");
         }
+        this.router.navigateByUrl('/blogs')
       })
     }     
   }
