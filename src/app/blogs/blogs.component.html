@@ -1,7 +1,15 @@
 <div class="container">
-    <a href="www.google.com">Your Blogs</a>
-    <a href="www.youtube.com">Global Blogs</a>
-
+    <button class="btn btn-primary" (click)="checkBlogs()">Your Blogs</button>
+</div>
+<div class="blogs">
+    <button class="btn btn-primary blogs">Global Blogs</button>
+</div>
+<div class="article">
+    <button class="btn btn-primary ">Home</button>
+    <button class="btn btn-primary">New Article</button>
+    <button class="btn btn-primary">Settings</button>
+</div>
+<div class="container" *ngIf="visible">
     <hr>
     <p>Title</p>
     <p>Slogs</p>

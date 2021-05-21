@@ -1,7 +1,18 @@
 .container{
     margin-top: 20px;
 }
-.container a {
+.container button {
     margin-left: 10px;
     margin-right: 10px;
+}
+.blogs{
+    margin-left: 150px;
+    margin-top: -21px;
+}
+.article{
+    float: right;
+    margin: -40px 67px;
+}
+.article button {
+    margin-right: 20px;
 }

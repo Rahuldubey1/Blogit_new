@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthServiceService } from '../auth-service.service';
 
 @Component({
@@ -8,18 +9,36 @@ import { AuthServiceService } from '../auth-service.service';
 })
 export class BlogsComponent implements OnInit {
 
-  constructor(private authService:AuthServiceService) { }
+  constructor(private authService:AuthServiceService, private router:Router) { }
   token:any
   userPost:any
+  visible:boolean = false
+  userFeed:any
+  
   ngOnInit(): void {
+    this.token = localStorage.getItem("token");
     this.authService.getPost(this.token).subscribe(result=> {
       if(result && result.articles) {
         this.userPost = result.articles
-        console.log(this.userPost)
       } else {
         alert("sdfg")
       }
     })
-    this.token = localStorage.getItem("token");
+    this.authService.getFeed(this.token).subscribe(result=> {
+      if(result && result.articles) {
+        this.userFeed = result.articles
+        console.log(this.userFeed)
+      }
+    })
+    
+    
+  }
+  checkBlogs(){
+    if(this.token){
+      this.visible = !this.visible
+    }
+    else {
+      this.router.navigateByUrl('/login')
+    }
   }
 }
