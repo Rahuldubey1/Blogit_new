@@ -4,27 +4,73 @@
 <div class="blogs">
     <button class="btn btn-primary blogs">Global Blogs</button>
 </div>
-<div class="article">
+
+<div *ngIf="showMainContent" class="article">
     <button class="btn btn-primary ">Home</button>
     <button class="btn btn-primary">New Article</button>
-    <button class="btn btn-primary">Settings</button>
+    <button class="btn btn-primary" (click)="editArticle()">Edit Article</button>
 </div>
-<div class="container" *ngIf="visible">
+
+<div *ngIf="!showMainContent">
+    <div class="container" *ngIf="visible">
+        <p>Title</p>
+        <p>Body</p>
+        <p>Author</p>
+    </div>
+    <div class="container" >
+        <div *ngFor="let blog of userPost; index as i">
+            <div class="p-3 mb-2 fl bg-secondary text-white">   
+                <div (click)="complete_blog(blog)">{{i+1}}.<b>{{blog.title}}</b></div>
+                <div>{{blog.body}}</div>
+                <div>{{blog.description}}</div>
+                <div>{{ blog.createdAt | date }} </div>
+            </div>
+        </div>    
+    </div>
+</div>
+<!-- <div>
+    <input type="text" placeholder="Article Title">
+    <input type="text" placeholder="What's this article about?">
+    <input type="text" placeholder="Write your Article">
+    <input type="text" placeholder="Article Title">
+</div> -->
+<div *ngIf="showEditContent" class="edit">   
+    <form>
+        <div class="form-group">
+        <label for="exampleFormControlInput1">Article Title</label>
+        <input type="email" class="form-control" placeholder="Article Title" value="{{showBlogs.title}}">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">What's this article about?</label>
+            <input type="email" class="form-control" placeholder="What's this article about?" value="{{showBlogs.description}}">
+        </div>
+        <div class="form-group">
+        <label for="exampleFormControlTextarea1">Write your Article</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" value="{{showBlogs.body}}"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Enter tags</label>
+            <input type="email" class="form-control" placeholder="Enter tags">
+            </div>
+        <button type="submit" class="btn btn-primary float-right">Submit</button>
+    </form>
+</div>
+<div *ngIf="showMainContent || !showEditContent">
+    <div class="title"><h1>{{showBlogs.title}}</h1>
+        <h4>{{showBlogs.description}}</h4>
+    </div>
+    <div class="user">
+        <img src="../assets/images/2.png" class="img1">
+        <p class="name">{{showBlogs.author.username}}</p>
+        <p class="date">{{ showBlogs.createdAt | date }} </p> 
+        <img src="../assets/images/3.png" class="img2">
+        <img src="../assets/images/4.png" class="img3">
+    </div>
+    <div class="content">
+        <p>{{showBlogs.body}}</p>
     <hr>
-    <p>Title</p>
-    <p>Slogs</p>
-    <p>Body</p>
-    <p>Description</p>
-    <p>Author</p>
-</div>
-<div class="container" >
-    <div *ngFor="let blog of userPost">
-        <p>Title : {{blog.title}} </p>
-        <p>Slogs : {{blog.slogs}}</p>
-        <p>Body: {{blog.body}}</p>
-        <p>Description: {{blog.description}}</p>
-        <p>Author: {{blog.author}}</p>
-        <hr>
-        <br>
-    </div>    
+        <label for="exampleFormControlTextarea1">Write your Comment</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+        <button type="submit" class="btn btn-primary float-right mt-2">Submit</button>
+    </div>
 </div>

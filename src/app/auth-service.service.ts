@@ -38,13 +38,13 @@ export class AuthServiceService {
   getToken() {
     return  localStorage.getItem("token");
   }
-  getFeed(data:any):Observable<any> {
-    console.log(data)
-    return this.http.get(`https://conduit.productionready.io/api/articles/feed`,{
-      headers: new HttpHeaders({
-        'Authorization': 'Token '+ data
-      })
-    })
+  // getFeed(data:any):Observable<any> {
+  //   console.log(data)
+  //   return this.http.get(`https://conduit.productionready.io/api/articles/feed`,{
+  //     headers: new HttpHeaders({
+  //       'Authorization': 'Token '+ data
+  //     })
+  //   })
 
-  }
+  // }
 }
