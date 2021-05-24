@@ -21,7 +21,7 @@
 #sect1 {  
     height: 650 px;  
     color: #fff;
-    background-image: url("../../assets/images/1.png");  
+    /* background-image: url("../../assets/images/1.png");   */
     background-size: 100% ;  
     background-size: cover;  
 }  

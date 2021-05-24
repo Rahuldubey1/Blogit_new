@@ -11,7 +11,8 @@ const routes: Routes = [
   {path:"blogs", component:BlogsComponent},
   {path:"login", component:SignInComponent},
   {path:"register", component:SignUpComponent},
-  {path:"settings", component:SettingsComponent}
+  {path:"settings", component:SettingsComponent},
+  {path: '**', component:HomeComponent}
 ];
 
 @NgModule({
