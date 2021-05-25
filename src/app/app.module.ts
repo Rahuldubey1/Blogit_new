@@ -9,12 +9,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ArticleListComponent } from './article-list/article-list.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponent
+    routingComponent,
+    ArticleListComponent
   ],
   imports: [
     BrowserModule,

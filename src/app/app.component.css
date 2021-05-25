@@ -1,8 +1,13 @@
-.navbar-nav{
-    margin-left: 590px;
+.navbar a{
+    color:rgb(52 204 229);  
 }
-
-.navbar-expand-lg .navbar-nav .nav-link {
-    padding-right: 2.5rem;
-    padding-left: 2.5rem;
+.logo{
+    font-family: titillium web,sans-serif;
+    font-size: 1.5rem!important;
+    padding-top: 0!important;
+    margin-left: 50px!important;
+    color:rgb(52 204 229)!important;
+}
+.navbar ul{
+    margin-right: 50px;
 }

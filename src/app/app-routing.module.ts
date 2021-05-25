@@ -5,14 +5,15 @@ import { BlogsComponent } from './blogs/blogs.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SettingsComponent } from './settings/settings.component';
+import { CompleteArticleComponent } from './complete-article/complete-article.component';
+
 
 const routes: Routes = [
-  {path:"", component:HomeComponent},
-  {path:"blogs", component:BlogsComponent},
+  {path:"", component:BlogsComponent},
   {path:"login", component:SignInComponent},
   {path:"register", component:SignUpComponent},
   {path:"settings", component:SettingsComponent},
-  {path: '**', component:HomeComponent}
+  {path:"complete-article", component:CompleteArticleComponent}
 ];
 
 @NgModule({
@@ -25,5 +26,7 @@ export const routingComponent = [
   BlogsComponent,
   SignInComponent,
   SignUpComponent,
-  SettingsComponent
+  SettingsComponent,
+  CompleteArticleComponent
+
 ]

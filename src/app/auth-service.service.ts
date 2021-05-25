@@ -1,13 +1,30 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable,EventEmitter,Output } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthServiceService {
+  data:any
+  value:any
 
   constructor(private http:HttpClient) { }
+  setData(value:any){
+    this.data = value
+  }
+  getData(){
+    return this.data
+  }
+  setValue(data:any){
+    this.value = data
+    console.log(this.value,"set")
+  }
+  getValue() {
+    alert("11")
+    return this.value
+  }
+
   login(data:any):Observable<any>{
     var user = {
       'user':data

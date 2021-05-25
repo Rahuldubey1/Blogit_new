@@ -55,10 +55,14 @@ export class BlogsComponent implements OnInit {
     })
     
     
+    
   }
+  
   checkBlogs(){
-    if(this.token){
-      this.visible = !this.visible
+    alert("sdf")
+    if(this.token) {
+      this.visible  = !this.visible
+      this.authService.setValue(this.visible);
     }
     else {
       this.router.navigateByUrl('/login')

@@ -1,0 +1,30 @@
+<div class="article-page">
+    <div class="banner">
+        <div class="container">
+            <h1>title</h1>
+            <div class="article-meta">
+                <a href="">
+                    <img src='{{data.author.image}}'>
+                </a>
+                <div class="info">
+                    <a class="author">{{data.author.username}}</a>
+                    <span class="date">{{data.createdAt | date }}</span>
+                </div>
+                <button class="btn btn-sm action-btn btn-outline-secondary">&nbsp;Follow {{data.author.username}}
+                <i class="ion-plus-round"></i>
+                </button>
+                <button class="btn btn-sm btn-primary">&nbsp; Unfavorite Article 
+                    <i class="ion-heart"></i>
+                    <span class="counter"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="container page">
+        <div class="row article-content">
+            <div class="col-md-12">
+                <p>{{data.body}}</p>
+            </div>    
+        </div>
+    </div>
+</div>

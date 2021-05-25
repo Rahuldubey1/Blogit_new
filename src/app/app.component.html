@@ -1,34 +1,41 @@
 <div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div >
-          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <div>
-                        <li class="nav-item">
-                            <a class="nav-link" routerLink="/blogs" routerLinkActive="active">Blogs</a>
-                        </li>
-                    </div>
-                    <div *ngIf="!authService.getToken()">
-                        <li class="nav-item">
-                            <a class="nav-link" routerLink="/login" routerLinkActive="active">Sign In</a>
-                        </li>
-                    </div>
-                    <div *ngIf="!authService.getToken()">
-                        <li class="nav-item">
-                            <a class="nav-link" routerLink="/register" routerLinkActive="active">Sign up</a>
-                        </li>
-                    </div>
-                    <div *ngIf="authService.getToken()">
-                        <li class="nav-item">
-                            <a class="nav-link" routerLink="/settings" routerLinkActive="active">Settings</a>
-                        </li>
-                    </div>    
-                </ul>
+    <nav class="navbar navbar-expand-sm bg-light">
+        <a class="logo">Blogger.com</a>
+        <ul class="navbar-nav ml-auto">
+            <!--ss="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li> -->
+            <div>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
             </div>
-        </div>
+            <div *ngIf="!authService.getToken()">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/login" routerLinkActive="active">Sign In</a>
+                </li>
+            </div>
+            <div *ngIf="!authService.getToken()">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/register" routerLinkActive="active">Sign up</a>
+                </li>
+            </div>
+            <div *ngIf="authService.getToken()">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/settings" routerLinkActive="active">New Article</a>
+                </li>
+            </div>
+            <div *ngIf="authService.getToken()">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/settings" routerLinkActive="active">Settings</a>
+                </li>
+            </div>
+            <div *ngIf="authService.getToken()">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/settings" routerLinkActive="active">Name</a>
+                </li>
+            </div>    
+        </ul>
     </nav>
 </div>
 <div>
