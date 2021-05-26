@@ -1,5 +1,9 @@
 <div class="container center_div rahul">
     <form [formGroup]="mySignupForm" (submit)="onSubmit()">
+        <div class="sign">
+            <h1>Sign up</h1>
+            <h5 (click)="alreadyRegister()">Already have account?</h5>
+        </div>
         <div class="mb-3">
             <label for="Username" class="form-label">Username:</label>
             <input type="text" class="form-control" formControlName="username" placeholder="Enter username">
@@ -13,6 +17,5 @@
             <input type="password" class="form-control" formControlName="password" placeholder="password">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
-        <button class="btn btn-primary" (click)="alreadyRegister()">Already Register</button>
     </form>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, SimpleChanges} from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs'
 import { AuthServiceService } from '../auth-service.service';
@@ -16,9 +16,12 @@ export class ArticleListComponent implements OnInit {
   userBlog:any
   data:any
   
+  ngAfterContentInit():void {
+    this.data= this.authService.getValue();
+    
+  }
 
   ngOnInit(): void {
-    console.log(this.data)
     this.token = localStorage.getItem("token");
     this.authService.getPost(this.token).subscribe(result=> {
       if(result && result.articles) {
@@ -27,7 +30,7 @@ export class ArticleListComponent implements OnInit {
         alert("There is error")
       }
     })
-    this.authService.getFeed(this.token).subscribe(result=> {
+      this.authService.getFeed(this.token).subscribe(result=> {
       if(result && result.articles) {
         this.userFeed = result.articles
       }
@@ -36,9 +39,15 @@ export class ArticleListComponent implements OnInit {
 
   showFeed(blog:any)
   {
-    this.data= this.authService.getValue()
     this.userBlog = blog  
     this.authService.setData(this.userBlog)
-    // this.router.navigateByUrl('/complete-article')
+    this.router.navigateByUrl('/complete-article')
+  }
+  showProfile(blog:any)
+  {
+    this.userBlog = blog
+    console.log(this.userBlog,"hhhh")
+    this.authService.setProfile(this.userBlog)
+    this.router.navigateByUrl('/profile')
   }
 }

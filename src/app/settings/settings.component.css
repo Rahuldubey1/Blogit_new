@@ -18,3 +18,9 @@
 .box{
     margin: 211px 200px 0px 220px;
 }
+.pull-xs-right{
+    float: right!important;
+}
+.btn .btn-outline-danger {
+    margin-bottom: 10px !important;
+}

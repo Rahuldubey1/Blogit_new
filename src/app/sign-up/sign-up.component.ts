@@ -19,9 +19,9 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit() {
      this.mySignupForm = new FormGroup({
-       'username' : new FormControl(''),
-       'email' : new FormControl(''),
-       'password' : new FormControl(''),
+       'username' : new FormControl(null,Validators.required),
+       'email' : new FormControl(null,Validators.required),
+       'password' : new FormControl(null,Validators.required),
      });
   }
   alreadyRegister() {
@@ -31,7 +31,7 @@ export class SignUpComponent implements OnInit {
     if (this.mySignupForm.valid){
       this.authService.signup(this.mySignupForm.value).subscribe(result=>{
         if(true){
-          console.log(result)
+          this.router.navigateByUrl('/login')
         }
       })
     }    

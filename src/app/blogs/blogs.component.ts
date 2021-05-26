@@ -12,6 +12,8 @@ export class BlogsComponent implements OnInit {
   editArticle1:FormGroup;
 
   constructor(private authService:AuthServiceService, private router:Router) { }
+  tagList:any=[]
+  selectedTab:Number
   token:any
   userPost:any
   visible:boolean = false
@@ -53,16 +55,20 @@ export class BlogsComponent implements OnInit {
         // console.log(this.userFeed)
       }
     })
-    
-    
-    
-  }
+    this.authService.getTag().subscribe(result=> {
+      if(result){
+        this.tagList = result
+        this.tagList = this.tagList["tags"]
+      }
+  })
+}
   
-  checkBlogs(){
-    alert("sdf")
+  checkBlogs(tab:Number){
+    this.selectedTab = tab
     if(this.token) {
-      this.visible  = !this.visible
-      this.authService.setValue(this.visible);
+      // this.visible  = !this.visible
+      // this.authService.setValue(this.visible);
+      console.log("set",this.visible)
     }
     else {
       this.router.navigateByUrl('/login')

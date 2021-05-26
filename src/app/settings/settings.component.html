@@ -1,4 +1,4 @@
-<div class="setting">
+<!-- <div class="setting">
     <h1>User Details</h1>
     <button class="btn btn-primary" (click)="logout()">Logout</button>
     <button class="btn btn-primary" (click)="showUser()">Update user</button>
@@ -27,4 +27,40 @@
         </div>
         <button type="submit" class="btn btn-primary float-right">Submit</button>
     </form>
+</div> -->
+<div class="setting-page">
+    <div class="container page">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 col-xs-12">
+                <h1 class="text-xs-center">Your settings</h1>
+                <form [formGroup]="updateData" (submit)="updateUser()" class="ng-valid ng-dirty ng-touched">
+                    <fieldset>    
+                        <fieldset class="form-group">
+                            <input class="form-control ng-pristine ng-valid ng-touched"
+                            formcontrolname="image" placeholder="URL of profile picture" type="text">
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <input class="form-control form-control-lg ng-valid ng-touched ng-dirty"
+                            formcontrolname="username" placeholder="Username" type="text" value="{{userData.username}}">
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <textarea class="form-control form-control-lg ng-untouched ng-pristine ng-valid"
+                            formcontrolname="bio" placeholder="Short bio about you" rows="8"></textarea>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <input class="form-control form-control-lg ng-untouched ng-pristine ng-valid" 
+                            formcontrolname="email" placeholder="Email" type="email" value="{{userData.email}}">
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <input class="form-control form-control-lg ng-valid ng-dirty ng-touched"
+                            formcontrolname="password" placeholder="New Password" type="password">
+                        </fieldset>
+                        <button class="btn btn-lg btn-primary pull-xs-right" type="submit"> Update settings</button>
+                    </fieldset>
+                </form>
+                <hr>
+                <button class="btn btn-outline-danger" (click)="logout()">Click here to logout. </button>
+            </div>
+        </div>
+    </div>
 </div>

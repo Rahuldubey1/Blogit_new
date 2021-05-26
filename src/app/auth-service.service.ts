@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class AuthServiceService {
   data:any
   value:any
+  profile:any
 
   constructor(private http:HttpClient) { }
   setData(value:any){
@@ -18,19 +19,22 @@ export class AuthServiceService {
   }
   setValue(data:any){
     this.value = data
-    console.log(this.value,"set")
+    // console.log(this.value)
   }
   getValue() {
-    alert("11")
     return this.value
+  }
+  setProfile(data:any){
+    this.profile = data
+  }
+  getProfile(){
+    return this.profile
   }
 
   login(data:any):Observable<any>{
     var user = {
       'user':data
     }
-    console.log("I am server")
-    console.log(user)
     return this.http.post(`https://conduit.productionready.io/api/users/login`,user);
   }
   signup(data:any):Observable<any>{
@@ -64,9 +68,6 @@ export class AuthServiceService {
     const headers = { 'Authorization':'Token '+ data.token };
     const body = { body: data.body  };
       return this.http.post(`https://conduit.productionready.io/api/articles/${data.slug}/comments`,body,{headers})
-      // headers: new HttpHeaders({
-      //   'Authorization': 'Token '+ data.token
-      // })
   }
   updateArticle(data:any):Observable<any> {
     let title = data.title
@@ -96,7 +97,6 @@ export class AuthServiceService {
     var user = {
       'user':data
     }
-    console.log(user)
     return this.http.put(`https://conduit.productionready.io/api/user`,user,{headers});
   }
   addLike(data:any):Observable<any>{
@@ -104,5 +104,8 @@ export class AuthServiceService {
     const headers = { 'Authorization':'Token '+ token };
     return this.http.post(` https://conduit.productionready.io/api/articles/${data}/favorite`,'',{headers});
     
+  }
+  getTag(){
+    return this.http.get(` https://conduit.productionready.io/api/tags`);
   }
 }

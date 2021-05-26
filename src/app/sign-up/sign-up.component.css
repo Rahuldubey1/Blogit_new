@@ -5,3 +5,17 @@
 .btn-primary{
     margin: 10px 10px 10px 10px;
 }
+.btn-primary{
+    margin: 10px 10px 10px 10px;
+    background-color:rgb(52 204 229) !important;
+}
+.sign{
+    text-align: center;
+}
+.sign h5{
+    color:rgb(52 204 229);
+}
+input .ng-touched .ng-invalid{ 
+    border: 1px solid red;
+    box-shadow: 0 0 4px inset;
+}

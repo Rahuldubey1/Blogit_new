@@ -5,23 +5,25 @@
         <div class="container">
             <p>feed.title</p>
             <p>feed.body</p>
-            <p>feed.description}}</p>
+            <p>feed.description</p>
         </div>
     </div>
     <div class="container">
         <div *ngFor="let blog of userPost">
             <div class="article-preview">   
                 <div class="article-meta">
-                    <a href="">
-                        <img src='{{blog.author.image}}'>
+                    <a (click)="showProfile(blog)">
+                        <a href="">
+                            <img src='{{blog.author.image}}'>
+                        </a>
+                        <div class="info">
+                            <a class="author">{{blog.author.username}}</a>
+                            <span class="date">{{blog.createdAt | date }}</span>
+                        </div>
+                        <button class="btn btn-sm btn-outline-primary pull-xs-right">
+                            <i class="ion-heart"></i>1
+                        </button>
                     </a>
-                    <div class="info">
-                        <a class="author">{{blog.author.username}}</a>
-                        <span class="date">{{blog.createdAt | date }}</span>
-                    </div>
-                    <button class="btn btn-sm btn-outline-primary pull-xs-right">
-                        <i class="ion-heart"></i>1
-                    </button>
                     <a class="preview-link" (click)="showFeed(blog)">
                         <h1>{{blog.title}}</h1>
                         <p>{{blog.description}}</p>
