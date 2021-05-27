@@ -7,6 +7,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { SettingsComponent } from './settings/settings.component';
 import { CompleteArticleComponent } from './complete-article/complete-article.component';
 import { ProfileComponent } from './profile/profile.component';
+import { NewArticleComponent } from './new-article/new-article.component';
+
 
 
 const routes: Routes = [
@@ -15,7 +17,8 @@ const routes: Routes = [
   {path:"register", component:SignUpComponent},
   {path:"settings", component:SettingsComponent},
   {path:"complete-article", component:CompleteArticleComponent},
-  {path:"profile", component:ProfileComponent}
+  {path:"profile", component:ProfileComponent},
+  {path:"new-article", component:NewArticleComponent}
 ];
 
 @NgModule({
@@ -30,6 +33,6 @@ export const routingComponent = [
   SignUpComponent,
   SettingsComponent,
   CompleteArticleComponent,
-  ProfileComponent
-
+  ProfileComponent,
+  NewArticleComponent
 ]

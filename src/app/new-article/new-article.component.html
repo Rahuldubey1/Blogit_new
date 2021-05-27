@@ -1,0 +1,23 @@
+<div class="editor-page">
+    <div class="container page">
+        <div class="row">
+            <div class="col-md-10 offset-md-1 col-xs-12">
+                <form [formGroup]="addArticle1" (submit)="onSubmit1()">
+                    <div class="`form-group">
+                    <input type="email" class="form-control" formControlName="title" placeholder="Article Title">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" formControlName="description" placeholder="What's this article about?">
+                    </div>
+                    <div class="form-group">
+                    <textarea class="form-control" id="exampleFormControlTextarea1"  formControlName="body" rows="5"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" formControlName="tagList" placeholder="Enter tags">
+                        </div>
+                    <button type="submit" class="btn btn-primary float-right">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

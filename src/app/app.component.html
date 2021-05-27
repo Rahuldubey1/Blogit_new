@@ -1,6 +1,35 @@
+<!-- 
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>    
+    </ul>
+  </div>  
+</nav> -->
+
+
 <div>
-    <nav class="navbar navbar-expand-sm bg-light">
-        <a class="logo">Blogger.com</a>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <!-- <nav class="navbar navbar-expand-sm bg-light"> -->
+        <a class="navbar-brand logo" href="#">Blogger.com</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- <a class="logo">Blogger.com</a> -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+
         <ul class="navbar-nav ml-auto">
             <!--ss="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
@@ -22,7 +51,7 @@
             </div>
             <div *ngIf="authService.getToken()">
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/settings" routerLinkActive="active">New Article</a>
+                    <a class="nav-link" routerLink="/new-article" routerLinkActive="active">New Article</a>
                 </li>
             </div>
             <div *ngIf="authService.getToken()">
@@ -36,6 +65,7 @@
                 </li>
             </div>    
         </ul>
+        </div>
     </nav>
 </div>
 <div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, Output,EventEmitter, OnInit } from '@angular/core'; 
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../auth-service.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -9,9 +9,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./blogs.component.css']
 })
 export class BlogsComponent implements OnInit {
+  // @Output() myOutput =  new EventEmitter();  
+  @Input() myinputMsg:Number; 
+
   editArticle1:FormGroup;
 
   constructor(private authService:AuthServiceService, private router:Router) { }
+
   tagList:any=[]
   selectedTab:Number
   token:any
@@ -64,11 +68,15 @@ export class BlogsComponent implements OnInit {
 }
   
   checkBlogs(tab:Number){
-    this.selectedTab = tab
+    alert(tab)
     if(this.token) {
+      this.selectedTab = tab
+
+      // this.myOutput.emit(this.selectedTab);  
+    
       // this.visible  = !this.visible
       // this.authService.setValue(this.visible);
-      console.log("set",this.visible)
+      // console.log("set",this.selectedTab)
     }
     else {
       this.router.navigateByUrl('/login')
