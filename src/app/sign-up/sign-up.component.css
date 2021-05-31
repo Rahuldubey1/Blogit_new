@@ -15,7 +15,7 @@
 .sign h5{
     color:rgb(52 204 229);
 }
-input .ng-touched .ng-invalid{ 
-    border: 1px solid red;
-    box-shadow: 0 0 4px inset;
+input.ng-touched.ng-invalid{ 
+    border: 1px solid red !important;
+    box-shadow: 0 0 4px inset !important;
 }

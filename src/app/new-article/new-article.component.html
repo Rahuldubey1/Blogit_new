@@ -2,20 +2,26 @@
     <div class="container page">
         <div class="row">
             <div class="col-md-10 offset-md-1 col-xs-12">
-                <form [formGroup]="addArticle1" (submit)="onSubmit1()">
-                    <div class="`form-group">
-                    <input type="email" class="form-control" formControlName="title" placeholder="Article Title">
-                    </div>
-                    <div class="form-group">
-                        <input type="email" class="form-control" formControlName="description" placeholder="What's this article about?">
-                    </div>
-                    <div class="form-group">
-                    <textarea class="form-control" id="exampleFormControlTextarea1"  formControlName="body" rows="5"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" class="form-control" formControlName="tagList" placeholder="Enter tags">
-                        </div>
-                    <button type="submit" class="btn btn-primary float-right">Submit</button>
+                <form [formGroup]="addArticle" (submit)="onSubmit()">
+                    <fieldset>
+                        <fieldset class="form-group">
+                            <input class="form-control form-control-lg ng-pristine ng-valid ng-touched"
+                            formControlName="title" placeholder="Article Title" type="text">
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <input class="form-control ng-untouched ng-pristine ng-valid"
+                            formControlName="description" placeholder="What's this article about?" type="text">
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <textarea class="form-control ng-untouched ng-pristine ng-valid"
+                            formControlName="body" placeholder="Write your article (in markdown)" rows="8"></textarea>
+                        </fieldset>
+                        <!-- <fieldset class="form-group">
+                            <input class="form-control ng-untouched ng-pristine ng-valid"
+                            formcontrolname="tags" placeholder="Enter Tags" type="text">
+                        </fieldset> -->
+                        <button type="submit" class="btn btn-lg pull-xs-right btn-primary"> Publish Article </button>
+                    </fieldset>
                 </form>
             </div>
         </div>

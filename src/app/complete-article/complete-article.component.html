@@ -50,21 +50,23 @@
                 <form class="card comment-form ng-untouched ng-pristine ng-valid">
                     <fieldset>
                         <div class="card-block">
-                            <textarea class="form-control ng-valid ng-untouched ng-pristine" placeholder="Write your comment..." rows="3" #comment></textarea>
+                            <textarea class="form-control ng-valid ng-untouched ng-pristine" 
+                            placeholder="Write your comment..." rows="3" [(ngModel)]='commentss' name="comm"></textarea>
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-sm btn-primary" (click)="addComment(comment.value)">Submit</button>
+                            <button type="submit" class="btn btn-sm btn-primary" 
+                            (click)="addComment()">Submit</button>
                         </div>    
                     </fieldset>
                 </form>
-                <div class="card">
+                <div class="card" *ngFor="let comment of comments">
                     <div class="card-block">
-                        <p>{{comments.body}}</p>
+                        <p>{{comment.body}}</p>
                     </div>
                     <div class="cord-footer">
-                        <img class="comment-author-img" src="{{comments.author.image}}">
-                        <a class="comment-author">{{comments.author.username}}</a>
-                        <span class="date-posted">{{comments.createdAt | date }}</span>
+                        <img class="comment-author-img" src="{{comment.author.image}}">
+                        <a class="comment-author">{{comment.author.username}}</a>
+                        <span class="date-posted">{{comment.createdAt | date }}</span>
                         <span class="mod option">
                             <i class="ion-trash-a"></i>
                         </span>

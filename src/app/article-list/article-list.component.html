@@ -1,4 +1,4 @@
-<div >
+<div>
     <div class="container">
         <div *ngFor="let blog of userPost">
             <div class="article-preview">   
@@ -11,8 +11,10 @@
                             <a class="author">{{blog.author.username}}</a>
                             <span class="date">{{blog.createdAt | date }}</span>
                         </div>
+                    </a>
+                    <a>
                         <button class="btn btn-sm btn-outline-primary pull-xs-right">
-                            <i class="ion-heart"></i>1
+                            <i class="fa fa-heart-o" aria-hidden="true" (click)="like(blog)">1</i>
                         </button>
                     </a>
                     <a class="preview-link" (click)="showFeed(blog)">

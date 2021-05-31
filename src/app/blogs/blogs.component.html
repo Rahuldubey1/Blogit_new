@@ -1,6 +1,6 @@
 <div class="block">
     <div class="container">
-        <h1 class="logo-font">Blogger.Com</h1>
+        <h1>Blogger.Com</h1>
         <p>A place to share your <i>Angular</i> knowledge.</p>
     </div>
 </div>
@@ -10,17 +10,17 @@
             <div class="feed-toggle">
                 <ul class="nav nav-pills outline-active">
                     <li class="nav-item">
-                        <a class="nav-link" (click)="checkBlogs(1)">Your Feed</a>
+                        <a class="nav-link" [ngClass]="{'active' : !condition}"(click)="checkBlogs(1)">Your Feed</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" (click)="checkBlogs(2)">Global Feed</a>
+                        <a class="nav-link" [ngClass]="{'active' : condition}" (click)="checkBlogs(2)">Global Feed</a>
                     </li>
                     <li class="nav-item" hidden>
                         <a class="nav-link active"></a>
                     </li>
                 </ul>
             </div>
-            <app-article-list></app-article-list>
+            <app-article-list [myinputMsg]="selectedTab"></app-article-list>
         </div>
         <div class="col-md-3">
             <div class="tagbar">
@@ -78,7 +78,7 @@
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput1">What's this article about?</label>
-            <input type="email" class="form-control" formControlName="description" placeholder="What's this article about?">
+            <input type="email" class="form`-control" formControlName="description" placeholder="What's this article about?">
         </div>
         <div class="form-group">
         <label for="exampleFormControlTextarea1">Write your Article</label>

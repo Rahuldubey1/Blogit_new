@@ -8,16 +8,14 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   templateUrl: './blogs.component.html',
   styleUrls: ['./blogs.component.css']
 })
-export class BlogsComponent implements OnInit {
-  // @Output() myOutput =  new EventEmitter();  
-  @Input() myinputMsg:Number; 
+export class BlogsComponent implements OnInit {  
 
   editArticle1:FormGroup;
-
+  selectedTab:Number
   constructor(private authService:AuthServiceService, private router:Router) { }
 
   tagList:any=[]
-  selectedTab:Number
+  
   token:any
   userPost:any
   visible:boolean = false
@@ -28,6 +26,7 @@ export class BlogsComponent implements OnInit {
   showNewContent:boolean = false
   comments:any
   addArticle1:any
+  condition:boolean =  false
   ngOnInit(): void {
     this.editArticle1 = new FormGroup({
       'title' : new FormControl(''),
@@ -64,15 +63,14 @@ export class BlogsComponent implements OnInit {
         this.tagList = result
         this.tagList = this.tagList["tags"]
       }
-  })
-}
+    })
+  }
   
   checkBlogs(tab:Number){
     alert(tab)
     if(this.token) {
-      this.selectedTab = tab
-
-      // this.myOutput.emit(this.selectedTab);  
+      this.selectedTab = tab 
+      this.condition = this.condition ? false : true;
     
       // this.visible  = !this.visible
       // this.authService.setValue(this.visible);
@@ -125,7 +123,6 @@ export class BlogsComponent implements OnInit {
     this.authService.updateArticle(this.editArticle1.value).subscribe(result=> {
       console.log(result)
       console.log("vbnm")
-
     })
   }
   onSubmit1(){
@@ -134,10 +131,10 @@ export class BlogsComponent implements OnInit {
     })
   }
   like() {
-    this.authService.addLike(this.showBlogs.slug).subscribe(result=> {
-    if(result){
-      alert("You have liked this article")
-    }
-  })
-}
+      this.authService.addLike(this.showBlogs.slug).subscribe(result=> {
+      if(result){
+        alert("You have liked this article")
+      }
+    })
+  }
 }

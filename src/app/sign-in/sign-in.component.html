@@ -5,15 +5,18 @@
             <h5 (click)="register()">Need an account?</h5>
         </div>
         <div class="mb-3 form-group" >
-            <label for="exampleInputEmail1" class="form-label">Email address</label>
-            <input type="email" class="form-control validation" formControlName="email" id="exampleInputEmail1">
-            <!-- <small class="text-danger"
-            *ngIf="!mySigninForm.get('email').valid || mySigninForm.get('email').tounched">
-            Please enter valid email!</small> -->
+            <label for="exampleInputEmail1" class="form-label">Email address*</label>
+            <input type="email" class="form-control" formControlName="email">
+            <small class="text-danger"
+            *ngIf="mySigninForm.get('email')!.invalid && mySigninForm.get('email')!.touched">
+            Please enter valid email!</small>
         </div>
         <div class="mb-3 form-group">
-            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <label for="exampleInputPassword1" class="form-label">Password*</label>
             <input type="password" class="form-control"  formControlName="password" id="exampleInputPassword1">
+            <small class="text-danger"
+            *ngIf="mySigninForm.get('password')!.invalid && mySigninForm.get('password')!.touched">
+            Please enter valid password!</small>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

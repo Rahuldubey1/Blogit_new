@@ -10,11 +10,19 @@ import { AuthServiceService } from './auth-service.service';
 export class AppComponent {
   title = 'social-blogging-site';
   token:any;
+  userData:any
   
   constructor(public authService:AuthServiceService){}
   
   ngOnInit(): void {
-    console.log(this.authService.getToken())
-    // this.token = localStorage.getItem("token");
+    this.token= this.authService.getToken()
+    this.authService.getUser(this.token).subscribe(result=> {
+      if(result && result.user) {
+        this.userData = result.user
+        this.authService.setProfile(this.userData)
+      } else {
+        alert("errro")
+      }
+    })
   }
 }

@@ -18,7 +18,7 @@ export class SignInComponent implements OnInit {
   ngOnInit() {
     this.mySigninForm = new FormGroup({
       'email' : new FormControl(null,[Validators.required,Validators.email]),
-      'password' : new FormControl(null,Validators.required),
+      'password' : new FormControl(null,[Validators.required,Validators.minLength(8)]),
     });
   }
   register(){
@@ -36,6 +36,9 @@ export class SignInComponent implements OnInit {
       })
     }     
   }
-
+  // validation(){
+  //   if(this.mySigninForm.value == '')
+  //    alert(this.mySigninForm.value)
+  // }
 
 }

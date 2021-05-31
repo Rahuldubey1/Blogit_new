@@ -19,13 +19,16 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateData = new FormGroup({
-      'email' : new FormControl(''),
-      'username' : new FormControl(''),
-      'password' : new FormControl('')
+      'image' : new FormControl(''),
+      'username' : new FormControl('',Validators.required),
+      'bio' : new FormControl(''),
+      'email' : new FormControl('',[Validators.email,Validators.required]),
+      'password' : new FormControl('',[Validators.minLength(8),Validators.required,])
     });
     this.authService.getUser(this.token).subscribe(result=> {
       if(result && result.user) {
         this.userData = result.user
+        console.log(this.userData)
       } else {
         alert("sdfg")
       }
@@ -44,7 +47,10 @@ export class SettingsComponent implements OnInit {
   updateUser(){
     console.log(this.updateData.value)
     this.authService.updateUser(this.updateData.value).subscribe(result=> {
-    console.log(result)
+    if (result)
+    {
+      this.router.navigateByUrl('/')
+    }
     })
 }
 }

@@ -76,6 +76,9 @@ ol, ul, dl {
     border-bottom: 2px solid rgb(52 204 229) !important;
     color: rgb(52 204 229) !important;
 }
+.nav-link {
+color: rgb(52 204 229);
+}
 .nav-pills .nav-link {
     display: block;
     padding: 0.5em 1em;

@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChanges,Input} from '@angular/core';
+import { Component, OnInit,Input} from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs'
 import { AuthServiceService } from '../auth-service.service';
@@ -8,7 +8,7 @@ import { AuthServiceService } from '../auth-service.service';
   styleUrls: ['./article-list.component.css']
 })
 export class ArticleListComponent implements OnInit {
-  // @Input() myinputMsg:Number; 
+  @Input() myinputMsg:Number; 
 
   constructor(private authService:AuthServiceService,private router:Router) { }
   userPost:any
@@ -17,33 +17,37 @@ export class ArticleListComponent implements OnInit {
   userBlog:any
   data:any
   
+  
   GetChildData(data:any){  
     console.log(data);  
   }
-  ngAfterContentInit():void {
-    this.data= this.authService.getValue();
-    
-  }
-
-  ngOnInit(): void {
-    this.token = localStorage.getItem("token");
-    // if(this.myinputMsg==1){
-    //   alert("hello")
+  ngOnChanges(): void{
+    if(this.myinputMsg ==1 ){
+      this.authService.getFeed(this.token).subscribe(result=> {
+        if(result && result.articles) {
+          this.userPost = result.articles
+        }
+      }) 
+    }
+    if(this.myinputMsg ==2 ) {
       this.authService.getPost(this.token).subscribe(result=> {
         if(result && result.articles) {
           this.userPost = result.articles
         } else {
           alert("There is error")
         }
+      })     
+    } 
+  }
+  ngOnInit(): void {
+      this.token = localStorage.getItem("token");
+      this.authService.getPost(this.token).subscribe(result=> {
+          if(result && result.articles) {
+            this.userPost = result.articles
+          } else {
+            alert("There is error")
+          }
       })
-    // } 
-    // else { 
-      this.authService.getFeed(this.token).subscribe(result=> {
-      if(result && result.articles) {
-        this.userFeed = result.articles
-      }
-      })
-    // }
   }
 
   showFeed(blog:any)
@@ -59,4 +63,19 @@ export class ArticleListComponent implements OnInit {
     this.authService.setProfile(this.userBlog)
     this.router.navigateByUrl('/profile')
   }
+//   like() {
+//     this.authService.addLike(this.showBlogs.slug).subscribe(result=> {
+//     if(result){
+//       alert("You have liked this article")
+//     }
+//   })
+// }
+like(blog:any) {
+  this.authService.addLike(blog.slug).subscribe(result=> {
+  if(result){
+    console.log(result)
+    alert("You have liked this article")
+  }
+})
+}
 }

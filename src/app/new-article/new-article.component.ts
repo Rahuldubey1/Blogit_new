@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthServiceService } from '../auth-service.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-article',
@@ -8,23 +9,26 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./new-article.component.css']
 })
 export class NewArticleComponent implements OnInit {
-  editArticle1:FormGroup;
-  addArticle1:any
+  
 
-  constructor(private authService:AuthServiceService) { }
-
+  constructor(private authService:AuthServiceService,private router:Router) { }
+  addArticle:any
   ngOnInit(): void {
-    this.addArticle1 = new FormGroup({
+    this.addArticle = new FormGroup({
       'title' : new FormControl(''),
       'description' : new FormControl(''),
-      'body' : new FormControl(''),
+      'body' : new FormControl('')
       // 'tagList' : new FormControl(''),
     });
   }
-  onSubmit1(){
-    this.authService.addArticle(this.addArticle1.value).subscribe(result=> {
-    console.log(result)
-    })
-  }
-
+    onSubmit(){
+      console.log(this.addArticle.value)
+      this.authService.addArticle(this.addArticle.value).subscribe(result=> {
+        if(result) {
+          this.router.navigateByUrl('/')
+        }
+        // console.log(result)
+      })
+    }
+  
 }
