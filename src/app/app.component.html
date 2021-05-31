@@ -41,7 +41,7 @@
             </div>
             <div *ngIf="!authService.getToken()">
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/login" routerLinkActive="active">Sign In</a>
+                    <a class="nav-link" routerLink="!checkUser ? ['/login'] : []" routerLinkActive="active">Sign In</a>
                 </li>
             </div>
             <div *ngIf="!authService.getToken()">

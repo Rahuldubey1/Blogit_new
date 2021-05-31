@@ -13,9 +13,8 @@
                         </div>
                     </a>
                     <a>
-                        <button class="btn btn-sm btn-outline-primary pull-xs-right">
-                            <i class="fa fa-heart-o" aria-hidden="true" (click)="like(blog)">1</i>
-                        </button>
+                        <span class="ion ion-md-attach"></span>
+                            <i class="fa fa-heart-o" aria-hidden="true" (click)="like(blog)">{{liked}}likes</i>
                     </a>
                     <a class="preview-link" (click)="showFeed(blog)">
                         <h1>{{blog.title}}</h1>

@@ -108,4 +108,9 @@ export class AuthServiceService {
   getTag(){
     return this.http.get(` https://conduit.productionready.io/api/tags`);
   }
+  follow(data:any):Observable<any>{
+    var token:any = localStorage.getItem("token");
+    const headers = { 'Authorization':'Token '+ token };
+    return this.http.post(` https://conduit.productionready.io/api/profiles/${data}/follow`,'',{headers});
+  }
 }

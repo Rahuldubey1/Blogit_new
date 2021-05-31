@@ -11,7 +11,7 @@ export class AppComponent {
   title = 'social-blogging-site';
   token:any;
   userData:any
-  
+  checkUser:boolean = false  
   constructor(public authService:AuthServiceService){}
   
   ngOnInit(): void {
@@ -24,5 +24,8 @@ export class AppComponent {
         alert("errro")
       }
     })
+    if(this.token){
+      this.checkUser = this.checkUser ? false : true;
+    }
   }
 }

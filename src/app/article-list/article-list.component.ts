@@ -16,6 +16,7 @@ export class ArticleListComponent implements OnInit {
   token:any
   userBlog:any
   data:any
+  liked:any
   
   
   GetChildData(data:any){  
@@ -73,8 +74,8 @@ export class ArticleListComponent implements OnInit {
 like(blog:any) {
   this.authService.addLike(blog.slug).subscribe(result=> {
   if(result){
-    console.log(result)
-    alert("You have liked this article")
+    this.liked=result.article.favoritesCount
+    alert(this.liked)
   }
 })
 }

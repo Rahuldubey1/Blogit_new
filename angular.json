@@ -92,7 +92,7 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/font-awesome/css/font-awesome.min.css",
+              "node_modules/ionicons/dist/scss/ionicons.scss",
               "src/styles.css"
             ],
             "scripts": [
