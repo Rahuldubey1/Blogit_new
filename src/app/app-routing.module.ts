@@ -8,7 +8,9 @@ import { SettingsComponent } from './settings/settings.component';
 import { CompleteArticleComponent } from './complete-article/complete-article.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NewArticleComponent } from './new-article/new-article.component';
+import { UserProflieComponent } from './user-proflie/user-proflie.component';
 
+// import { AuthGuard } from './helper';
 
 
 const routes: Routes = [
@@ -18,9 +20,9 @@ const routes: Routes = [
   {path:"settings", component:SettingsComponent},
   {path:"complete-article", component:CompleteArticleComponent},
   {path:"profile", component:ProfileComponent},
-  {path:"new-article", component:NewArticleComponent}
+  {path:"new-article", component:NewArticleComponent},
+  {path:"user-profile", component:UserProflieComponent}
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
@@ -34,5 +36,6 @@ export const routingComponent = [
   SettingsComponent,
   CompleteArticleComponent,
   ProfileComponent,
-  NewArticleComponent
+  NewArticleComponent,
+  UserProflieComponent
 ]

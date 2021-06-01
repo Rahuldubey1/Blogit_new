@@ -21,14 +21,22 @@
 
 
 <div>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark
+    navbar-light bg-light">
     <!-- <nav class="navbar navbar-expand-sm bg-light"> -->
         <a class="navbar-brand logo" href="#">Blogger.com</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <button class="navbar-toggler"
+         type="button" 
+         data-toggle="collapse" 
+         data-target="#collapsibleNavbar"
+         aria-controls="collapsibleNavbar"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+        (click)="collapsed = !this.collapsed">
             <span class="navbar-toggler-icon"></span>
         </button>
         <!-- <a class="logo">Blogger.com</a> -->
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <div class="collapse navbar-collapse" id="collapsibleNavbar"[ngClass]="{ collapse: collapsed, 'navbar-collapse': true }">
 
         <ul class="navbar-nav ml-auto">
             <!--ss="nav-item">
@@ -39,10 +47,19 @@
                     <a class="nav-link" href="#">Home</a>
                 </li>
             </div>
-            <div *ngIf="!authService.getToken()">
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="!checkUser ? ['/login'] : []" routerLinkActive="active">Sign In</a>
-                </li>
+            <div *ngIf="!checkUser">
+                <div *ngIf="!authService.getToken()">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/login" routerLinkActive="active">Sign In</a>
+                    </li>
+                </div>
+            </div>
+            <div *ngIf="checkUser">
+                <div *ngIf="!authService.getToken()">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" routerLinkActive="active">Sign In</a>
+                    </li>
+                </div>
             </div>
             <div *ngIf="!authService.getToken()">
                 <li class="nav-item">
@@ -71,3 +88,8 @@
 <div>
   <router-outlet></router-outlet>
 </div>
+
+
+
+
+

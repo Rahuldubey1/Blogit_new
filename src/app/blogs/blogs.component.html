@@ -10,23 +10,23 @@
             <div class="feed-toggle">
                 <ul class="nav nav-pills outline-active">
                     <li class="nav-item">
-                        <a class="nav-link" [ngClass]="{'active' : !condition}"(click)="checkBlogs(1)">Your Feed</a>
+                        <a class="nav-link" [ngClass]="{'active' : condition==1}" (click)="checkBlogs(1)">Your Feed</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" [ngClass]="{'active' : condition}" (click)="checkBlogs(2)">Global Feed</a>
+                        <a class="nav-link" [ngClass]="{'active' : condition ==2}" (click)="checkBlogs(2)">Global Feed</a>
                     </li>
-                    <li class="nav-item" hidden>
-                        <a class="nav-link active"></a>
+                    <li class="nav-item" *ngIf="filter">
+                        <a class="nav-link" [ngClass]="{'active' : condition==3}" (click)="checkBlogs(3)">#{{save}}</a>
                     </li>
                 </ul>
             </div>
-            <app-article-list [myinputMsg]="selectedTab"></app-article-list>
+            <app-article-list [myinputMsg]="selectedTab" [tags]="save"></app-article-list>
         </div>
         <div class="col-md-3">
             <div class="tagbar">
                 <p>Popular Tags</p>
                 <div class="tag-list" >
-                    <a class="tag-default tag-pill" *ngFor="let tag of tagList">{{tag}}</a>
+                    <a class="tag-default tag-pill" *ngFor="let tag of tagList" (click)="filterBlogs(tag)">{{tag}}</a>
                 </div>
             </div>
          </div>

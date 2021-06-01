@@ -105,12 +105,36 @@ export class AuthServiceService {
     return this.http.post(` https://conduit.productionready.io/api/articles/${data}/favorite`,'',{headers});
     
   }
+  removeLike(data:any):Observable<any>{
+    var token:any = localStorage.getItem("token");
+    const headers = { 'Authorization':'Token '+ token };
+    return this.http.delete(` https://conduit.productionready.io/api/articles/${data}/favorite`,{headers});
+  }
   getTag(){
     return this.http.get(` https://conduit.productionready.io/api/tags`);
   }
   follow(data:any):Observable<any>{
+    alert(data)
     var token:any = localStorage.getItem("token");
     const headers = { 'Authorization':'Token '+ token };
-    return this.http.post(` https://conduit.productionready.io/api/profiles/${data}/follow`,'',{headers});
+    return this.http.post(`https://conduit.productionready.io/api/profiles/${data}/follow`,'',{headers});
+  }
+  unFollow(data:any):Observable<any>{
+    var token:any = localStorage.getItem("token");
+    const headers = { 'Authorization':'Token '+ token };
+    return this.http.delete(` https://conduit.productionready.io/api/profiles/${data}/follow`,{headers});
+  }
+  getFilteredBlog(data:any):Observable<any>{
+    return this.http.get(`https://conduit.productionready.io/api/articles/?tag=${data}`);
+  }
+  getSelectedProfile(data:any):Observable<any>{
+    var token:any = localStorage.getItem("token");
+    const headers = { 'Authorization':'Token '+ token };
+    return this.http.get(`https://conduit.productionready.io/api/articles/?author=${data}`,{headers});
+  }
+  showFavBlog(data:any):Observable<any>{
+    var token:any = localStorage.getItem("token");
+    const headers = { 'Authorization':'Token '+ token };
+    return this.http.get(`https://conduit.productionready.io/api/articles/?favorited=${data}`,{headers});
   }
 }

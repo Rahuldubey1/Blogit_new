@@ -10,6 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class SettingsComponent implements OnInit {
   updateData:FormGroup;
+  // example = { username: "", email: "", password: ""  };
   token:any;
   userData:any;
   constructor(private authService:AuthServiceService,private router:Router) { 

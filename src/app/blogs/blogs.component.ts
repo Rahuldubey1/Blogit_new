@@ -26,7 +26,10 @@ export class BlogsComponent implements OnInit {
   showNewContent:boolean = false
   comments:any
   addArticle1:any
-  condition:boolean =  false
+  condition:number = 1
+  filteredPost:any
+  filter:boolean = false
+  save:any
   ngOnInit(): void {
     this.editArticle1 = new FormGroup({
       'title' : new FormControl(''),
@@ -68,17 +71,28 @@ export class BlogsComponent implements OnInit {
   
   checkBlogs(tab:Number){
     alert(tab)
+    if(tab == 1){
+      alert(tab)
+      this.condition = 1
+    }
+    else if(tab == 2) {
+      alert(tab)
+
+      this.condition = 2
+    }
+    else {
+      alert(tab)
+
+      this.condition = 3
+    }
     if(this.token) {
       this.selectedTab = tab 
-      this.condition = this.condition ? false : true;
-    
-      // this.visible  = !this.visible
-      // this.authService.setValue(this.visible);
-      // console.log("set",this.selectedTab)
+      this.filter = this.filter ? false : true;
     }
     else {
       this.router.navigateByUrl('/login')
     }
+  
   }
   complete_blog(blog:any) {
     this.showBlogs = blog
@@ -112,6 +126,12 @@ export class BlogsComponent implements OnInit {
   newArticle(){
     this.showNewContent = this.showNewContent ? false : true;
     
+  }
+  filterBlogs(tag:any){
+    this.selectedTab = 3
+    this.save=tag
+    this.filter = this.filter ? false : true;
+    this.condition = 3
   }
   onSubmit(){
     // var data = {

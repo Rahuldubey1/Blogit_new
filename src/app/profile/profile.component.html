@@ -4,12 +4,11 @@
             <div class="row">
                 <div class="col-xs-12 col-md-10 offset-md-1">
                     <img class="user-img" src='{{data.image}}'>
-                    <h4>{{data.username}}</h4>
-                    <p></p>
-                    <button *ngIf="!profileFollow" class="btn btn-sm action-btn btn-outline-secondary" (click)="follow(data)">&nbsp;Unfollow {{data.username}}
+                    <h4>{{data.author.username}}</h4>
+                    <button *ngIf="!profileFollow" class="btn btn-sm action-btn btn-outline-secondary" (click)="follow(data)">&nbsp;Follow {{data.author.username}}
                         <i class="ion-plus-round"></i>
                     </button>
-                    <button *ngIf="profileFollow" class="btn btn-sm action-btn btn-outline-secondary" (click)="follow(data)">&nbsp;Follow {{data.username}}
+                    <button *ngIf="profileFollow" class="btn btn-sm action-btn btn-outline-secondary" (click)="unFollow(data)">&nbsp;Unfollow {{data.author.username}}
                         <i class="ion-plus-round"></i>
                     </button>
                 </div>
@@ -18,21 +17,49 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-9">
-                <div class="feed-toggle">
+            <div class="col-xs-12 col-md-10 offset-md-1">
+                <div class="articles-toggle">
                     <ul class="nav nav-pills outline-active">
                         <li class="nav-item">
-                            <a class="nav-link">Your Feed</a>
+                            <a class="nav-link" [ngClass]="{'active' : !condition}"(click)="show()">My Posts</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active">Global Feed</a>
+                            <a class="nav-link" [ngClass]="{'active' : condition}" (click)="showFavBlog(data.author.username)">Favorited Posts</a>
                         </li>
                         <li class="nav-item" hidden>
                             <a class="nav-link active"></a>
                         </li>
                     </ul>
                 </div>
-                <app-article-list></app-article-list>
+                <div *ngFor="let blog of selectedUserPost">
+                    <div class="article-preview">   
+                        <div class="article-meta">
+                            <a>
+                                <a href="">
+                                    <img src='{{blog.author.image}}'>
+                                </a>
+                                <div class="info">
+                                    <a class="author">{{blog.author.username}}</a>
+                                    <span class="date">{{blog.createdAt | date }}</span>
+                                </div>
+                            </a>
+                            <a>
+                                <button class="btn btn-sm btn-outline-primary pull-xs-right" (click)="like(blog)">
+                                    <i class="ion-heart" >{{blog.favoritesCount}}</i>
+                                </button>
+                            </a>
+                            <a class="preview-link">
+                                <h1>{{blog.title}}</h1>
+                                <p>{{blog.description}}</p>
+                                <span>Read More...</span>
+                                <ul class="tag_list"></ul>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="favArticle">
+                    <p class="favArticle"> No articles are here... yet.</p>
+                </div>
             </div>
         </div>
     </div>

@@ -11,7 +11,8 @@ export class AppComponent {
   title = 'social-blogging-site';
   token:any;
   userData:any
-  checkUser:boolean = false  
+  checkUser:boolean = false 
+  collapsed = true;
   constructor(public authService:AuthServiceService){}
   
   ngOnInit(): void {

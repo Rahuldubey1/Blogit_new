@@ -1,4 +1,4 @@
-import { Component, OnInit,Input} from '@angular/core';
+import { Component, OnInit,Input, ANALYZE_FOR_ENTRY_COMPONENTS} from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs'
 import { AuthServiceService } from '../auth-service.service';
@@ -9,6 +9,7 @@ import { AuthServiceService } from '../auth-service.service';
 })
 export class ArticleListComponent implements OnInit {
   @Input() myinputMsg:Number; 
+  @Input() tags:string; 
 
   constructor(private authService:AuthServiceService,private router:Router) { }
   userPost:any
@@ -38,8 +39,15 @@ export class ArticleListComponent implements OnInit {
           alert("There is error")
         }
       })     
-    } 
+    }
+    if(this.myinputMsg ==3) {
+      this.authService.getFilteredBlog(this.tags).subscribe(result=>{
+        if(result){
+          this.userPost=result.articles
+        }
+    })
   }
+}
   ngOnInit(): void {
       this.token = localStorage.getItem("token");
       this.authService.getPost(this.token).subscribe(result=> {
@@ -72,11 +80,21 @@ export class ArticleListComponent implements OnInit {
 //   })
 // }
 like(blog:any) {
+  if(blog.favorited == false) {
   this.authService.addLike(blog.slug).subscribe(result=> {
-  if(result){
-    this.liked=result.article.favoritesCount
-    alert(this.liked)
-  }
-})
+    if(result){
+      blog.favoritesCount = blog.favoritesCount + 1
+      blog.favorited = true
+    }
+  })
+}
+else {
+  this.authService.removeLike(blog.slug).subscribe(result=> {
+    if(result){
+      blog.favoritesCount = blog.favoritesCount - 1
+      blog.favorited = false
+    }
+  })
+}
 }
 }
