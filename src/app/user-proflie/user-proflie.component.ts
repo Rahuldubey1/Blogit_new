@@ -12,10 +12,12 @@ export class UserProflieComponent implements OnInit {
   condition:boolean = false
   selectedUserPost:any
   favArticle:any
+  userBlog:any
   constructor(private authService:AuthServiceService,private router:Router) { }
 
   ngOnInit(): void {
     this.data = this.authService.getProfile()
+    console.log(this.data)
     this.authService.getSelectedProfile(this.data.username).subscribe(result=>{
       if(result){
         console.log(result)
@@ -23,6 +25,12 @@ export class UserProflieComponent implements OnInit {
         console.log(this.selectedUserPost)
       }
     })
+  }
+  showFeed(blog:any)
+  {
+    this.userBlog = blog  
+    this.authService.setData(this.userBlog)
+    this.router.navigateByUrl('/complete-article')
   }
   showFavBlog(data:any){
     this.authService.showFavBlog(data).subscribe(result=>{

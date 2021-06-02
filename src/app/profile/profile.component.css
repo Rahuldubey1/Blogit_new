@@ -55,6 +55,7 @@ ol, ul, dl {
 }
 .nav-pills .nav-item {
     float: left;
+    cursor: pointer;
 }
 .nav-pills.outline-active .nav-link.active {
     background: #fff!important;
@@ -88,18 +89,14 @@ img {
 .article-meta .info .author {
     display: block;
     font-weight: 500!important;
-}
-.article-meta .info .author {
-    display: block;
-    font-weight: 500!important;
-
+    cursor: pointer;
 }
 .author{
+    cursor: pointer;
     color:rgb(52 204 229);
 }
 a:focus, a:hover {
     color: #447baf;
-    text-decoration: underline;
 }
 .article-meta .info {
     margin: 0 1.5rem 0 .3rem;
@@ -122,6 +119,7 @@ a:focus, a:hover {
 }
 .preview-link {
     color: inherit!important;
+    cursor: pointer;
 }
 .article-preview .preview-link h1 {
     font-weight: 600!important;

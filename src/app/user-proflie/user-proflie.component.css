@@ -47,6 +47,7 @@ h4, .h4 {
     padding-left: 0;
     margin-bottom: 0;
     list-style: none;
+    cursor: pointer;
 }
 
 ol, ul, dl {
@@ -73,6 +74,7 @@ ol, ul, dl {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     padding: 1.5rem 0px;
     box-sizing: inherit;
+    cursor: pointer;
 }
 .article-meta img {
     display: inline-block;
@@ -88,18 +90,14 @@ img {
 .article-meta .info .author {
     display: block;
     font-weight: 500!important;
+    cursor: pointer;
 }
-.article-meta .info .author {
-    display: block;
-    font-weight: 500!important;
 
-}
 .author{
     color:rgb(52 204 229);
 }
 a:focus, a:hover {
     color: #447baf;
-    text-decoration: underline;
 }
 .article-meta .info {
     margin: 0 1.5rem 0 .3rem;

@@ -9,13 +9,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./blogs.component.css']
 })
 export class BlogsComponent implements OnInit {  
-
+  re = new RegExp(/[\u200B-\u200D\uFEFF]/g);
   editArticle1:FormGroup;
   selectedTab:Number
   constructor(private authService:AuthServiceService, private router:Router) { }
 
   tagList:any=[]
-  
   token:any
   userPost:any
   visible:boolean = false
@@ -30,6 +29,7 @@ export class BlogsComponent implements OnInit {
   filteredPost:any
   filter:boolean = false
   save:any
+  rahul:any
   ngOnInit(): void {
     this.editArticle1 = new FormGroup({
       'title' : new FormControl(''),
@@ -65,7 +65,27 @@ export class BlogsComponent implements OnInit {
       if(result){
         this.tagList = result
         this.tagList = this.tagList["tags"]
-      }
+        console.log(this.tagList)
+        
+       for(var tag of this.tagList){
+            if(tag.replace(this.re, '').length>0){
+              this
+            }
+        }    //     this.rahul=tag.trim()
+      //     console.log(this.rahul);
+
+      //     if(tag.trim()){
+      //       console.log(tag.length);
+      //     }
+      //   //   if(!/\S/.test(tag)){
+      //   //   console.log(tag)
+      //   // }
+
+      //   // else{
+      //   //   console.log("else")
+      //   // }
+      // }
+    }
     })
   }
   

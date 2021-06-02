@@ -1,6 +1,6 @@
 <div>
     <div class="container">
-        <div *ngFor="let blog of userPost">
+        <div *ngFor="let blog of userPost index as i" >
             <div class="article-preview">   
                 <div class="article-meta">
                     <a (click)="showProfile(blog)">
@@ -13,8 +13,8 @@
                         </div>
                     </a>
                     <a>
-                        <button class="btn btn-sm btn-outline-primary pull-xs-right"(click)="like(blog)">
-                            
+                        <button class="btn btn-sm btn-outline-primary pull-xs-right"(click)="like(blog)"
+                        [ngClass]="{'liked' : class }">
                             <i class="fa fa-heart">{{blog.favoritesCount}}</i>
                         </button>
                     </a>
@@ -22,7 +22,6 @@
                         <h1>{{blog.title}}</h1>
                         <p>{{blog.description}}</p>
                         <span>Read More...</span>
-                        <ul class="tag_list"></ul>
                     </a>
                 </div>
             </div>

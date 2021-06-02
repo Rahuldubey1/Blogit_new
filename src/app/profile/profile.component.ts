@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthServiceService } from '../auth-service.service';
 
 @Component({
@@ -12,10 +13,11 @@ export class ProfileComponent implements OnInit {
   condition:boolean =  false
   favArticle:boolean = false
   selectedUserPost:any
-  constructor(private authService:AuthServiceService) { }
+  userBlog:any
+  constructor(private authService:AuthServiceService,private router:Router) { }
  
   ngOnInit(): void {
-  this.data = this.authService.getProfile()
+  this.data = this.authService.getProfile1()
   this.authService.getSelectedProfile(this.data.author.username).subscribe(result=>{
     if(result){
       this.selectedUserPost = result.articles
@@ -31,6 +33,12 @@ export class ProfileComponent implements OnInit {
   //   alert("true")
   //   this.profileFollow = this.profileFollow ? false : true;
   // }
+  }
+  showFeed(blog:any)
+  {
+    this.userBlog = blog  
+    this.authService.setData(this.userBlog)
+    this.router.navigateByUrl('/complete-article')
   }
   follow(data:any){
     this.authService.follow(data.author.username).subscribe(result=>{

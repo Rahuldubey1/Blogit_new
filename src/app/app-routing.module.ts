@@ -9,14 +9,15 @@ import { CompleteArticleComponent } from './complete-article/complete-article.co
 import { ProfileComponent } from './profile/profile.component';
 import { NewArticleComponent } from './new-article/new-article.component';
 import { UserProflieComponent } from './user-proflie/user-proflie.component';
+import { AuthGuard } from './auth.guard';
 
 // import { AuthGuard } from './helper';
 
 
 const routes: Routes = [
   {path:"", component:BlogsComponent},
-  {path:"login", component:SignInComponent},
-  {path:"register", component:SignUpComponent},
+  {path:"login", canActivate:[AuthGuard], component:SignInComponent},
+  {path:"register",canActivate:[AuthGuard], component:SignUpComponent},
   {path:"settings", component:SettingsComponent},
   {path:"complete-article", component:CompleteArticleComponent},
   {path:"profile", component:ProfileComponent},

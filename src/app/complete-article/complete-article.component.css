@@ -33,6 +33,7 @@ img {
 
 }
 .author{
+    cursor: pointer;
     color:rgb(52 204 229);
 }
 a:focus, a:hover {

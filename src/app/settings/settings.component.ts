@@ -14,6 +14,8 @@ export class SettingsComponent implements OnInit {
   token:any;
   userData:any;
   rahul:any
+  error:any
+  showError:boolean=false
   constructor(private authService:AuthServiceService,private router:Router) { 
     this.token = localStorage.getItem("token");
   }
@@ -44,9 +46,7 @@ export class SettingsComponent implements OnInit {
           email: result.user.email,
           bio: result.user.bio
         })
-      } else {
-        alert("sdfg")
-      }
+      } 
     })
   }
 
@@ -66,6 +66,12 @@ export class SettingsComponent implements OnInit {
     {
       this.router.navigateByUrl('/')
     }
-    })
+    },
+    errors=>{
+        this.error = errors.error.errors
+        console.log(this.error)
+        this.showError = this.showError? false:true
+    }
+    )
 }
 }

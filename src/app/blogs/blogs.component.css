@@ -95,6 +95,19 @@ color: rgb(52 204 229);
     display: inline-block;
     box-sizing: inherit;
 }
+.tag-list {
+    color: #fff!important;
+    font-size: .8rem;
+    padding-top: .1rem;
+    padding-bottom: .1rem;
+    white-space: nowrap;
+    margin-right: 3px;
+    margin-bottom: .2rem;
+    display: inline-block;
+    box-sizing: inherit;
+}
+
+
 .tag-pill {
     padding-right: .6em;
     padding-left: .6em;

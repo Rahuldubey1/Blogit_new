@@ -18,7 +18,7 @@ export class ArticleListComponent implements OnInit {
   userBlog:any
   data:any
   liked:any
-  
+  class:boolean=false
   
   GetChildData(data:any){  
     console.log(data);  
@@ -53,6 +53,9 @@ export class ArticleListComponent implements OnInit {
       this.authService.getFeed(this.token).subscribe(result=> {
         if(result && result.articles) {
           this.userPost = result.articles
+          if(this.userPost.favorited == true){
+            this.class = this.class? false : true;
+          }
         }
       }) 
   }
@@ -67,7 +70,7 @@ export class ArticleListComponent implements OnInit {
   {
     this.userBlog = blog
     console.log(this.userBlog,"hhhh")
-    this.authService.setProfile(this.userBlog)
+    this.authService.setProfile1(this.userBlog)
     this.router.navigateByUrl('/profile')
   }
 //   like() {
@@ -83,6 +86,7 @@ like(blog:any) {
     if(result){
       blog.favoritesCount = blog.favoritesCount + 1
       blog.favorited = true
+      this.class = this.class? false : true;
     }
   })
 }
@@ -91,6 +95,7 @@ else {
     if(result){
       blog.favoritesCount = blog.favoritesCount - 1
       blog.favorited = false
+      this.class = this.class? false : true;
     }
   })
 }

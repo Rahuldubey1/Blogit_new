@@ -28,3 +28,7 @@ input.ng-touched.ng-invalid{
     border: 1px solid red !important;
     box-shadow: 0 0 4px inset !important;
 }
+.danger{
+    color: red;
+    
+}

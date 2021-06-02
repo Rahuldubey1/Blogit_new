@@ -9,6 +9,7 @@ export class AuthServiceService {
   data:any
   value:any
   profile:any
+  profile1:any
 
   constructor(private http:HttpClient) { }
   setData(value:any){
@@ -27,8 +28,14 @@ export class AuthServiceService {
   setProfile(data:any){
     this.profile = data
   }
+  setProfile1(data:any){
+    this.profile1 = data
+  }
   getProfile(){
     return this.profile
+  }
+  getProfile1(){
+    return this.profile1
   }
 
   login(data:any):Observable<any>{

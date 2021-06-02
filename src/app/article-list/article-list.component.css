@@ -2,6 +2,7 @@
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     padding: 1.5rem 0px;
     box-sizing: inherit;
+    cursor: pointer;
 }
 .article-meta img {
     display: inline-block;
@@ -49,8 +50,17 @@ a:focus, a:hover {
 .pull-xs-right {
     float: right!important;
 }
+.liked{
+    background-color:rgb(52 204 229) ;
+    color: white !important;
+}
+.btn-outline-primary {
+    color: rgb(52 204 229);
+    border-color: rgb(52 204 229);
+}
 .preview-link {
     color: inherit!important;
+    cursor: pointer;
 }
 .article-preview .preview-link h1 {
     font-weight: 600!important;
