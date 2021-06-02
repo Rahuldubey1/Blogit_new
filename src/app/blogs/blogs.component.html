@@ -13,10 +13,10 @@
                         <a class="nav-link" [ngClass]="{'active' : condition==1}" (click)="checkBlogs(1)">Your Feed</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" [ngClass]="{'active' : condition ==2}" (click)="checkBlogs(2)">Global Feed</a>
+                        <a class="nav-link" [ngClass]="{'active' : condition==2}" (click)="checkBlogs(2)">Global Feed</a>
                     </li>
                     <li class="nav-item" *ngIf="filter">
-                        <a class="nav-link" [ngClass]="{'active' : condition==3}" (click)="checkBlogs(3)">#{{save}}</a>
+                        <a class="nav-link" [ngClass]="{'active' : condition==3}" (click)="checkBlogs(3)">{{save}}</a>
                     </li>
                 </ul>
             </div>

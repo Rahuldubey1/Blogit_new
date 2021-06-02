@@ -11,8 +11,9 @@ export class ProfileComponent implements OnInit {
   profileFollow:boolean = false
   condition:boolean =  false
   favArticle:boolean = false
-  constructor(private authService:AuthServiceService) { }
   selectedUserPost:any
+  constructor(private authService:AuthServiceService) { }
+ 
   ngOnInit(): void {
   this.data = this.authService.getProfile()
   this.authService.getSelectedProfile(this.data.author.username).subscribe(result=>{

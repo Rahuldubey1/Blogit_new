@@ -41,7 +41,8 @@
                         </fieldset>
                         <fieldset class="form-group">
                             <input class="form-control form-control-lg"
-                            formControlName="username" placeholder="Username" type="text" bind-value="userData.username">
+                            formControlName="username" placeholder="Username" type="text" 
+                            bind-value="userData.username">
                             <small class="text-danger"
                             *ngIf="updateData.get('username')!.invalid && updateData.get('username')!.touched">
                             Please enter valid username!</small>

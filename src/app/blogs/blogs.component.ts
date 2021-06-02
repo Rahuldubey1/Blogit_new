@@ -71,23 +71,17 @@ export class BlogsComponent implements OnInit {
   
   checkBlogs(tab:Number){
     alert(tab)
-    if(tab == 1){
-      alert(tab)
+    if(tab == 1) { 
+      this.filter = false
       this.condition = 1
     }
-    else if(tab == 2) {
-      alert(tab)
-
+    if(tab == 2) {
+      this.filter = false
       this.condition = 2
-    }
-    else {
-      alert(tab)
-
-      this.condition = 3
     }
     if(this.token) {
       this.selectedTab = tab 
-      this.filter = this.filter ? false : true;
+     
     }
     else {
       this.router.navigateByUrl('/login')

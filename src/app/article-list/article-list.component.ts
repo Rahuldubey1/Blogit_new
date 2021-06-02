@@ -50,13 +50,11 @@ export class ArticleListComponent implements OnInit {
 }
   ngOnInit(): void {
       this.token = localStorage.getItem("token");
-      this.authService.getPost(this.token).subscribe(result=> {
-          if(result && result.articles) {
-            this.userPost = result.articles
-          } else {
-            alert("There is error")
-          }
-      })
+      this.authService.getFeed(this.token).subscribe(result=> {
+        if(result && result.articles) {
+          this.userPost = result.articles
+        }
+      }) 
   }
 
   showFeed(blog:any)

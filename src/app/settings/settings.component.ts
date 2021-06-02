@@ -13,6 +13,7 @@ export class SettingsComponent implements OnInit {
   // example = { username: "", email: "", password: ""  };
   token:any;
   userData:any;
+  rahul:any
   constructor(private authService:AuthServiceService,private router:Router) { 
     this.token = localStorage.getItem("token");
   }
@@ -26,10 +27,23 @@ export class SettingsComponent implements OnInit {
       'email' : new FormControl('',[Validators.email,Validators.required]),
       'password' : new FormControl('',[Validators.minLength(8),Validators.required,])
     });
+    // console.log(this.form.controls.get.['username'].value)
+    this.rahul=JSON.stringify(this.updateData.value) 
+    console.log(this.rahul)
+    this.updateData.patchValue({
+      
+      username: this.updateData.value.username
+      
+    })
     this.authService.getUser(this.token).subscribe(result=> {
       if(result && result.user) {
         this.userData = result.user
-        console.log(this.userData)
+        // this.updateData['username'].setValue(result.user.username);
+        this.updateData.patchValue({
+          username: result.user.username,
+          email: result.user.email,
+          bio: result.user.bio
+        })
       } else {
         alert("sdfg")
       }
@@ -46,7 +60,7 @@ export class SettingsComponent implements OnInit {
 
   }
   updateUser(){
-    console.log(this.updateData.value)
+    console.log(this.updateData.value,"hello")
     this.authService.updateUser(this.updateData.value).subscribe(result=> {
     if (result)
     {
