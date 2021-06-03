@@ -22,7 +22,9 @@ const routes: Routes = [
   {path:"complete-article", component:CompleteArticleComponent},
   {path:"profile", component:ProfileComponent},
   {path:"new-article", component:NewArticleComponent},
-  {path:"user-profile", component:UserProflieComponent}
+  {path:"user-profile", component:UserProflieComponent},
+  {path:"**", component:BlogsComponent},
+
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

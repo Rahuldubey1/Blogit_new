@@ -25,39 +25,32 @@ export class BlogsComponent implements OnInit {
   showNewContent:boolean = false
   comments:any
   addArticle1:any
-  condition:number = 1
+  condition:number = 2
   filteredPost:any
   filter:boolean = false
   save:any
   list1:any=[]
   list:any=[]
   ngOnInit(): void {
-    this.editArticle1 = new FormGroup({
-      'title' : new FormControl(''),
-      'description' : new FormControl(''),
-      'body' : new FormControl(''),
-      // 'tagList' : new FormControl(''),
-    });
-    this.addArticle1 = new FormGroup({
-      'title' : new FormControl(''),
-      'description' : new FormControl(''),
-      'body' : new FormControl(''),
-      // 'tagList' : new FormControl(''),
-    });
-
     this.token = localStorage.getItem("token");
-    this.authService.getPost(this.token).subscribe(result=> {
-      if(result && result.articles) {
-        this.userPost = result.articles
-      } else {
-        alert("There is error")
-      }
-    })
-    this.authService.getFeed(this.token).subscribe(result=> {
-      if(result && result.articles) {
-        this.userFeed = result.articles
-      }
-    })
+    if(this.token){
+      this.condition = 1
+    }
+    // this.authService.getPost(this.token).subscribe(result=> {
+    //   console.log(result)
+    //   if(result && result.articles) {
+    //     this.userPost = result.articles
+    //     // console.log(this.userPost)
+    //   } else {
+    //     alert("There is error")
+    //   }
+    // })
+    // this.authService.getFeed(this.token).subscribe(result=> {
+    //   // console.log(result)
+    //   if(result && result.articles) {
+    //     this.userFeed = result.articles
+    //   }
+    // })
     this.authService.getTag().subscribe(result=> {
       if(result){
         this.tagList = result
@@ -94,6 +87,7 @@ export class BlogsComponent implements OnInit {
   }
   complete_blog(blog:any) {
     this.showBlogs = blog
+    // console.log(this.showBlogs.tagList)
 
     this.showMainContent = this.showMainContent ? false : true;
    }
@@ -101,6 +95,7 @@ export class BlogsComponent implements OnInit {
     this.showEditContent = this.showEditContent ? false : true;
   }
   edit(values:any){
+    console.log(values)
   }
   blogHome(){
     this.showMainContent = this.showMainContent ? false : true;
@@ -114,6 +109,7 @@ export class BlogsComponent implements OnInit {
     this.authService.addComment(data).subscribe(result=> {
       if(result){
         this.comments=result
+        // console.log(this.comments.comment.body)
       }
     })
 
@@ -127,6 +123,23 @@ export class BlogsComponent implements OnInit {
     this.save=tag
     this.filter = this.filter ? false : true;
     this.condition = 3
+  }
+  onSubmit(){
+    // var data = {
+    //   title: this.editArticle1.title,
+    //   description: this.editArticle1.description,
+    //   body: this.editArticle1.body
+    // }
+    // console.log(this.editArticle1.value)
+    this.authService.updateArticle(this.editArticle1.value).subscribe(result=> {
+      console.log(result)
+      console.log("vbnm")
+    })
+  }
+  onSubmit1(){
+    this.authService.addArticle(this.addArticle1.value).subscribe(result=> {
+    console.log(result)
+    })
   }
   like() {
       this.authService.addLike(this.showBlogs.slug).subscribe(result=> {
