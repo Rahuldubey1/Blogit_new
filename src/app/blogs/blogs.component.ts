@@ -29,7 +29,8 @@ export class BlogsComponent implements OnInit {
   filteredPost:any
   filter:boolean = false
   save:any
-  rahul:any
+  list1:any=[]
+  list:any=[]
   ngOnInit(): void {
     this.editArticle1 = new FormGroup({
       'title' : new FormControl(''),
@@ -43,51 +44,35 @@ export class BlogsComponent implements OnInit {
       'body' : new FormControl(''),
       // 'tagList' : new FormControl(''),
     });
-    
+
     this.token = localStorage.getItem("token");
     this.authService.getPost(this.token).subscribe(result=> {
-      console.log(result)
       if(result && result.articles) {
         this.userPost = result.articles
-        // console.log(this.userPost)
       } else {
         alert("There is error")
       }
     })
     this.authService.getFeed(this.token).subscribe(result=> {
-      // console.log(result)
       if(result && result.articles) {
         this.userFeed = result.articles
-        // console.log(this.userFeed)
       }
     })
     this.authService.getTag().subscribe(result=> {
       if(result){
         this.tagList = result
-        this.tagList = this.tagList["tags"]
-        console.log(this.tagList)
-        
-       for(var tag of this.tagList){
-            if(tag.replace(this.re, '').length>0){
-              this
-            }
-        }    //     this.rahul=tag.trim()
-      //     console.log(this.rahul);
-
-      //     if(tag.trim()){
-      //       console.log(tag.length);
-      //     }
-      //   //   if(!/\S/.test(tag)){
-      //   //   console.log(tag)
-      //   // }
-
-      //   // else{
-      //   //   console.log("else")
-      //   // }
-      // }
-    }
+        this.tagList = this.tagList["tags"]        
+        for(var tag of this.tagList){
+          this.list1 = tag.replace(this.re, '')
+          if(this.list1.length>0){
+            this.list.push(this.list1)
+          }
+        }
+      }
     })
   }
+  
+
   
   checkBlogs(tab:Number){
     if(tab == 1) { 
@@ -109,7 +94,6 @@ export class BlogsComponent implements OnInit {
   }
   complete_blog(blog:any) {
     this.showBlogs = blog
-    // console.log(this.showBlogs.tagList)
 
     this.showMainContent = this.showMainContent ? false : true;
    }
@@ -117,7 +101,6 @@ export class BlogsComponent implements OnInit {
     this.showEditContent = this.showEditContent ? false : true;
   }
   edit(values:any){
-    console.log(values)
   }
   blogHome(){
     this.showMainContent = this.showMainContent ? false : true;
@@ -131,7 +114,6 @@ export class BlogsComponent implements OnInit {
     this.authService.addComment(data).subscribe(result=> {
       if(result){
         this.comments=result
-        // console.log(this.comments.comment.body)
       }
     })
 
@@ -145,23 +127,6 @@ export class BlogsComponent implements OnInit {
     this.save=tag
     this.filter = this.filter ? false : true;
     this.condition = 3
-  }
-  onSubmit(){
-    // var data = {
-    //   title: this.editArticle1.title,
-    //   description: this.editArticle1.description,
-    //   body: this.editArticle1.body
-    // }
-    // console.log(this.editArticle1.value)
-    this.authService.updateArticle(this.editArticle1.value).subscribe(result=> {
-      console.log(result)
-      console.log("vbnm")
-    })
-  }
-  onSubmit1(){
-    this.authService.addArticle(this.addArticle1.value).subscribe(result=> {
-    console.log(result)
-    })
   }
   like() {
       this.authService.addLike(this.showBlogs.slug).subscribe(result=> {

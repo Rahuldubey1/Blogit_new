@@ -25,8 +25,8 @@
         <div class="col-md-3">
             <div class="tagbar">
                 <p>Popular Tags</p>
-                <div class="tag-list" *ngFor="let tag of tagList" >
-                    <a class="tag-default tag-pill" *ngIf="tag.replace(re, '')"  (click)="filterBlogs(tag)">
+                <div class="tag-list" *ngFor="let tag of list" >
+                    <a class="tag-default tag-pill" (click)="filterBlogs(tag)">
                         {{tag}}
                     </a>
                 </div>

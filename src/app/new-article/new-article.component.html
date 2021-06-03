@@ -6,7 +6,7 @@
                     <fieldset>
                         <fieldset class="form-group">
                             <input class="form-control form-control-lg"
-                            formControlName="title" placeholder="Article Title" type="text">
+                            formControlName="title" placeholder="Article Title" type="text" ng-init="editData.title">{{editData.title}}
                             <small class="text-danger"
                             *ngIf="(addArticle.get('title')!.invalid && addArticle.get('title')!.touched)">
                             Please enter valid Title!</small>

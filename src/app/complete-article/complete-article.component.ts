@@ -69,8 +69,9 @@ delete(data:any){
   })
 }
 editArticle(data:any){
-  this.router.navigateByUrl('/new-article',{ state: { title:data.title , description:data.description , body:data.body } })
-}
+  this.authService.setEditData(data)
+  this.router.navigateByUrl('/new-article')
+ }
   addComment(){
     var data = {
       body:this.commentss,

@@ -10,14 +10,23 @@ export class AuthServiceService {
   value:any
   profile:any
   profile1:any
+  editData:any
 
   constructor(private http:HttpClient) { }
   setData(value:any){
+    this.data = value
     this.data = value
   }
   getData(){
     return this.data
   }
+  setEditData(value:any){
+    this.editData = value
+  }
+  getEditData(){
+    return this.editData
+  }
+
   setValue(data:any){
     this.value = data
     // console.log(this.value)
