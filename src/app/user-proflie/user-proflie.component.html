@@ -31,8 +31,8 @@
                 <div *ngFor="let blog of selectedUserPost">
                     <div class="article-preview">   
                         <div class="article-meta">
-                            <a>
-                                <a href="">
+                            <a (click)="showProfile(blog)">
+                                <a>
                                     <img src='{{blog.author.image}}'>
                                 </a>
                                 <div class="info">

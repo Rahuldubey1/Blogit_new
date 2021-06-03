@@ -11,7 +11,7 @@ export class UserProflieComponent implements OnInit {
   data:any
   condition:boolean = false
   selectedUserPost:any
-  favArticle:any
+  favArticle:boolean=false
   userBlog:any
   constructor(private authService:AuthServiceService,private router:Router) { }
 
@@ -32,6 +32,14 @@ export class UserProflieComponent implements OnInit {
     this.authService.setData(this.userBlog)
     this.router.navigateByUrl('/complete-article')
   }
+  showProfile(blog:any) { 
+    if(blog.author.username == this.data.username){
+  } else {
+      this.userBlog = blog
+      this.authService.setProfile1(this.userBlog)
+      this.router.navigateByUrl('/profile')
+    }
+  }
   showFavBlog(data:any){
     this.authService.showFavBlog(data).subscribe(result=>{
       if(result){
@@ -44,13 +52,23 @@ export class UserProflieComponent implements OnInit {
     })
   }
   show(){
+    if(this.favArticle == true){
+      this.favArticle = this.favArticle ? false : true;
+
+    }
     this.condition = this.condition ? false : true;
     this.authService.getSelectedProfile(this.data.username).subscribe(result=>{
       if(result){
         this.selectedUserPost = result.articles
+        if(result.articlesCount == 0){
+          console.log(this.favArticle)
+
+          this.favArticle = this.favArticle ? false : true;
+          console.log(this.favArticle)
+
+        }
       }
     })
-    this.favArticle = this.favArticle ? false : true;
   }
   like(blog:any) {
     if(blog.favorited == false) {

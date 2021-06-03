@@ -144,4 +144,22 @@ export class AuthServiceService {
     const headers = { 'Authorization':'Token '+ token };
     return this.http.get(`https://conduit.productionready.io/api/articles/?favorited=${data}`,{headers});
   }
+  getComment(data:any){
+    return this.http.get(`https://conduit.productionready.io/api/articles/${data}/comments`);
+  }
+  deleteComment(data:any){
+    console.log(data)
+    let id = data.id
+    let slug = data.slug
+    var token:any = localStorage.getItem("token");
+    const headers = { 'Authorization':'Token '+ token };
+    return this.http.delete(`https://conduit.productionready.io/api/articles/${slug}/comments/${id}`,{headers});
+  }
+  deleteArticle(data:any){
+    console.log(data)
+    var token:any = localStorage.getItem("token");
+    const headers = { 'Authorization':'Token '+ token };
+    return this.http.delete(`https://conduit.productionready.io/api/articles/${data.slug}`,{headers});
+
+  }
 }

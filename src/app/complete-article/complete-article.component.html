@@ -10,18 +10,30 @@
                     <a class="author">{{data.author.username}}</a>
                     <span class="date">{{data.createdAt | date }}</span>
                 </div>
-                <button *ngIf="!profileFollow" class="btn btn-sm action-btn btn-outline-secondary" (click)="follow(data)">
-                    <i class="fa fa-plus">&nbsp;Follow {{data.author.username}}</i>
-                </button>
-                <button *ngIf="profileFollow" class="btn btn-sm action-btn btn-outline-secondary" (click)="unFollow(data)">
-                    <i class="fa fa-plus">&nbsp;Unfollow {{data.author.username}}</i>
-                </button>
-                <button *ngIf="!articleLike" class="btn btn-sm btn-primary" (click)="like(data)"> 
-                    <i class="fa fa-heart"></i>&nbsp; favorite Article
-                </button>
-                <button *ngIf="articleLike" class="btn btn-sm btn-primary" (click)="like(data)"> 
-                    <i class="fa fa-heart"></i>&nbsp; Unfavorite Article
-                </button>
+                <br>
+                <br>
+                <div *ngIf="!profile">
+                    <button *ngIf="!profileFollow" class="btn btn-sm action-btn btn-outline-secondary" (click)="follow(data)">
+                        <i class="fa fa-plus">&nbsp;Follow {{data.author.username}}</i>
+                    </button>
+                    <button *ngIf="profileFollow" class="btn btn-sm action-btn btn-outline-secondary" (click)="unFollow(data)">
+                        <i class="fa fa-plus">&nbsp;Unfollow {{data.author.username}}</i>
+                    </button>
+                    <button *ngIf="!articleLike" class="btn btn-sm btn-primary" (click)="like(data)"> 
+                        <i class="fa fa-heart"></i>&nbsp; favorite Article
+                    </button>
+                    <button *ngIf="articleLike" class="btn btn-sm btn-primary" (click)="like(data)"> 
+                        <i class="fa fa-heart"></i>&nbsp; Unfavorite Article
+                    </button>
+                </div>
+                <div *ngIf="profile" >
+                    <button class="btn btn-sm action-btn btn-outline-secondary" (click)="editArticle(data)">
+                        <i class="fas fa-pen-alt">&nbsp;Edit Article</i>
+                    </button>
+                    <button class="btn btn-sm action-btn btn-outline-secondary" (click)="delete(data)">
+                        <i class="fa fa-trash-o">&nbsp;Delete Article</i>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -41,18 +53,29 @@
                     <a class="author">{{data.author.username}}</a>
                     <span class="date">{{data.createdAt | date }}</span>
                 </div>
-                <button *ngIf="!profileFollow" class="btn btn-sm action-btn btn-outline-secondary" (click)="follow(data)">
-                    <i class="fa fa-plus">&nbsp;Follow {{data.author.username}}</i>
-                </button>
-                <button *ngIf="profileFollow" class="btn btn-sm action-btn btn-outline-secondary" (click)="unFollow(data)">
-                    <i class="fa fa-plus">&nbsp;Unfollow {{data.author.username}}</i>
-                </button>
-                <button *ngIf="!articleLike" class="btn btn-sm btn-primary" (click)="like(data)"> 
-                    <i class="fa fa-heart"></i>&nbsp; favorite Article
-                </button>
-                <button *ngIf="articleLike" class="btn btn-sm btn-primary" (click)="like(data)"> 
-                    <i class="fa fa-heart"></i>&nbsp; Unfavorite Article
-                </button>
+                <br>
+                <div *ngIf="!profile">
+                    <button *ngIf="!profileFollow" class="btn btn-sm action-btn btn-outline-secondary" (click)="follow(data)">
+                        <i class="fa fa-plus">&nbsp;Follow {{data.author.username}}</i>
+                    </button>
+                    <button *ngIf="profileFollow" class="btn btn-sm action-btn btn-outline-secondary" (click)="unFollow(data)">
+                        <i class="fa fa-plus">&nbsp;Unfollow {{data.author.username}}</i>
+                    </button>
+                    <button *ngIf="!articleLike" class="btn btn-sm btn-primary" (click)="like(data)"> 
+                        <i class="fa fa-heart"></i>&nbsp; favorite Article
+                    </button>
+                    <button *ngIf="articleLike" class="btn btn-sm btn-primary" (click)="like(data)"> 
+                        <i class="fa fa-heart"></i>&nbsp; Unfavorite Article
+                    </button>
+                </div>
+                <div *ngIf="profile">
+                    <button class="btn btn-sm action-btn btn-outline-secondary" (click)="editArticle(data)">
+                        <i class="fas fa-pen-alt">&nbsp;Edit Article</i>
+                    </button>
+                    <button class="btn btn-sm action-btn btn-outline-secondary" (click)="delete(data)">
+                        <i class="fa fa-trash-o">&nbsp;Delete Article</i>
+                    </button>
+                </div>
             </div>
         </div>
         <div class="row1">
@@ -78,7 +101,7 @@
                         <a class="comment-author">{{comment.author.username}}</a>
                         <span class="date-posted">{{comment.createdAt | date }}</span>
                         <span class="mod option">
-                            <i class="fa fa-trash-o" style="font-size:24px;float:right;margin-right: 10px;"></i>
+                            <i class="fa fa-trash-o" (click)="deleteComment(comment)"style="font-size:24px;float:right;margin-right: 10px;"></i>
                         </span>
                     </div>
                 </div>    

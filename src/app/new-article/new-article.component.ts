@@ -33,4 +33,5 @@ export class NewArticleComponent implements OnInit {
       })
     }
   }
+
 }

@@ -12,6 +12,10 @@
     margin-bottom: 2rem;
     box-sizing: inherit;
 }
+.menu{
+    float: right;
+    margin-right: 280px;
+}
 .article-meta img {
     display: inline-block;
     vertical-align: middle;
@@ -161,6 +165,9 @@ input, button, select, textarea {
 .article-page .comment-form .card-footer .btn {
     font-weight: 700;
     float: right;
+}
+.option{
+    cursor: pointer;
 }
 
 .btn-sm, .btn-group-sm>.btn {
