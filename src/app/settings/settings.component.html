@@ -44,7 +44,7 @@
                             formControlName="username" placeholder="Username" type="text" 
                             bind-value="userData.username">
                             <small class="text-danger"
-                            *ngIf="updateData.get('username')!.invalid && updateData.get('username')!.touched">
+                            *ngIf="(updateData.get('username')!.invalid && updateData.get('username')!.touched)">
                             Please enter valid username!</small>
                         </fieldset>
                         <fieldset class="form-group">
@@ -55,20 +55,20 @@
                             <input class="form-control form-control-lg" 
                             formControlName="email" placeholder="Email" type="email" [value]="userData.email">
                             <small class="text-danger"
-                            *ngIf="updateData.get('email')!.invalid && updateData.get('email')!.touched">
+                            *ngIf="(updateData.get('email')!.invalid && updateData.get('email')!.touched)">
                             Please enter valid email!</small>
                         </fieldset>
                         <fieldset class="form-group">
                             <input class="form-control form-control-lg"
                             formControlName="password" placeholder="New Password" type="password">
                             <small class="text-danger"
-                            *ngIf="updateData.get('password')!.invalid && updateData.get('password')!.touched">
-                            Please enter valid email!</small>
+                            *ngIf="(updateData.get('password')!.invalid && updateData.get('password')!.touched) || showError">
+                            Please enter valid password!</small>
                         </fieldset>
-                        <p *ngIf="showError">
+                        <!-- <p *ngIf="showError">
                             <p class="danger" *ngFor="let item of error | keyvalue">
                                 {{item.key}}  {{item.value}}
-                            </p>
+                            </p> -->
                         <button class="btn btn-lg btn-primary pull-xs-right" type="submit"> Update settings</button>
                     </fieldset>
                 </form>

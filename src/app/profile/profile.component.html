@@ -5,11 +5,11 @@
                 <div class="col-xs-12 col-md-10 offset-md-1">
                     <img class="user-img" src='{{data.image}}'>
                     <h4>{{data.author.username}}</h4>
-                    <button *ngIf="!profileFollow" class="btn btn-sm action-btn btn-outline-secondary" (click)="follow(data)">&nbsp;Follow {{data.author.username}}
-                        <i class="ion-plus-round"></i>
+                    <button *ngIf="!profileFollow" class="btn btn-sm action-btn btn-outline-secondary" (click)="follow(data)">
+                        <i class="fa fa-plus">&nbsp;Follow {{data.author.username}}</i>
                     </button>
-                    <button *ngIf="profileFollow" class="btn btn-sm action-btn btn-outline-secondary" (click)="unFollow(data)">&nbsp;Unfollow {{data.author.username}}
-                        <i class="ion-plus-round"></i>
+                    <button *ngIf="profileFollow" class="btn btn-sm action-btn btn-outline-secondary" (click)="unFollow(data)">
+                        <i class="fa fa-plus">&nbsp;Unfollow {{data.author.username}}</i>
                     </button>
                 </div>
             </div>

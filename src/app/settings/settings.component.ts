@@ -10,7 +10,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class SettingsComponent implements OnInit {
   updateData:FormGroup;
-  // example = { username: "", email: "", password: ""  };
   token:any;
   userData:any;
   rahul:any
@@ -30,13 +29,13 @@ export class SettingsComponent implements OnInit {
       'password' : new FormControl('',[Validators.minLength(8),Validators.required,])
     });
     // console.log(this.form.controls.get.['username'].value)
-    this.rahul=JSON.stringify(this.updateData.value) 
-    console.log(this.rahul)
-    this.updateData.patchValue({
+    // this.rahul=JSON.stringify(this.updateData.value) 
+    // console.log(this.rahul)
+    // this.updateData.patchValue({
       
-      username: this.updateData.value.username
+    //   username: this.updateData.value.username
       
-    })
+    // })
     this.authService.getUser(this.token).subscribe(result=> {
       if(result && result.user) {
         this.userData = result.user
@@ -69,7 +68,6 @@ export class SettingsComponent implements OnInit {
     },
     errors=>{
         this.error = errors.error.errors
-        console.log(this.error)
         this.showError = this.showError? false:true
     }
     )

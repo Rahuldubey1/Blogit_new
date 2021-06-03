@@ -90,7 +90,6 @@ export class BlogsComponent implements OnInit {
   }
   
   checkBlogs(tab:Number){
-    alert(tab)
     if(tab == 1) { 
       this.filter = false
       this.condition = 1

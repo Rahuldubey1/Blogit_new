@@ -13,22 +13,24 @@ export class NewArticleComponent implements OnInit {
 
   constructor(private authService:AuthServiceService,private router:Router) { }
   addArticle:any
+  article:boolean=false
   ngOnInit(): void {
     this.addArticle = new FormGroup({
-      'title' : new FormControl(''),
-      'description' : new FormControl(''),
-      'body' : new FormControl('')
-      // 'tagList' : new FormControl(''),
+      'title' : new FormControl('',Validators.required),
+      'description' : new FormControl('',Validators.required),
+      'body' : new FormControl('',Validators.required)
     });
   }
     onSubmit(){
-      console.log(this.addArticle.value)
-      this.authService.addArticle(this.addArticle.value).subscribe(result=> {
+      if(this.addArticle.value.title == "" || this.addArticle.value.description == ""
+         || this.addArticle.value.body == "") {
+            this.article = true
+      } else {
+        this.authService.addArticle(this.addArticle.value).subscribe(result=> {
         if(result) {
           this.router.navigateByUrl('/')
         }
-        // console.log(result)
       })
     }
-  
+  }
 }

@@ -61,19 +61,25 @@ export class ProfileComponent implements OnInit {
         this.condition = this.condition ? false : true;
         console.log(result.articlesCount)
         if(result.articlesCount == 0){
+        alert("gbhnjm,")
+        
           this.favArticle = this.favArticle ? false : true;
         }
       }
     })
   }
   show(){
+    this.favArticle = this.favArticle ? false : true;
+    alert("sd")
     this.condition = this.condition ? false : true;
     this.authService.getSelectedProfile(this.data.author.username).subscribe(result=>{
       if(result){
         this.selectedUserPost = result.articles
+        if(result.articlesCount == 0){
+            this.favArticle = this.favArticle ? false : true;
+          }
       }
     })
-    this.favArticle = this.favArticle ? false : true;
   }
   like(blog:any) {
     if(blog.favorited == false) {

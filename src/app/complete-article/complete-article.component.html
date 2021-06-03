@@ -10,12 +10,17 @@
                     <a class="author">{{data.author.username}}</a>
                     <span class="date">{{data.createdAt | date }}</span>
                 </div>
-                <button class="btn btn-sm action-btn btn-outline-secondary">&nbsp;Follow {{data.author.username}}
-                <i class="ion-plus-round"></i>
+                <button *ngIf="!profileFollow" class="btn btn-sm action-btn btn-outline-secondary" (click)="follow(data)">
+                    <i class="fa fa-plus">&nbsp;Follow {{data.author.username}}</i>
                 </button>
-                <button class="btn btn-sm btn-primary">&nbsp; Unfavorite Article 
-                    <i class="ion-heart"></i>
-                    <span class="counter"></span>
+                <button *ngIf="profileFollow" class="btn btn-sm action-btn btn-outline-secondary" (click)="unFollow(data)">
+                    <i class="fa fa-plus">&nbsp;Unfollow {{data.author.username}}</i>
+                </button>
+                <button *ngIf="!articleLike" class="btn btn-sm btn-primary" (click)="like(data)"> 
+                    <i class="fa fa-heart"></i>&nbsp; favorite Article
+                </button>
+                <button *ngIf="articleLike" class="btn btn-sm btn-primary" (click)="like(data)"> 
+                    <i class="fa fa-heart"></i>&nbsp; Unfavorite Article
                 </button>
             </div>
         </div>
@@ -36,12 +41,17 @@
                     <a class="author">{{data.author.username}}</a>
                     <span class="date">{{data.createdAt | date }}</span>
                 </div>
-                <button class="btn btn-sm action-btn btn-outline-secondary">&nbsp;Follow {{data.author.username}}
-                <i class="ion-plus-round"></i>
+                <button *ngIf="!profileFollow" class="btn btn-sm action-btn btn-outline-secondary" (click)="follow(data)">
+                    <i class="fa fa-plus">&nbsp;Follow {{data.author.username}}</i>
                 </button>
-                <button class="btn btn-sm btn-primary">&nbsp; Unfavorite Article 
-                    <i class="ion-heart"></i>
-                    <span class="counter"></span>
+                <button *ngIf="profileFollow" class="btn btn-sm action-btn btn-outline-secondary" (click)="unFollow(data)">
+                    <i class="fa fa-plus">&nbsp;Unfollow {{data.author.username}}</i>
+                </button>
+                <button *ngIf="!articleLike" class="btn btn-sm btn-primary" (click)="like(data)"> 
+                    <i class="fa fa-heart"></i>&nbsp; favorite Article
+                </button>
+                <button *ngIf="articleLike" class="btn btn-sm btn-primary" (click)="like(data)"> 
+                    <i class="fa fa-heart"></i>&nbsp; Unfavorite Article
                 </button>
             </div>
         </div>
@@ -63,12 +73,12 @@
                     <div class="card-block">
                         <p>{{comment.body}}</p>
                     </div>
-                    <div class="cord-footer">
+                    <div class="card-footer">
                         <img class="comment-author-img" src="{{comment.author.image}}">
                         <a class="comment-author">{{comment.author.username}}</a>
                         <span class="date-posted">{{comment.createdAt | date }}</span>
                         <span class="mod option">
-                            <i class="ion-trash-a"></i>
+                            <i class="fa fa-trash-o" style="font-size:24px;float:right;margin-right: 10px;"></i>
                         </span>
                     </div>
                 </div>    
