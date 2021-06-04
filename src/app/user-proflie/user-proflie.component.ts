@@ -17,12 +17,9 @@ export class UserProflieComponent implements OnInit {
 
   ngOnInit(): void {
     this.data = this.authService.getProfile()
-    console.log(this.data)
     this.authService.getSelectedProfile(this.data.username).subscribe(result=>{
       if(result){
-        console.log(result)
         this.selectedUserPost = result.articles
-        console.log(this.selectedUserPost)
       }
     })
   }
@@ -61,11 +58,7 @@ export class UserProflieComponent implements OnInit {
       if(result){
         this.selectedUserPost = result.articles
         if(result.articlesCount == 0){
-          console.log(this.favArticle)
-
           this.favArticle = this.favArticle ? false : true;
-          console.log(this.favArticle)
-
         }
       }
     })

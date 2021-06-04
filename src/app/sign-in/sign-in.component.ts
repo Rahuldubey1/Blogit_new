@@ -48,7 +48,7 @@ export class SignInComponent implements OnInit {
             localStorage.setItem("token",result.user.token)
             this.router.navigateByUrl('/')
           } else {
-            alert("sdfg");
+            alert("this is error");
           }
         },
         error => {

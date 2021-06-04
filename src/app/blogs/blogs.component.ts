@@ -89,7 +89,6 @@ export class BlogsComponent implements OnInit {
     this.authService.addComment(data).subscribe(result=> {
       if(result){
         this.comments=result
-        // console.log(this.comments.comment.body)
       }
     })
 
@@ -106,28 +105,5 @@ export class BlogsComponent implements OnInit {
   }
     this.condition = 3
   }
-  onSubmit(){
-    // var data = {
-    //   title: this.editArticle1.title,
-    //   description: this.editArticle1.description,
-    //   body: this.editArticle1.body
-    // }
-    // console.log(this.editArticle1.value)
-    this.authService.updateArticle(this.editArticle1.value).subscribe(result=> {
-      console.log(result)
-      console.log("vbnm")
-    })
-  }
-  onSubmit1(){
-    this.authService.addArticle(this.addArticle1.value).subscribe(result=> {
-    console.log(result)
-    })
-  }
-  like() {
-      this.authService.addLike(this.showBlogs.slug).subscribe(result=> {
-      if(result){
-        alert("You have liked this article")
-      }
-    })
-  }
+
 }

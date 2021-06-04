@@ -17,7 +17,6 @@ export class AppComponent {
   
   ngOnInit(): void {
     this.token= this.authService.getToken()
-    console.log(this.token,"app")
     if(this.token){
     this.authService.getUser(this.token).subscribe(result=> {
       if(result && result.user) {

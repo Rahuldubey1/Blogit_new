@@ -30,7 +30,6 @@ export class AuthServiceService {
 
   setValue(data:any){
     this.value = data
-    // console.log(this.value)
   }
   getValue() {
     return this.value
@@ -40,9 +39,11 @@ export class AuthServiceService {
   }
   setProfile1(data:any){
     this.profile1 = data
+
   }
   setProfile2(data:any){
     this.profile2 = data
+
   }
   getProfile(){
     return this.profile
@@ -96,12 +97,9 @@ export class AuthServiceService {
     let description = data.description
     let body = data.body
     var token:any = localStorage.getItem("token");
-    // const body1 = {body : data};
-    // console.log(body1)
     var article = {
       'article':data
     }
-    console.log(article)
     const headers = { 'Authorization':'Token '+ token };
     return this.http.post(`https://conduit.productionready.io/api/articles/?title=${title}&description=${description}&body=${body}`,article,{headers})
   }
@@ -136,7 +134,6 @@ export class AuthServiceService {
     return this.http.get(` https://conduit.productionready.io/api/tags`);
   }
   follow(data:any):Observable<any>{
-    alert(data)
     var token:any = localStorage.getItem("token");
     const headers = { 'Authorization':'Token '+ token };
     return this.http.post(`https://conduit.productionready.io/api/profiles/${data}/follow`,'',{headers});
@@ -163,7 +160,6 @@ export class AuthServiceService {
     return this.http.get(`https://conduit.productionready.io/api/articles/${data}/comments`);
   }
   deleteComment(data:any){
-    console.log(data)
     let id = data.id
     let slug = data.slug
     var token:any = localStorage.getItem("token");
@@ -171,7 +167,6 @@ export class AuthServiceService {
     return this.http.delete(`https://conduit.productionready.io/api/articles/${slug}/comments/${id}`,{headers});
   }
   deleteArticle(data:any){
-    console.log(data)
     var token:any = localStorage.getItem("token");
     const headers = { 'Authorization':'Token '+ token };
     return this.http.delete(`https://conduit.productionready.io/api/articles/${data.slug}`,{headers});

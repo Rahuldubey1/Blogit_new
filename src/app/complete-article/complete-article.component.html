@@ -59,21 +59,21 @@
                     <button *ngIf="!profileFollow" class="btn btn-sm action-btn btn-outline-secondary mr-3" (click)="follow(data)">
                         <i class="fa fa-plus">&nbsp;Follow {{data.author.username}}</i>
                     </button>
-                    <button *ngIf="profileFollow" class="btn btn-sm action-btn btn-outline-secondary 3" (click)="unFollow(data)">
+                    <button *ngIf="profileFollow" class="btn btn-sm action-btn btn-outline-secondary mr-3" (click)="unFollow(data)">
                         <i class="fa fa-plus">&nbsp;Unfollow {{data.author.username}}</i>
                     </button>
-                    <button *ngIf="!articleLike" class="btn btn-sm btn-primary 3" (click)="like(data)"> 
+                    <button *ngIf="!articleLike" class="btn btn-sm btn-primary mr-3" (click)="like(data)"> 
                         <i class="fa fa-heart"></i>&nbsp; favorite Article
                     </button>
-                    <button *ngIf="articleLike" class="btn btn-sm btn-primary 3" (click)="like(data)"> 
+                    <button *ngIf="articleLike" class="btn btn-sm btn-primary mr-3" (click)="like(data)"> 
                         <i class="fa fa-heart"></i>&nbsp; Unfavorite Article
                     </button>
                 </div>
                 <div *ngIf="profile">
-                    <button class="btn btn-sm action-btn btn-outline-secondary 3" (click)="editArticle(data)">
+                    <button class="btn btn-sm action-btn btn-outline-secondary mr-3" (click)="editArticle(data)">
                         <i class="fas fa-pen-alt">&nbsp;Edit Article</i>
                     </button>
-                    <button class="btn btn-sm action-btn btn-outline-secondary 3" (click)="delete(data)">
+                    <button class="btn btn-sm action-btn btn-outline-secondary mr-3" (click)="delete(data)">
                         <i class="fa fa-trash-o">&nbsp;Delete Article</i>
                     </button>
                 </div>
@@ -93,7 +93,7 @@
                         </div>    
                     </fieldset>
                 </form>
-                <div class="card" *ngFor="let comment of comments">
+                <div class="card" *ngFor="let comment of comments; let i = index;">
                     <div class="card-block">
                         <p>{{comment.body}}</p>
                     </div>
@@ -102,7 +102,7 @@
                         <a class="comment-author">{{comment.author.username}}</a>
                         <span class="date-posted">{{comment.createdAt | date }}</span>
                         <span class="mod option">
-                            <i class="fa fa-trash-o" (click)="deleteComment(comment)"style="font-size:24px;float:right;margin-right: 10px;"></i>
+                            <i class="fa fa-trash-o" (click)="deleteComment(comment,i)"style="font-size:24px;float:right;margin-right: 10px;"></i>
                         </span>
                     </div>
                 </div>    

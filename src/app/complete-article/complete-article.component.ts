@@ -36,7 +36,6 @@ export class CompleteArticleComponent implements OnInit {
   this.authService.getUser(this.token).subscribe(result=> {
     if(result){
       this.userProfile = result
-      console.log(this.userProfile)
     }
     if(this.userProfile.user.username == this.data.author.username) {
       this.profile = this.profile? false:true
@@ -82,28 +81,24 @@ editArticle(data:any){
     this.authService.addComment(data).subscribe(result=> {
       if(result){
         this.comments.push(result.comment)
-        console.log(this.comments)
         this.commentss = ''
       }
     })
       
 
   } 
-  deleteComment(data:any){
+  deleteComment(data:any,id:number){
     var value={
       id:data.id,
       slug:this.data.slug
     }
-    console.log(value)
     this.authService.deleteComment(value).subscribe(result=> {
       if(result){
-        
-        // console.log(this.comments.id)
-        // this.comments.slice(value.id)        
-        // console.log(this.comments)
-                
       }
     })
+    console.log(this.comments.indexOf('id'))
+    this.comments = this.comments.filter((v:any,i:any) => i !== id); 
+    console.log(id,"hi")
     
   }
   follow(data:any){

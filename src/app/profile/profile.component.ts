@@ -15,27 +15,34 @@ export class ProfileComponent implements OnInit {
   selectedUserPost:any
   userBlog:any
   token:any
+  profile:any
   constructor(private authService:AuthServiceService,private router:Router) { }
  
   ngOnInit(): void {
   this.token = localStorage.getItem("token");
   this.data = this.authService.getProfile1()
-  this.data = this.authService.getProfile2()
-  this.authService.getSelectedProfile(this.data.author.username).subscribe(result=>{
-    if(result){
-      this.selectedUserPost = result.articles
-      console.log(this.selectedUserPost)
-      if(this.selectedUserPost[0].author.following == true)
-      {
-        this.profileFollow = this.profileFollow ? false : true;
+  this.profile = this.authService.getProfile2()
+  if(this.data){
+    this.authService.getSelectedProfile(this.data.author.username).subscribe(result=>{
+      if(result){
+        this.selectedUserPost = result.articles
+        if(this.selectedUserPost[0].author.following == true)
+        {
+          this.profileFollow = this.profileFollow ? false : true;
+        }
       }
-    }
-  })
-  
-  // if(this.data.author.following == true) {
-  //   alert("true")
-  //   this.profileFollow = this.profileFollow ? false : true;
-  // }
+    })
+  } else {
+    this.authService.getSelectedProfile(this.profile.author.username).subscribe(result=>{
+      if(result){
+        this.selectedUserPost = result.articles
+        if(this.selectedUserPost[0].author.following == true)
+        {
+          this.profileFollow = this.profileFollow ? false : true;
+        }
+      }
+    })
+  }
   }
   showFeed(blog:any)
   {
@@ -70,10 +77,7 @@ export class ProfileComponent implements OnInit {
       if(result){
         this.selectedUserPost = result.articles
         this.condition = this.condition ? false : true;
-        console.log(result.articlesCount)
         if(result.articlesCount == 0){
-        alert("gbhnjm,")
-        
           this.favArticle = this.favArticle ? false : true;
         }
       }
@@ -81,16 +85,26 @@ export class ProfileComponent implements OnInit {
   }
   show(){
     this.favArticle = this.favArticle ? false : true;
-    alert("sd")
     this.condition = this.condition ? false : true;
-    this.authService.getSelectedProfile(this.data.author.username).subscribe(result=>{
-      if(result){
-        this.selectedUserPost = result.articles
-        if(result.articlesCount == 0){
-            this.favArticle = this.favArticle ? false : true;
-          }
-      }
-    })
+    if(this.data) {
+      this.authService.getSelectedProfile(this.data.author.username).subscribe(result=>{
+        if(result){
+          this.selectedUserPost = result.articles
+          if(result.articlesCount == 0){
+              this.favArticle = this.favArticle ? false : true;
+            }
+        }
+      })
+    } else {
+      this.authService.getSelectedProfile(this.profile.author.username).subscribe(result=>{
+        if(result){
+          this.selectedUserPost = result.articles
+          if(result.articlesCount == 0){
+              this.favArticle = this.favArticle ? false : true;
+            }
+        }
+      })
+    }
   }
   like(blog:any) {
     if(this.token) {
