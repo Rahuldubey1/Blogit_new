@@ -17,6 +17,7 @@ export class CompleteArticleComponent implements OnInit {
   comm:any
   userProfile:any
   profile:boolean = false
+  userData:any
   constructor(private authService:AuthServiceService,private router:Router) { }
 
   // ngOnChanges(): void{
@@ -106,38 +107,52 @@ editArticle(data:any){
     
   }
   follow(data:any){
+    if(this.token) {
     this.authService.follow(data.author.username).subscribe(result=>{
       if(result){
         this.profileFollow = this.profileFollow ? false : true;
       }
     })
+  } else {
+    this.router.navigateByUrl('/login')
   }
+}
+
   
   unFollow(data:any){
-    this.authService.unFollow(data.author.username).subscribe(result=>{
-      if(result){
-        this.profileFollow = this.profileFollow ? false : true;
-      }
-    })
+    if(this.token){
+      this.authService.unFollow(data.author.username).subscribe(result=>{
+        if(result){
+          this.profileFollow = this.profileFollow ? false : true;
+        }
+      })
+    } else {
+    this.router.navigateByUrl('/login')
+    }
   }
-  
   like(blog:any) {
-    if(blog.favorited == false) {
-      alert("if")
-    this.authService.addLike(blog.slug).subscribe(result=> {
-      if(result){
-        this.articleLike = true
+    if(this.token) {
+      if(blog.favorited == false) {
+        this.authService.addLike(blog.slug).subscribe(result=> {
+          if(result){
+            this.articleLike = true
+          }
+        })
       }
-    })
+      else {
+        this.authService.removeLike(blog.slug).subscribe(result=> {
+          if(result){
+            this.articleLike = false
+          }
+        })
+      } 
+    } else {
+        this.router.navigateByUrl('/login')
+    }
   }
-  else {
-    alert("else")
-    this.authService.removeLike(blog.slug).subscribe(result=> {
-      if(result){
-        this.articleLike = false
-      }
-    })
+  showProfile(blog:any) {
+    this.userData = blog
+    this.authService.setProfile2(this.userData)
+    this.router.navigateByUrl('/profile')
   }
-  }  
-
 }

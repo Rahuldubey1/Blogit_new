@@ -120,8 +120,10 @@ export class BlogsComponent implements OnInit {
   }
   filterBlogs(tag:any){
     this.selectedTab = 3
-    this.save=tag
+      this.save=tag
+    if(this.filter == false){
     this.filter = this.filter ? false : true;
+  }
     this.condition = 3
   }
   onSubmit(){

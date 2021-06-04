@@ -18,7 +18,6 @@ export class NewArticleComponent implements OnInit {
   editData:any
   ngOnInit(): void {
     this.editData = this.authService.getEditData()
-    console.log(this.editData.title)
     this.addArticle = new FormGroup({
       'title' : new FormControl('',Validators.required),
       'description' : new FormControl('',Validators.required),

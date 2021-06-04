@@ -14,10 +14,13 @@ export class ProfileComponent implements OnInit {
   favArticle:boolean = false
   selectedUserPost:any
   userBlog:any
+  token:any
   constructor(private authService:AuthServiceService,private router:Router) { }
  
   ngOnInit(): void {
+  this.token = localStorage.getItem("token");
   this.data = this.authService.getProfile1()
+  this.data = this.authService.getProfile2()
   this.authService.getSelectedProfile(this.data.author.username).subscribe(result=>{
     if(result){
       this.selectedUserPost = result.articles
@@ -41,18 +44,26 @@ export class ProfileComponent implements OnInit {
     this.router.navigateByUrl('/complete-article')
   }
   follow(data:any){
-    this.authService.follow(data.author.username).subscribe(result=>{
-      if(result){
-        this.profileFollow = this.profileFollow ? false : true;
-      }
-    })
+    if(this.token) {
+      this.authService.follow(data.author.username).subscribe(result=>{
+        if(result){
+          this.profileFollow = this.profileFollow ? false : true;
+        }
+      })
+    } else {
+      this.router.navigateByUrl('/login')
+    }
   }
   unFollow(data:any){
-    this.authService.unFollow(data.author.username).subscribe(result=>{
-      if(result){
-        this.profileFollow = this.profileFollow ? false : true;
-      }
-    })
+    if(this.token) {
+      this.authService.unFollow(data.author.username).subscribe(result=>{
+        if(result){
+          this.profileFollow = this.profileFollow ? false : true;
+        }
+      })
+    } else {
+    this.router.navigateByUrl('/login')
+    }
   }
   showFavBlog(data:any){
     this.authService.showFavBlog(data).subscribe(result=>{
@@ -82,21 +93,25 @@ export class ProfileComponent implements OnInit {
     })
   }
   like(blog:any) {
-    if(blog.favorited == false) {
-    this.authService.addLike(blog.slug).subscribe(result=> {
-      if(result){
-        blog.favoritesCount = blog.favoritesCount + 1
-        blog.favorited = true
+    if(this.token) {
+      if(blog.favorited == false) {
+        this.authService.addLike(blog.slug).subscribe(result=> {
+          if(result){
+            blog.favoritesCount = blog.favoritesCount + 1
+            blog.favorited = true
+          }
+        })
       }
-    })
-  }
-  else {
-    this.authService.removeLike(blog.slug).subscribe(result=> {
-      if(result){
-        blog.favoritesCount = blog.favoritesCount - 1
-        blog.favorited = false
+      else {
+        this.authService.removeLike(blog.slug).subscribe(result=> {
+          if(result){
+            blog.favoritesCount = blog.favoritesCount - 1
+            blog.favorited = false
+          }
+        })
       }
-    })
-  }
+    } else {
+      this.router.navigateByUrl('/login')
+    }
   }
 }

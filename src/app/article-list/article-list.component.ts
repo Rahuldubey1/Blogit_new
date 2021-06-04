@@ -24,10 +24,7 @@ export class ArticleListComponent implements OnInit {
     console.log(data);  
   }
   ngOnChanges(): void{
-    alert("hello")
     if(this.myinputMsg ==1 ){
-    alert("1")
-
       this.authService.getFeed(this.token).subscribe(result=> {
         if(result && result.articles) {
           this.userPost = result.articles
@@ -35,9 +32,7 @@ export class ArticleListComponent implements OnInit {
       }) 
     }
     if(this.myinputMsg ==2 ) {
-    alert("2")
-
-      this.authService.getPost(this.token).subscribe(result=> {
+      this.authService.getPost().subscribe(result=> {
         if(result && result.articles) {
           this.userPost = result.articles
         } else {
@@ -46,8 +41,6 @@ export class ArticleListComponent implements OnInit {
       })     
     }
     if(this.myinputMsg ==3) {
-      alert("3")
-
       this.authService.getFilteredBlog(this.tags).subscribe(result=>{
         if(result){
           this.userPost=result.articles
@@ -56,33 +49,19 @@ export class ArticleListComponent implements OnInit {
   }
 }
   ngOnInit(): void {
-  
-      this.token = localStorage.getItem("token");
-      console.log(this.token)
-      this.authService.getPost(this.token).subscribe(result=> {
-        console.log(result)
+    this.token = localStorage.getItem("token");
+    if(!this.token){
+      this.authService.getPost().subscribe(result=> {
         if(result && result.articles) {
           this.userPost = result.articles
         } else {
           alert("There is error")
         }
       })
-      if(this.token){
-        alert("if")
-      // this.authService.getPost(this.token).subscribe(result=> {
-      //     console.log(result)
-      //     if(result && result.articles) {
-      //       this.userPost = result.articles
-      //     } else {
-      //       alert("There is error")
-      //     }
-      //   })
+    } else {
       this.authService.getFeed(this.token).subscribe(result=> {
         if(result && result.articles) {
           this.userPost = result.articles
-          // if(this.userPost.favorited == true){
-          //   this.class = this.class? false : true;
-          // }
         }
       }) 
     }
@@ -97,37 +76,32 @@ export class ArticleListComponent implements OnInit {
   showProfile(blog:any)
   {
     this.userBlog = blog
-    console.log(this.userBlog,"hhhh")
     this.authService.setProfile1(this.userBlog)
     this.router.navigateByUrl('/profile')
   }
-//   like() {
-//     this.authService.addLike(this.showBlogs.slug).subscribe(result=> {
-//     if(result){
-//       alert("You have liked this article")
-//     }
-//   })
-// }
-like(blog:any,i:any) {
-  console.log(i)
-  if(blog.favorited == false) {
-  this.authService.addLike(blog.slug).subscribe(result=> {
-    if(result){
-      blog.favoritesCount = blog.favoritesCount + 1
-      blog.favorited = true
-      this.option = i
+  like(blog:any,i:any) {
+    if(this.token) {
+      if(blog.favorited == false) {
+        this.authService.addLike(blog.slug).subscribe(result=> {
+          if(result){
+            blog.favoritesCount = blog.favoritesCount + 1
+            blog.favorited = true
+            this.option = i
+          }
+        })
+      }
+      else {
+        this.authService.removeLike(blog.slug).subscribe(result=> {
+          if(result){
+            blog.favoritesCount = blog.favoritesCount - 1
+            blog.favorited = false
+            this.option = ''
+          }
+        })
+      }
     }
-  })
-}
-else {
-  this.authService.removeLike(blog.slug).subscribe(result=> {
-    if(result){
-      blog.favoritesCount = blog.favoritesCount - 1
-      blog.favorited = false
-      this.option = ''
-      console.log(this.option)
+    else {
+      this.router.navigateByUrl('/login')
     }
-  })
-}
-}
+  }
 }

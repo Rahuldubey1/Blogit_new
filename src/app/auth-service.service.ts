@@ -10,6 +10,7 @@ export class AuthServiceService {
   value:any
   profile:any
   profile1:any
+  profile2:any
   editData:any
 
   constructor(private http:HttpClient) { }
@@ -40,13 +41,18 @@ export class AuthServiceService {
   setProfile1(data:any){
     this.profile1 = data
   }
+  setProfile2(data:any){
+    this.profile2 = data
+  }
   getProfile(){
     return this.profile
   }
   getProfile1(){
     return this.profile1
   }
-
+  getProfile2(){
+    return this.profile2
+  }
   login(data:any):Observable<any>{
     var user = {
       'user':data
@@ -67,7 +73,7 @@ export class AuthServiceService {
     });
 
   }
-  getPost(data:any):Observable<any> {
+  getPost():Observable<any> {
     return this.http.get(`https://conduit.productionready.io/api/articles`)
   }
   getToken() {
@@ -146,12 +152,12 @@ export class AuthServiceService {
   getSelectedProfile(data:any):Observable<any>{
     var token:any = localStorage.getItem("token");
     const headers = { 'Authorization':'Token '+ token };
-    return this.http.get(`https://conduit.productionready.io/api/articles/?author=${data}`,{headers});
+    return this.http.get(`https://conduit.productionready.io/api/articles/?author=${data}`);
   }
   showFavBlog(data:any):Observable<any>{
     var token:any = localStorage.getItem("token");
     const headers = { 'Authorization':'Token '+ token };
-    return this.http.get(`https://conduit.productionready.io/api/articles/?favorited=${data}`,{headers});
+    return this.http.get(`https://conduit.productionready.io/api/articles/?favorited=${data}`);
   }
   getComment(data:any){
     return this.http.get(`https://conduit.productionready.io/api/articles/${data}/comments`);
