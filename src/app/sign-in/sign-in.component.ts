@@ -11,7 +11,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class SignInComponent implements OnInit {
   mySigninForm:FormGroup;
-
+  showEmailError:boolean = false
+  showPasswordError:boolean = false
+  error:boolean = false
+  errorMessage:any
   constructor(private router:Router, private authService:AuthServiceService) { }
 
 
@@ -25,20 +28,34 @@ export class SignInComponent implements OnInit {
     this.router.navigateByUrl('/register');
   }
   onSubmit() {
-    if (this.mySigninForm.valid){
-      this.authService.login(this.mySigninForm.value).subscribe(result=> {
-        if( result && result.user) {
-          localStorage.setItem("token",result.user.token)
-          this.router.navigateByUrl('/')
-        } else {
-          alert("sdfg");
+    if(this.mySigninForm.value.email == null || this.mySigninForm.value.password == null){
+      if(this.mySigninForm.value.email == null){
+        if(this.showEmailError == false){
+          this.showEmailError = this.showEmailError ? false:true
         }
-      })
-    }     
+      }
+      if(this.mySigninForm.value.password == null){
+        if(this.showPasswordError == false){
+          this.showPasswordError = this.showPasswordError ? false:true
+        }
+      }
+    }
+    else {
+      if (this.mySigninForm.valid){
+        this.authService.login(this.mySigninForm.value).subscribe(
+          result=> {
+          if( result && result.user) {
+            localStorage.setItem("token",result.user.token)
+            this.router.navigateByUrl('/')
+          } else {
+            alert("sdfg");
+          }
+        },
+        error => {
+          this.errorMessage = error.error.errors;
+          this.error = this.error ? false:true
+        })
+      }     
+    }
   }
-  // validation(){
-  //   if(this.mySigninForm.value == '')
-  //    alert(this.mySigninForm.value)
-  // }
-
 }

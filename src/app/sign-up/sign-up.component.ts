@@ -12,6 +12,12 @@ import { AuthServiceService } from '../auth-service.service';
 })
 export class SignUpComponent implements OnInit {
   mySignupForm:FormGroup;
+  showEmailError:boolean = false
+  showPasswordError:boolean = false
+  showUsernameError:boolean = false
+  
+  error:boolean = false
+  errorMessage:any
 
 
 
@@ -28,13 +34,37 @@ export class SignUpComponent implements OnInit {
     this.router.navigateByUrl('/login')
   }
   onSubmit() {
-    if (this.mySignupForm.valid){
-      this.authService.signup(this.mySignupForm.value).subscribe(result=>{
-        if(true){
-          this.router.navigateByUrl('/login')
+    if(this.mySignupForm.value.email == null || this.mySignupForm.value.password == null || this.mySignupForm.value.username == null){
+      if(this.mySignupForm.value.email == null){
+        if(this.showEmailError == false){
+          this.showEmailError = this.showEmailError ? false:true
         }
-      })
-    }    
-  }
+      }
+      if(this.mySignupForm.value.password == null){
+        if(this.showPasswordError == false){
+          this.showPasswordError = this.showPasswordError ? false:true
+        }
+      }
+      if(this.mySignupForm.value.username == null){
+        if(this.showUsernameError == false){
+          this.showUsernameError = this.showUsernameError ? false:true
+        }
+      }
+    }
+    else {
+      if (this.mySignupForm.valid){
+        this.authService.signup(this.mySignupForm.value).subscribe(
+          result=>{
+            if(true){
+              this.router.navigateByUrl('/login')
+            }
+          },
+          error => {
+            this.errorMessage = error.error.errors;
+            this.error = this.error ? false:true
+          })
+        } 
+      }   
+    }
 
-}
+} 

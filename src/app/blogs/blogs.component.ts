@@ -36,21 +36,6 @@ export class BlogsComponent implements OnInit {
     if(this.token){
       this.condition = 1
     }
-    // this.authService.getPost(this.token).subscribe(result=> {
-    //   console.log(result)
-    //   if(result && result.articles) {
-    //     this.userPost = result.articles
-    //     // console.log(this.userPost)
-    //   } else {
-    //     alert("There is error")
-    //   }
-    // })
-    // this.authService.getFeed(this.token).subscribe(result=> {
-    //   // console.log(result)
-    //   if(result && result.articles) {
-    //     this.userFeed = result.articles
-    //   }
-    // })
     this.authService.getTag().subscribe(result=> {
       if(result){
         this.tagList = result
@@ -65,8 +50,6 @@ export class BlogsComponent implements OnInit {
     })
   }
   
-
-  
   checkBlogs(tab:Number){
     if(tab == 1) { 
       this.filter = false
@@ -78,17 +61,14 @@ export class BlogsComponent implements OnInit {
     }
     if(this.token) {
       this.selectedTab = tab 
-     
     }
-    else {
+    if(!this.token && tab==1){
       this.router.navigateByUrl('/login')
     }
   
   }
   complete_blog(blog:any) {
     this.showBlogs = blog
-    // console.log(this.showBlogs.tagList)
-
     this.showMainContent = this.showMainContent ? false : true;
    }
    editArticle(){

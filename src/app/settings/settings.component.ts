@@ -14,7 +14,10 @@ export class SettingsComponent implements OnInit {
   userData:any;
   rahul:any
   error:any
-  showError:boolean=false
+  showPasswordError:boolean=false
+  showUsernameError:boolean=false
+  showEmailError:boolean=false
+
   constructor(private authService:AuthServiceService,private router:Router) { 
     this.token = localStorage.getItem("token");
   }
@@ -28,18 +31,10 @@ export class SettingsComponent implements OnInit {
       'email' : new FormControl('',[Validators.email,Validators.required]),
       'password' : new FormControl('',[Validators.minLength(8),Validators.required,])
     });
-    // console.log(this.form.controls.get.['username'].value)
-    // this.rahul=JSON.stringify(this.updateData.value) 
-    // console.log(this.rahul)
-    // this.updateData.patchValue({
-      
-    //   username: this.updateData.value.username
-      
-    // })
+
     this.authService.getUser(this.token).subscribe(result=> {
       if(result && result.user) {
         this.userData = result.user
-        // this.updateData['username'].setValue(result.user.username);
         this.updateData.patchValue({
           username: result.user.username,
           email: result.user.email,
@@ -59,17 +54,25 @@ export class SettingsComponent implements OnInit {
 
   }
   updateUser(){
-    console.log(this.updateData.value,"hello")
+  if(this.updateData.value.password == '' || this.updateData.value.email == '' || this.updateData.value.username == '') {
+    if(this.updateData.value.username == ''){
+      this.showUsernameError = this.showUsernameError ? false:true
+    } 
+    if(this.updateData.value.email == ''){
+      this.showEmailError = this.showEmailError ? false:true
+    } 
+    if(this.updateData.value.password == ''){
+      if(this.showPasswordError == false){
+      this.showPasswordError = this.showPasswordError ? false:true
+    }
+  }
+  }
+  else {
     this.authService.updateUser(this.updateData.value).subscribe(result=> {
-    if (result)
-    {
+    if (result) {
       this.router.navigateByUrl('/')
     }
-    },
-    errors=>{
-        this.error = errors.error.errors
-        this.showError = this.showError? false:true
-    }
-    )
-}
+    })
+  }
+  }
 }
