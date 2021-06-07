@@ -8,14 +8,15 @@
             <label for="exampleInputEmail1" class="form-label">Email address*</label>
             <input type="email" class="form-control" formControlName="email">
             <small class="text-danger"
-            *ngIf="(mySigninForm.get('email')!.invalid && mySigninForm.get('email')!.untouched) && showEmailError">
+            *ngIf="((mySigninForm.get('email')!.invalid && showEmailError) ||
+             (mySigninForm.get('email')!.invalid && mySigninForm.get('email')!.touched))">
             Please enter valid email!</small>
         </div>
         <div class="mb-3 form-group">
             <label for="exampleInputPassword1" class="form-label">Password*</label>
             <input type="password" class="form-control"  formControlName="password" id="exampleInputPassword1">
             <small class="text-danger"
-            *ngIf="(mySigninForm.get('password')!.invalid && mySigninForm.get('password')!.untouched) && showPasswordError">
+            *ngIf="((mySigninForm.get('password')!.invalid && showPasswordError) || (mySigninForm.get('password')!.invalid && mySigninForm.get('password')!.touched))">
             Please enter valid password!</small>
             <small class="text-danger"
             *ngIf="error">

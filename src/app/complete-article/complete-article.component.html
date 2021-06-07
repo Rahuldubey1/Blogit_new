@@ -5,7 +5,7 @@
             <div class="article-meta">
                 <div (click)="showProfile(data)">
                     <a href="">
-                        <img src='{{data.author.image}}'>
+                        <img src='{{data.author.image}}' onerror="this.src='https://as1.ftcdn.net/v2/jpg/01/71/25/36/1000_F_171253635_8svqUJc0BnLUtrUOP5yOMEwFwA8SZayX.jpg'">
                     </a>
                     <div class="info">
                         <a class="author">{{data.author.username}}</a>
@@ -48,7 +48,7 @@
         <div class="center">
             <div class="article-meta">
                 <a href="">
-                    <img src='{{data.author.image}}'>
+                    <img src='{{data.author.image}}' onerror="this.src='https://as1.ftcdn.net/v2/jpg/01/71/25/36/1000_F_171253635_8svqUJc0BnLUtrUOP5yOMEwFwA8SZayX.jpg'">
                 </a>
                 <div class="info">
                     <a class="author">{{data.author.username}}</a>
@@ -98,7 +98,7 @@
                         <p>{{comment.body}}</p>
                     </div>
                     <div class="card-footer">
-                        <img class="comment-author-img" src="{{comment.author.image}}">
+                        <img class="comment-author-img" src="{{comment.author.image}}" onerror="this.src='https://as1.ftcdn.net/v2/jpg/01/71/25/36/1000_F_171253635_8svqUJc0BnLUtrUOP5yOMEwFwA8SZayX.jpg'">
                         <a class="comment-author">{{comment.author.username}}</a>
                         <span class="date-posted">{{comment.createdAt | date }}</span>
                         <span class="mod option">

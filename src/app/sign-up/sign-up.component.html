@@ -8,21 +8,21 @@
             <label for="Username" class="form-label">Username:</label>
             <input type="text" class="form-control" formControlName="username" placeholder="Enter username">
             <small class="text-danger"
-            *ngIf="(mySignupForm.get('username')!.invalid && mySignupForm.get('username')!.untouched) && showUsernameError">
+            *ngIf="((mySignupForm.get('username')!.invalid && mySignupForm.get('username')!.touched) || (mySignupForm.get('username')!.invalid && showUsernameError))">
             Please enter valid username!</small>
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Email address:</label>
             <input type="email" class="form-control" formControlName="email" placeholder="Email">
             <small class="text-danger"
-            *ngIf="(mySignupForm.get('email')!.invalid && mySignupForm.get('email')!.untouched) && showEmailError">
+            *ngIf="((mySignupForm.get('email')!.invalid && mySignupForm.get('email')!.touched) || (mySignupForm.get('email')!.invalid && showEmailError))">
             Please enter valid email!</small>
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password:</label>
             <input type="password" class="form-control" formControlName="password" placeholder="password">
             <small class="text-danger"
-            *ngIf="(mySignupForm.get('password')!.invalid && mySignupForm.get('password')!.untouched) && showPasswordError">
+            *ngIf="((mySignupForm.get('password')!.invalid && mySignupForm.get('password')!.touched) || (mySignupForm.get('password')!.invalid && showPasswordError))">
             Please enter valid password!</small>
             <small class="text-danger"
             *ngIf="error">

@@ -158,3 +158,11 @@ a {
 .favArticle{
     text-align: center;
 }
+.btn-outline-primary {
+    color: rgb(52 204 229);
+    border-color: rgb(52 204 229);
+}
+.liked{
+    background-color:rgb(52 204 229) ;
+    color: white !important;
+}

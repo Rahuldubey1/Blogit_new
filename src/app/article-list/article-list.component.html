@@ -5,7 +5,7 @@
                 <div class="article-meta">
                     <a (click)="showProfile(blog)">
                         <a href="">
-                            <img src='{{blog.author.image}}'>
+                            <img src='{{blog.author.image}}' onerror="this.src='https://as1.ftcdn.net/v2/jpg/01/71/25/36/1000_F_171253635_8svqUJc0BnLUtrUOP5yOMEwFwA8SZayX.jpg'">
                         </a>
                         <div class="info">
                             <a class="author">{{blog.author.username}}</a>
@@ -14,7 +14,7 @@
                     </a>
                     <a>
                         <button class="btn btn-sm btn-outline-primary pull-xs-right"(click)="like(blog,i)"
-                        [ngClass]="{'liked' : option}">
+                        [ngClass]="{'liked' : blog.favorited == true}">
                             <i class="fa fa-heart">{{blog.favoritesCount}}</i>
                         </button>
                     </a>
@@ -25,6 +25,9 @@
                     </a>
                 </div>
             </div>
-        </div>    
+        </div>  
+        <div *ngIf="show">
+            <p class="favArticle"> No articles are here... yet.</p>
+        </div>  
     </div>
 </div>

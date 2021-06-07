@@ -19,11 +19,13 @@ export class SettingsComponent implements OnInit {
   showEmailError:boolean=false
 
   constructor(private authService:AuthServiceService,private router:Router) { 
-    this.token = localStorage.getItem("token");
+
   }
   userShow:boolean = false
 
   ngOnInit(): void {
+    this.token = localStorage.getItem("token");
+    console.log(this.token)
     this.updateData = new FormGroup({
       'image' : new FormControl(''),
       'username' : new FormControl('',Validators.required),
@@ -32,7 +34,7 @@ export class SettingsComponent implements OnInit {
       'password' : new FormControl('',[Validators.minLength(8),Validators.required,])
     });
 
-    this.authService.getUser(this.token).subscribe(result=> {
+    this.authService.getUser().subscribe(result=> {
       if(result && result.user) {
         this.userData = result.user
         this.updateData.patchValue({

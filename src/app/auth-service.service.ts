@@ -35,6 +35,7 @@ export class AuthServiceService {
     return this.value
   }
   setProfile(data:any){
+    console.log(data)
     this.profile = data
   }
   setProfile1(data:any){
@@ -43,7 +44,6 @@ export class AuthServiceService {
   }
   setProfile2(data:any){
     this.profile2 = data
-
   }
   getProfile(){
     return this.profile
@@ -66,10 +66,11 @@ export class AuthServiceService {
     }
     return this.http.post(`https://conduit.productionready.io/api/users`,user);
   }
-  getUser(data:any):Observable<any>{
+  getUser():Observable<any>{
+    var token:any = localStorage.getItem("token");
     return this.http.get(`https://conduit.productionready.io/api/user`,{
       headers: new HttpHeaders({
-        'Authorization': 'Token '+ data
+        'Authorization': 'Token '+ token
       })
     });
 
@@ -92,18 +93,20 @@ export class AuthServiceService {
     const body = { body: data.body  };
       return this.http.post(`https://conduit.productionready.io/api/articles/${data.slug}/comments`,body,{headers})
   }
-  updateArticle(data:any):Observable<any> {
-    let title = data.title
-    let description = data.description
-    let body = data.body
+  updateArticle(data:any,slug:any):Observable<any> {
+    // let title = data.title
+    // let description = data.description
+    // let body = data.body
+    // var article = {
+    //   'article':data
+    // }
     var token:any = localStorage.getItem("token");
-    var article = {
-      'article':data
-    }
+
     const headers = { 'Authorization':'Token '+ token };
-    return this.http.post(`https://conduit.productionready.io/api/articles/?title=${title}&description=${description}&body=${body}`,article,{headers})
+    return this.http.put(`https://conduit.productionready.io/api/articles/${slug}`,data,{headers})
   }
   addArticle(data:any):Observable<any> {
+    alert("hello")
     var token:any = localStorage.getItem("token");
     const headers = { 'Authorization':'Token '+ token };
     var article = {
@@ -149,7 +152,7 @@ export class AuthServiceService {
   getSelectedProfile(data:any):Observable<any>{
     var token:any = localStorage.getItem("token");
     const headers = { 'Authorization':'Token '+ token };
-    return this.http.get(`https://conduit.productionready.io/api/articles/?author=${data}`);
+    return this.http.get(`https://conduit.productionready.io/api/articles/?author=${data}`,{headers});
   }
   showFavBlog(data:any):Observable<any>{
     var token:any = localStorage.getItem("token");
@@ -170,6 +173,17 @@ export class AuthServiceService {
     var token:any = localStorage.getItem("token");
     const headers = { 'Authorization':'Token '+ token };
     return this.http.delete(`https://conduit.productionready.io/api/articles/${data.slug}`,{headers});
+
+  }
+  getUserProfile(data:any){
+    var token:any = localStorage.getItem("token");
+    const headers = { 'Authorization':'Token '+ token };
+    return this.http.get(`https://conduit.productionready.io/api/profiles/${data}`,{headers});
+  }
+  getclickedBlog(data:any){
+    var token:any = localStorage.getItem("token");
+    const headers = { 'Authorization':'Token '+ token };
+    return this.http.get(`https://conduit.productionready.io/api/articles/${data}`,{headers});
 
   }
 }

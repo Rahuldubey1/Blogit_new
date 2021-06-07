@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../auth-service.service';
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'app-profile',
@@ -16,33 +17,59 @@ export class ProfileComponent implements OnInit {
   userBlog:any
   token:any
   profile:any
-  constructor(private authService:AuthServiceService,private router:Router) { }
+  selectedUser:any
+  userName:any
+  constructor(private authService:AuthServiceService,private router:Router, private route:ActivatedRoute ) { }
  
   ngOnInit(): void {
+  // this.userName = parseInt(this.route.snapshot.paramMap.get('username')!)
+  this.route.paramMap.subscribe(params => {
+    this.userName = params.get("username")
+ })
+  console.log(this.userName)
   this.token = localStorage.getItem("token");
-  this.data = this.authService.getProfile1()
+  // this.data = this.authService.getProfile1()
   this.profile = this.authService.getProfile2()
-  if(this.data){
-    this.authService.getSelectedProfile(this.data.author.username).subscribe(result=>{
+  if(this.userName){
+    this.authService.getSelectedProfile(this.userName).subscribe(result=>{
       if(result){
+        console.log(result)
         this.selectedUserPost = result.articles
-        if(this.selectedUserPost[0].author.following == true)
+        console.log(this.selectedUserPost[0].favorited)
+        if(this.selectedUserPost[0].favorited == true){}
+      }
+    })
+    this.authService.getUserProfile(this.userName).subscribe(result=>{
+      if(result){
+        this.selectedUser = result
+        this.selectedUser = this.selectedUser.profile
+        console.log(this.selectedUser)
+        if(this.selectedUser.profile.following == true)
         {
           this.profileFollow = this.profileFollow ? false : true;
         }
       }
     })
   } else {
-    this.authService.getSelectedProfile(this.profile.author.username).subscribe(result=>{
-      if(result){
-        this.selectedUserPost = result.articles
-        if(this.selectedUserPost[0].author.following == true)
-        {
-          this.profileFollow = this.profileFollow ? false : true;
-        }
-      }
-    })
-  }
+    // this.authService.getSelectedProfile(this.profile.author.username).subscribe(result=>{
+    //   if(result){
+    //     this.selectedUserPost = result.articles
+    //     if(this.selectedUserPost[0].author.following == true)
+    //     {
+    //       this.profileFollow = this.profileFollow ? false : true;
+    //     }
+    //   }
+    // })
+    // this.authService.getUserProfile(this.profile.author.username).subscribe(result=>{
+    //   if(result){
+    //     this.selectedUser = result
+    //     if(this.selectedUser.profile.following == true)
+    //     {
+    //       this.profileFollow = this.profileFollow ? false : true;
+    //     }
+    //   }
+    // })
+    }
   }
   showFeed(blog:any)
   {
@@ -73,6 +100,7 @@ export class ProfileComponent implements OnInit {
     }
   }
   showFavBlog(data:any){
+    alert(data)
     this.authService.showFavBlog(data).subscribe(result=>{
       if(result){
         this.selectedUserPost = result.articles
@@ -84,10 +112,12 @@ export class ProfileComponent implements OnInit {
     })
   }
   show(){
-    this.favArticle = this.favArticle ? false : true;
+    if(this.favArticle == true){
+      this.favArticle = this.favArticle ? false : true;
+    }
     this.condition = this.condition ? false : true;
-    if(this.data) {
-      this.authService.getSelectedProfile(this.data.author.username).subscribe(result=>{
+    if(this.userName) {
+      this.authService.getSelectedProfile(this.userName).subscribe(result=>{
         if(result){
           this.selectedUserPost = result.articles
           if(result.articlesCount == 0){
@@ -109,6 +139,7 @@ export class ProfileComponent implements OnInit {
   like(blog:any) {
     if(this.token) {
       if(blog.favorited == false) {
+        console.log("like")
         this.authService.addLike(blog.slug).subscribe(result=> {
           if(result){
             blog.favoritesCount = blog.favoritesCount + 1
@@ -119,6 +150,8 @@ export class ProfileComponent implements OnInit {
       else {
         this.authService.removeLike(blog.slug).subscribe(result=> {
           if(result){
+        console.log("removelike")
+
             blog.favoritesCount = blog.favoritesCount - 1
             blog.favorited = false
           }

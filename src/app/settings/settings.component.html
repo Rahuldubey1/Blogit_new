@@ -1,33 +1,3 @@
-<!-- <div class="setting">
-    <h1>User Details</h1>
-    <button class="btn btn-primary" (click)="logout()">Logout</button>
-    <button class="btn btn-primary" (click)="showUser()">Update user</button>
-</div>
-
-<div *ngIf="!userShow"class="detail">
-    <p>Id:  {{userData.id}}</p>
-    <p>Username:  {{userData.username}}</p>
-    <p>Email:  {{userData.email}}</p>
-    <p>createdAt:  {{userData.createdAt}}</p>
-    <p>updatedAt:  {{userData.updatedAt}}</p>
-</div>
-<div *ngIf="userShow" class="box">
-    <form [formGroup]="updateData" (submit)="updateUser()">
-        <div class="`form-group" >
-        <label for="exampleFormControlInput1">Username</label>
-        <input type="email" class="form-control" formControlName="username" placeholder="Enter username">
-        </div>
-        <div class="form-group">
-            <label for="exampleFormControlInput1">Email</label>
-            <input type="email" class="form-control" formControlName="email" placeholder="Enter your email">
-        </div>
-        <div class="form-group">
-        <label for="exampleFormControlTextarea1">Password</label>
-        <input type="password" class="form-control" formControlName="password">
-        </div>
-        <button type="submit" class="btn btn-primary float-right">Submit</button>
-    </form>
-</div> -->
 <div class="setting-page">
     <div class="container page">
         <div class="row">
@@ -44,7 +14,7 @@
                             formControlName="username" placeholder="Username" type="text" 
                             bind-value="userData.username">
                             <small class="text-danger"
-                            *ngIf="(updateData.get('username')!.invalid && updateData.get('username')!.touched) || showUsernameError">
+                            *ngIf="((updateData.get('username')!.invalid && updateData.get('username')!.touched) || (updateData.get('username')!.invalid && showUsernameError))">                            
                             Please enter valid username!</small>
                         </fieldset>
                         <fieldset class="form-group">
@@ -55,14 +25,14 @@
                             <input class="form-control form-control-lg" 
                             formControlName="email" placeholder="Email" type="email" [value]="userData.email">
                             <small class="text-danger"
-                            *ngIf="(updateData.get('email')!.invalid && updateData.get('email')!.touched) || showEmailError">
+                            *ngIf="((updateData.get('email')!.invalid && updateData.get('email')!.touched) || (updateData.get('email')!.invalid && showEmailError))">
                             Please enter valid email!</small>
                         </fieldset>
                         <fieldset class="form-group">
                             <input class="form-control form-control-lg"
                             formControlName="password" placeholder="New Password" type="password">
                             <small class="text-danger"
-                            *ngIf="(updateData.get('password')!.invalid && updateData.get('password')!.touched) || showPasswordError">
+                            *ngIf="((updateData.get('password')!.invalid && updateData.get('password')!.touched) || (updateData.get('password')!.invalid && showPasswordError))">
                             Please enter valid password!</small>
                         </fieldset>
                         <!-- <p *ngIf="showError">

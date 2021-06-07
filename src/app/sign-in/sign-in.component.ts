@@ -31,8 +31,12 @@ export class SignInComponent implements OnInit {
     if(this.mySigninForm.value.email == null || this.mySigninForm.value.password == null){
       if(this.mySigninForm.value.email == null){
         if(this.showEmailError == false){
+          console.log(this.showEmailError)
           this.showEmailError = this.showEmailError ? false:true
+          console.log(this.showEmailError)
+        
         }
+
       }
       if(this.mySigninForm.value.password == null){
         if(this.showPasswordError == false){
@@ -45,6 +49,7 @@ export class SignInComponent implements OnInit {
         this.authService.login(this.mySigninForm.value).subscribe(
           result=> {
           if( result && result.user) {
+            this.authService.setProfile(result.user)
             localStorage.setItem("token",result.user.token)
             this.router.navigateByUrl('/')
           } else {

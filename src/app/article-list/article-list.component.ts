@@ -19,6 +19,7 @@ export class ArticleListComponent implements OnInit {
   data:any
   liked:any
   option:boolean = false
+  show:boolean = false
   
   GetChildData(data:any){  
     console.log(data);  
@@ -27,14 +28,21 @@ export class ArticleListComponent implements OnInit {
     if(this.myinputMsg ==1 ){
       this.authService.getFeed(this.token).subscribe(result=> {
         if(result && result.articles) {
-          this.userPost = result.articles
+          if(result.articlesCount == 0){
+            this.show = this.show ? false:true
+          }
+          this.userPost = result.articles 
         }
       }) 
     }
     if(this.myinputMsg ==2 ) {
       this.authService.getPost().subscribe(result=> {
         if(result && result.articles) {
+          if(result.articlesCount == 0){
+            this.show = this.show ? false:true
+          }
           this.userPost = result.articles
+          this.show = this.show ? false:true
         } else {
           alert("There is error")
         }
@@ -43,6 +51,9 @@ export class ArticleListComponent implements OnInit {
     if(this.myinputMsg ==3) {
       this.authService.getFilteredBlog(this.tags).subscribe(result=>{
         if(result){
+          if(result.articlesCount == 0){
+            this.show = this.show ? false:true
+          }
           this.userPost=result.articles
         }
     })
@@ -61,14 +72,10 @@ export class ArticleListComponent implements OnInit {
     } else {
       this.authService.getFeed(this.token).subscribe(result=> {
         if(result && result.articles) {
-          console.log(result)
-          this.userPost = result.articles
-          for (var value of this.userPost){
-            if(value.favorited == true ){
-              this.option = this.option ? false:true
-            }
+          if(result.articlesCount == 0){
+            this.show = this.show ? false:true
           }
-          
+          this.userPost = result.articles          
         }
       }) 
     }
@@ -78,13 +85,15 @@ export class ArticleListComponent implements OnInit {
   {
     this.userBlog = blog  
     this.authService.setData(this.userBlog)
-    this.router.navigateByUrl('/complete-article')
+    console.log(this.userBlog)
+    this.router.navigate(['/complete-article', blog.slug])
   }
   showProfile(blog:any)
   {
-    this.userBlog = blog
-    this.authService.setProfile1(this.userBlog)
-    this.router.navigateByUrl('/profile')
+    this.userBlog = blog.author.username
+    // console.log(this.userBlog.author.username)
+    // this.authService.setProfile1(this.userBlog)
+    this.router.navigate(['/profile', blog.author.username]);
   }
   like(blog:any,i:any) {
     if(this.token) {

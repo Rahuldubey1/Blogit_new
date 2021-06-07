@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../auth-service.service';
-
+import { ActivatedRoute} from '@angular/router'
 @Component({
   selector: 'app-complete-article',
   templateUrl: './complete-article.component.html',
@@ -18,7 +18,8 @@ export class CompleteArticleComponent implements OnInit {
   userProfile:any
   profile:boolean = false
   userData:any
-  constructor(private authService:AuthServiceService,private router:Router) { }
+  userName:any
+  constructor(private authService:AuthServiceService,private router:Router,private route:ActivatedRoute) { }
 
   // ngOnChanges(): void{
   //   this.authService.getComment(this.data.slug).subscribe(result=> {
@@ -30,12 +31,24 @@ export class CompleteArticleComponent implements OnInit {
   // }
   
   ngOnInit(): void {
-
+    this.route.paramMap.subscribe(params => {
+      this.userName = params.get("username")
+   })
+   console.log(this.userName)
   this.token = localStorage.getItem("token");
-  this.data = this.authService.getData()
-  this.authService.getUser(this.token).subscribe(result=> {
+  // this.data = this.authService.getData()
+  // console.log(this.data)\
+  this.authService.getclickedBlog(this.userName).subscribe(result=>{
     if(result){
-      this.userProfile = result
+      this.data = result
+      this.data=this.data.article
+      console.log(this.data)
+    }
+  })
+  this.authService.getUser().subscribe(result=> {
+    if(result){
+      this.userProfile = result.user
+      console.log(this.userProfile)
     }
     if(this.userProfile.user.username == this.data.author.username) {
       this.profile = this.profile? false:true
@@ -146,8 +159,11 @@ editArticle(data:any){
     }
   }
   showProfile(blog:any) {
-    this.userData = blog
-    this.authService.setProfile2(this.userData)
-    this.router.navigateByUrl('/profile')
+    // console.log(blog)
+    // this.userData = blog
+    // this.authService.setProfile2(this.userData)
+    this.router.navigate(['/profile', blog.author.username]);
+
+    // this.router.navigateByUrl('/profile')
   }
 }
