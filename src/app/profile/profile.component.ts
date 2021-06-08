@@ -75,7 +75,7 @@ export class ProfileComponent implements OnInit {
   {
     this.userBlog = blog  
     this.authService.setData(this.userBlog)
-    this.router.navigateByUrl('/complete-article')
+    this.router.navigate(['/complete-article',this.userBlog.slug])
   }
   follow(data:any){
     if(this.token) {

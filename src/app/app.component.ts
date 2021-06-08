@@ -8,6 +8,11 @@ import { AuthServiceService } from './auth-service.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  activePage:number = 0;  
+  
+  displayActivePage(activePageNumber:number){  
+    this.activePage = activePageNumber  
+  }  
   title = 'social-blogging-site';
   token:any;
   userData:any
@@ -47,3 +52,4 @@ export class AppComponent {
     }
   }
 }
+  

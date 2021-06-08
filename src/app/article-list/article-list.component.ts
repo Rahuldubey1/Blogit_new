@@ -20,13 +20,16 @@ export class ArticleListComponent implements OnInit {
   liked:any
   option:boolean = false
   show:boolean = false
+  articleCount:any
+  article:any=[]
+  value:any = 0
   
   GetChildData(data:any){  
     console.log(data);  
   }
   ngOnChanges(): void{
     if(this.myinputMsg ==1 ){
-      this.authService.getFeed(this.token).subscribe(result=> {
+      this.authService.getFeed(this.token,'').subscribe(result=> {
         if(result && result.articles) {
           if(result.articlesCount == 0){
             this.show = this.show ? false:true
@@ -70,13 +73,18 @@ export class ArticleListComponent implements OnInit {
         }
       })
     } else {
-      this.authService.getFeed(this.token).subscribe(result=> {
+      this.authService.getFeed(this.token,'').subscribe(result=> {
         if(result && result.articles) {
+          this.articleCount = (result.articlesCount/10)
           if(result.articlesCount == 0){
             this.show = this.show ? false:true
           }
           this.userPost = result.articles          
         }
+        for (let i = 0; i < this.articleCount; i++) {
+        this.article.push(i)
+        }
+        console.log(this.article)
       }) 
     }
   }
@@ -120,5 +128,47 @@ export class ArticleListComponent implements OnInit {
     else {
       this.router.navigateByUrl('/login')
     }
+  }
+  pagination(number:number){
+    this.value = number
+    this.authService.getFeed(this.token,number).subscribe(result=> {
+      if(result && result.articles) {
+        if(result.articlesCount == 0){
+          this.show = this.show ? false:true
+
+        }
+        this.userPost = result.articles          
+      }
+    }) 
+  }
+  pervious(){
+    if(this.value == 0){
+      alert("hello")
+    }
+    else {
+    this.value = this.value-1
+    console.log(this.value)
+    }
+    this.authService.getFeed(this.token,this.value).subscribe(result=> {
+      if(result && result.articles) {
+        if(result.articlesCount == 0){
+          this.show = this.show ? false:true
+        }
+        this.userPost = result.articles          
+      }
+    }) 
+  }
+  next(){
+    this.value = this.value+1
+    console.log(this.value)
+    this.authService.getFeed(this.token,this.value).subscribe(result=> {
+      if(result && result.articles) {
+        if(result.articlesCount == 0){
+          this.show = this.show ? false:true
+        }
+        this.userPost = result.articles          
+      }
+    }) 
+
   }
 }

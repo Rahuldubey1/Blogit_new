@@ -21,7 +21,7 @@ import { UserProflieComponent } from './user-proflie/user-proflie.component';
     routingComponent,
     ArticleListComponent,
     ProfileComponent,
-    UserProflieComponent
+    UserProflieComponent,
   ],
   imports: [
     BrowserModule,

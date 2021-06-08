@@ -25,6 +25,7 @@ const routes: Routes = [
   {path:"profile/:username", component:ProfileComponent},
   {path:"new-article", component:NewArticleComponent},
   {path:"user-profile", component:UserProflieComponent},
+  {path:"user-profile/:username", component:UserProflieComponent},
   {path:"**", component:BlogsComponent},
 
 ];

@@ -12,6 +12,8 @@ export class AuthServiceService {
   profile1:any
   profile2:any
   editData:any
+  limit:number= 10
+  offset:any
 
   constructor(private http:HttpClient) { }
   setData(value:any){
@@ -81,8 +83,23 @@ export class AuthServiceService {
   getToken() {
     return  localStorage.getItem("token");
   }
-  getFeed(data:any):Observable<any> {
-    return this.http.get(`https://conduit.productionready.io/api/articles/feed`,{
+  getFeed(data:any,number:any):Observable<any> {
+    this.offset = number * 10
+    //   switch(number){
+    //   case 1:
+    //     alert("1")
+    //     this.offset = 0;
+    //     break
+    //   case 2:  
+    //     alert("2")
+    //     this.offset = 10;
+    //     break
+    //   case 3:  
+    //     alert("3")
+    //     this.offset = 20;
+    //     break
+    // }
+    return this.http.get(`https://conduit.productionready.io/api/articles/feed?limit=${this.limit}&offset=${this.offset}`,{
       headers: new HttpHeaders({
         'Authorization': 'Token '+ data
       })

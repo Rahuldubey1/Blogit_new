@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../auth-service.service';
+import { ActivatedRoute} from '@angular/router'
 
 @Component({
   selector: 'app-user-proflie',
@@ -13,12 +14,14 @@ export class UserProflieComponent implements OnInit {
   selectedUserPost:any
   favArticle:boolean=false
   userBlog:any
-  constructor(private authService:AuthServiceService,private router:Router) { }
+  constructor(private authService:AuthServiceService,private router:Router,private route:ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.data = this.authService.getProfile()
-    console.log(this.data,"g")
-    this.authService.getSelectedProfile(this.data.username).subscribe(result=>{
+    this.route.paramMap.subscribe(params => {
+      this.data = params.get("username")
+   })
+   console.log(this.data)
+    this.authService.getSelectedProfile(this.data).subscribe(result=>{
       if(result){
         console.log(result.articlesCount)
         if(result.articlesCount == 0){
@@ -34,15 +37,16 @@ export class UserProflieComponent implements OnInit {
   showFeed(blog:any)
   {
     this.userBlog = blog  
-    this.authService.setData(this.userBlog)
-    this.router.navigateByUrl('/complete-article')
+    // this.authService.setData(this.userBlog)
+    this.router.navigate(['/complete-article',this.userBlog.slug])
   }
   showProfile(blog:any) { 
-    if(blog.author.username == this.data.username){
+    if(blog.author.username == this.data){
   } else {
       this.userBlog = blog
-      this.authService.setProfile1(this.userBlog)
-      this.router.navigateByUrl('/profile')
+      console.log(this.userBlog)
+      // this.authService.setProfile1(this.userBlog)
+      this.router.navigate(['/profile',this.userBlog.author.username])
     }
   }
   showFavBlog(data:any){
@@ -74,12 +78,10 @@ export class UserProflieComponent implements OnInit {
   }
   show(){
     if(this.favArticle == true){
-      alert("3")
-
       this.favArticle = this.favArticle ? false : true;
     }
     this.condition = this.condition ? false : true;
-    this.authService.getSelectedProfile(this.data.username).subscribe(result=>{
+    this.authService.getSelectedProfile(this.data).subscribe(result=>{
       if(result){
         this.selectedUserPost = result.articles
         if(result.articlesCount == 0){

@@ -78,7 +78,7 @@
             </div>
             <div *ngIf="authService.getToken() && userData">
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/user-profile" routerLinkActive="active">{{userData.username}}</a>
+                    <a class="nav-link" routerLink="/user-profile/{{userData.username}}" routerLinkActive="active">{{userData.username}}</a>
                 </li>
             </div>    
         </ul>

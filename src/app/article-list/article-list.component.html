@@ -29,5 +29,16 @@
         <div *ngIf="show">
             <p class="favArticle"> No articles are here... yet.</p>
         </div>  
+        <nav aria-label="Page navigation example" class="mt-5">
+            <ul class="pagination clearfix">
+                
+                <li class="page-item"><a class="page-link" href="#" (click)="pervious()"><i class="fa fa-angle-double-left"> Previous</i></a></li>
+                <li class="page-item clearfix"  *ngFor="let number of article"><a class="page-link clearfix" href="#" (click)="pagination(number)">{{number+1}}</a></li>
+                <!-- <li class="page-item"><a class="page-link" href="#" (click)="pagination(2)">2</a></li> -->
+                <!-- <li class="page-item"><a class="page-link" href="#" (click)="pagination(3)">3</a></li> -->
+                
+                <li class="page-item"><a class="page-link" href="#"(click)="next()">Next <i class="fa fa-angle-double-right"></i></a></li>
+            </ul>
+        </nav>
     </div>
 </div>
