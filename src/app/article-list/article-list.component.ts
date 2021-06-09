@@ -10,6 +10,7 @@ import { AuthServiceService } from '../auth-service.service';
 export class ArticleListComponent implements OnInit {
   @Input() myinputMsg:Number; 
   @Input() tags:string; 
+  @Input() filterPost:number;
 
   constructor(private authService:AuthServiceService,private router:Router) { }
   userPost:any
@@ -21,15 +22,27 @@ export class ArticleListComponent implements OnInit {
   option:boolean = false
   show:boolean = false
   articleCount:any
+  myInputMessage:any
   article:any=[]
   value:any = 0
+  filter:any
+  length:number
+  
+  private allItems: any[];
+
+  // pager object
+  pager: any = {};
+
+  // paged items
+  pagedItems: any[];
   
   GetChildData(data:any){  
     console.log(data);  
   }
   ngOnChanges(): void{
+    console.log(this.filterPost)
     if(this.myinputMsg ==1 ){
-      this.authService.getFeed(this.token,'').subscribe(result=> {
+      this.authService.getFeed(this.token,this.filterPost).subscribe(result=> {
         if(result && result.articles) {
           if(result.articlesCount == 0){
             this.show = this.show ? false:true
@@ -61,6 +74,17 @@ export class ArticleListComponent implements OnInit {
         }
     })
   }
+  if(this.filterPost != undefined){
+    alert("callerd")
+    this.authService.getFeed(this.token,this.filterPost).subscribe(result=> {
+      if(result && result.articles) {
+        if(result.articlesCount == 0){
+          this.show = this.show ? false:true
+        }
+        this.userPost = result.articles 
+      }
+    }) 
+  }
 }
   ngOnInit(): void {
     this.token = localStorage.getItem("token");
@@ -73,22 +97,39 @@ export class ArticleListComponent implements OnInit {
         }
       })
     } else {
-      this.authService.getFeed(this.token,'').subscribe(result=> {
+      this.authService.getFeed(this.token,this.filterPost).subscribe(result=> {
         if(result && result.articles) {
           this.articleCount = (result.articlesCount/10)
+          this.myInputMessage = this.articleCount
+          console.log(this.myInputMessage,"hel")
           if(result.articlesCount == 0){
             this.show = this.show ? false:true
           }
           this.userPost = result.articles          
         }
         for (let i = 0; i < this.articleCount; i++) {
-        this.article.push(i)
+          this.article.push(i)
         }
-        console.log(this.article)
+        this.length = this.article.length
+        this.allItems = result;
+        this.setPage(1);
       }) 
     }
+    if(this.filter){
+      alert("ghjk")
+    }
   }
+  setPage(page: number) {
+    if (page < 1 || page > this.pager.totalPages) {
+        return;
+    }
 
+    // get pager object from service
+    this.pager = this.authService.getPager(this.allItems.length, page);
+
+    // get current page of items
+    this.pagedItems = this.allItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
+}
   showFeed(blog:any)
   {
     this.userBlog = blog  

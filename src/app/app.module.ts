@@ -12,6 +12,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UserProflieComponent } from './user-proflie/user-proflie.component';
+import { AppPaginationComponent } from './app-pagination/app-pagination.component';
 
 
 
@@ -22,6 +23,7 @@ import { UserProflieComponent } from './user-proflie/user-proflie.component';
     ArticleListComponent,
     ProfileComponent,
     UserProflieComponent,
+    AppPaginationComponent,
   ],
   imports: [
     BrowserModule,

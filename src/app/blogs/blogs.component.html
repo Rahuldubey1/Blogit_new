@@ -20,19 +20,25 @@
                     </li>
                 </ul>
             </div>
-            <app-article-list [myinputMsg]="selectedTab" [tags]="save"></app-article-list>
+            <app-article-list [myinputMsg]="selectedTab" [tags]="save" [filterPost]="value"></app-article-list>
         </div>
         <div class="col-md-2">
             <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown button
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+                <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown button
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div> -->
+                <select (change)="selectChangeHandler($event)">
+                    <option value="select">  select  </option>
+                    <option value="10">  10  </option>
+                    <option value="20">  20  </option>
+                    <option value="50">  50  </option>
+                </select>
             </div>
-          </div>
         </div>
         <div class="col-md-2">
             <div class="tagbar">

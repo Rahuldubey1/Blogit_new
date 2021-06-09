@@ -31,6 +31,7 @@ export class BlogsComponent implements OnInit {
   save:any
   list1:any=[]
   list:any=[]
+  value:any
   ngOnInit(): void {
     this.token = localStorage.getItem("token");
     if(this.token){
@@ -104,6 +105,9 @@ export class BlogsComponent implements OnInit {
     this.filter = this.filter ? false : true;
   }
     this.condition = 3
+  }
+  selectChangeHandler (event: any) {
+    this.value = event.target.value
   }
 
 }
