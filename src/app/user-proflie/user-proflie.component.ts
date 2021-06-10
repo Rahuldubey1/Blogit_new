@@ -20,10 +20,8 @@ export class UserProflieComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.data = params.get("username")
    })
-   console.log(this.data)
     this.authService.getSelectedProfile(this.data).subscribe(result=>{
       if(result){
-        console.log(result.articlesCount)
         if(result.articlesCount == 0){
           this.favArticle = this.favArticle ? false : true;
         }
@@ -32,19 +30,15 @@ export class UserProflieComponent implements OnInit {
         }
       }
     })
-    
   }
-  showFeed(blog:any)
-  {
+  showFeed(blog:any) {
     this.userBlog = blog  
-    // this.authService.setData(this.userBlog)
     this.router.navigate(['/complete-article',this.userBlog.slug])
   }
   showProfile(blog:any) { 
     if(blog.author.username == this.data){
   } else {
       this.userBlog = blog
-      console.log(this.userBlog)
       // this.authService.setProfile1(this.userBlog)
       this.router.navigate(['/profile',this.userBlog.author.username])
     }
@@ -56,8 +50,6 @@ export class UserProflieComponent implements OnInit {
             if(this.favArticle == false){
               this.favArticle = this.favArticle ? false : true;
               this.condition = this.condition ? false : true;
-
-          console.log(this.favArticle)
           } else {
             this.condition = this.condition ? false : true;
 
@@ -85,8 +77,6 @@ export class UserProflieComponent implements OnInit {
       if(result){
         this.selectedUserPost = result.articles
         if(result.articlesCount == 0){
-          alert("4")
-
           this.favArticle = this.favArticle ? false : true;
         }
       }

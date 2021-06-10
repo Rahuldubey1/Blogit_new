@@ -47,10 +47,7 @@ export class SignUpComponent implements OnInit {
       }
       if(this.mySignupForm.value.username == null){
         if(this.showUsernameError == false){
-          console.log(this.showUsernameError)
           this.showUsernameError = this.showUsernameError ? false:true
-          console.log(this.showUsernameError)
-        
         }
       }
     }

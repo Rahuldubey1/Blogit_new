@@ -22,28 +22,23 @@ export class AppComponent {
     
   }
   ngOnChange(){
-    alert("hello")
     this.authService.getUser().subscribe(result=> {
       if(result && result.user) {
-        console.log(result)
         this.userData = result.user
         this.authService.setProfile(this.userData)
       } else {
-        alert("errro")
       }
     })
   }
   ngOnInit(): void {
     this.token= this.authService.getToken()
-    console.log(this.token)
 
     this.authService.getUser().subscribe(result=> {
       if(result && result.user) {
-        console.log(result)
         this.userData = result.user
+        console.log(this.userData)
         this.authService.setProfile(this.userData)
       } else {
-        alert("errro")
       }
     })
   

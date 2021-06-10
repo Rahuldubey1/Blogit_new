@@ -4,21 +4,21 @@
             <div class="row">
                 <div class="col-xs-12 col-md-10 offset-md-1">
                     <img *ngIf="userName" class="user-img" src='{{selectedUser.image}}' onerror="this.src='https://as1.ftcdn.net/v2/jpg/01/71/25/36/1000_F_171253635_8svqUJc0BnLUtrUOP5yOMEwFwA8SZayX.jpg'">
-                    <img *ngIf="profile" class="user-img" src='{{profile.author.image}}' onerror="this.src='https://as1.ftcdn.net/v2/jpg/01/71/25/36/1000_F_171253635_8svqUJc0BnLUtrUOP5yOMEwFwA8SZayX.jpg'">
+                    <!-- <img *ngIf="profile" class="user-img" src='{{profile.author.image}}' onerror="this.src='https://as1.ftcdn.net/v2/jpg/01/71/25/36/1000_F_171253635_8svqUJc0BnLUtrUOP5yOMEwFwA8SZayX.jpg'"> -->
                     <h4 *ngIf="userName">{{selectedUser.username}}</h4>
-                    <h4 *ngIf="profile">{{profile.author.username}}</h4>
-                    <button *ngIf="!profileFollow && userName" class="btn btn-sm action-btn btn-outline-secondary" (click)="follow(data)">
+                    <!-- <h4 *ngIf="profile">{{profile.author.username}}</h4> -->
+                    <button *ngIf="!profileFollow && userName" class="btn btn-sm action-btn btn-outline-secondary" (click)="follow(selectedUser)">
                         <i class="fa fa-plus">&nbsp;Follow {{selectedUser.username}}</i>
                     </button>
-                    <button *ngIf="!profileFollow && profile" class="btn btn-sm action-btn btn-outline-secondary" (click)="follow(profile)">
+                    <!-- <button *ngIf="!profileFollow && profile" class="btn btn-sm action-btn btn-outline-secondary" (click)="follow(profile)">
                         <i class="fa fa-plus">&nbsp;Follow {{profile.author.username}}</i>
-                    </button>
-                    <button *ngIf="profileFollow && userName" class="btn btn-sm action-btn btn-outline-secondary" (click)="unFollow(data)">
+                    </button> -->
+                    <button *ngIf="profileFollow && userName" class="btn btn-sm action-btn btn-outline-secondary" (click)="unFollow(selectedUser)">
                         <i class="fa fa-plus">&nbsp;Unfollow {{selectedUser.username}}</i>
                     </button>
-                    <button *ngIf="profileFollow && profile" class="btn btn-sm action-btn btn-outline-secondary" (click)="unFollow(profile)">
+                    <!-- <button *ngIf="profileFollow && profile" class="btn btn-sm action-btn btn-outline-secondary" (click)="unFollow(profile)">
                         <i class="fa fa-plus">&nbsp;Unfollow {{profile.author.username}}</i>
-                    </button>
+                    </button> -->
                 </div>
             </div>
         </div>

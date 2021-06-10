@@ -72,8 +72,8 @@ export class AuthServiceService {
   profile1:any
   profile2:any
   editData:any
-  limit:number= 10
-  offset:any
+  limit:number = 10
+  offset:number = 0
   count:any
   filter:any
   constructor(private http:HttpClient) { }
@@ -98,7 +98,6 @@ export class AuthServiceService {
     return this.value
   }
   setProfile(data:any){
-    console.log(data)
     this.profile = data
   }
   setProfile1(data:any){
@@ -119,21 +118,16 @@ export class AuthServiceService {
   }
   setCount(data:any){
     this.count = data
-    console.log(this.count)
   }
   getCount(){
-    console.log(this.count)
     return this.count
   }
   setLimit(data:any){
-    console.log(data)
 
     this.filter = data
-    console.log(this.filter)
 
   }
   getLimit(){
-    console.log(this.filter)
     return this.filter
   }
   login(data:any):Observable<any>{
@@ -149,6 +143,7 @@ export class AuthServiceService {
     return this.http.post(`https://conduit.productionready.io/api/users`,user);
   }
   getUser():Observable<any>{
+    
     var token:any = localStorage.getItem("token");
     return this.http.get(`https://conduit.productionready.io/api/user`,{
       headers: new HttpHeaders({
@@ -164,25 +159,25 @@ export class AuthServiceService {
     return  localStorage.getItem("token");
   }
   getFeed(data:any,number:any):Observable<any> {
-    if(number == 10 || number == 20 || number == 50){
+    if((number == 10 || number == 20 || number == 50)){
+      this.offset = 0
       this.limit = number
+    //   return this.http.get(`https://conduit.productionready.io/api/articles/feed?limit=${this.limit}&offset=${this.offset}`,{
+    //   headers: new HttpHeaders({
+    //     'Authorization': 'Token '+ data
+    //   })
+    // })
     } else {
-      this.offset = number * 10      
+      if(this.limit == 20){
+        this.offset = number * 20
+      } 
+      else if(this.limit == 50){
+        this.offset = number * 50
+      }
+      else {
+        this.offset = number * 10
+      }
     }
-    //   switch(number){
-    //   case 1:
-    //     alert("1")
-    //     this.offset = 0;
-    //     break
-    //   case 2:  
-    //     alert("2")
-    //     this.offset = 10;
-    //     break
-    //   case 3:  
-    //     alert("3")
-    //     this.offset = 20;
-    //     break
-    // }
     return this.http.get(`https://conduit.productionready.io/api/articles/feed?limit=${this.limit}&offset=${this.offset}`,{
       headers: new HttpHeaders({
         'Authorization': 'Token '+ data
@@ -207,7 +202,6 @@ export class AuthServiceService {
     return this.http.put(`https://conduit.productionready.io/api/articles/${slug}`,data,{headers})
   }
   addArticle(data:any):Observable<any> {
-    alert("hello")
     var token:any = localStorage.getItem("token");
     const headers = { 'Authorization':'Token '+ token };
     var article = {
@@ -253,7 +247,12 @@ export class AuthServiceService {
   getSelectedProfile(data:any):Observable<any>{
     var token:any = localStorage.getItem("token");
     const headers = { 'Authorization':'Token '+ token };
-    return this.http.get(`https://conduit.productionready.io/api/articles/?author=${data}`,{headers});
+    if(token) {
+      return this.http.get(`https://conduit.productionready.io/api/articles/?author=${data}`,{headers});
+    } else {
+      return this.http.get(`https://conduit.productionready.io/api/articles/?author=${data}`,);
+
+    }
   }
   showFavBlog(data:any):Observable<any>{
     var token:any = localStorage.getItem("token");
@@ -274,17 +273,24 @@ export class AuthServiceService {
     var token:any = localStorage.getItem("token");
     const headers = { 'Authorization':'Token '+ token };
     return this.http.delete(`https://conduit.productionready.io/api/articles/${data.slug}`,{headers});
-
   }
   getUserProfile(data:any){
     var token:any = localStorage.getItem("token");
     const headers = { 'Authorization':'Token '+ token };
-    return this.http.get(`https://conduit.productionready.io/api/profiles/${data}`,{headers});
+    if(token) {
+      return this.http.get(`https://conduit.productionready.io/api/profiles/${data}`,{headers});
+    } else {
+      return this.http.get(`https://conduit.productionready.io/api/profiles/${data}`);
+    }
   }
   getclickedBlog(data:any){
     var token:any = localStorage.getItem("token");
     const headers = { 'Authorization':'Token '+ token };
-    return this.http.get(`https://conduit.productionready.io/api/articles/${data}`,{headers});
+    if(token) {
+      return this.http.get(`https://conduit.productionready.io/api/articles/${data}`,{headers});
+    } else { 
+      return this.http.get(`https://conduit.productionready.io/api/articles/${data}`);
 
+    }
   }
 }

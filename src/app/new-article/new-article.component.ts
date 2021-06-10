@@ -18,7 +18,6 @@ export class NewArticleComponent implements OnInit {
   editData:any
   ngOnInit(): void {
     this.editData = this.authService.getEditData()
-    console.log(this.editData)
     this.addArticle = new FormGroup({
       'title' : new FormControl('',Validators.required),
       'description' : new FormControl('',Validators.required),
@@ -38,7 +37,6 @@ export class NewArticleComponent implements OnInit {
         || this.addArticle.value.body == "") {
           this.article = true
     } else if(this.editData){
-      console.log(this.editData.slug,"ghjk")
       this.authService.updateArticle(this.addArticle.value,this.editData.slug).subscribe(result=>{
         if(result){
           this.router.navigateByUrl("/user-profile")
@@ -46,7 +44,6 @@ export class NewArticleComponent implements OnInit {
       })
     }
     else {
-      alert("hhshsh")
       this.authService.addArticle(this.addArticle.value).subscribe(result=> {
         if(result) {
           this.router.navigateByUrl('/')

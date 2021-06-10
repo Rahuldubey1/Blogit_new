@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { AuthServiceService } from '../auth-service.service';
 
 @Component({
@@ -8,19 +8,47 @@ import { AuthServiceService } from '../auth-service.service';
 })
 export class AppPaginationComponent implements OnInit,OnChanges {
   @Input() myinputMsg:any;
-  article:any
+  @Output() myOutput:EventEmitter<any>= new EventEmitter();
+  article:any = []
+  value:any = 0
+  token:any
   constructor(private authService:AuthServiceService) { }
-  ngOnChanges(){
-    
-    for (let i = 0; i < this.myinputMsg; i++) {
-      this.article.push(i)
-      }
-    console.log(this.article)
+  ngOnChanges(){ 
+    this. article = []
+      for (let i = 0; i < this.myinputMsg; i++) { 
+        this.article.push(i)
+    }
   }
   ngOnInit(): void {
-    
+    this.token = this.authService.getToken()
+  }
+  pagination(number:any){
+    this.myOutput.emit(number)
+    this.value = number 
+  }
+  pervious(){
+
+    if(this.value == 0){
+    }
+    else {
+    this.value = this.value-1
+    }
+    this.authService.getFeed(this.token,this.value).subscribe(result=> {
+      if(result && result.articles) {
+        if(result.articlesCount == 0){
+        }        
+      }
+    }) 
+  }
+  next(){
+    this.value = this.value+1
+    this.authService.getFeed(this.token,this.value).subscribe(result=> {
+      if(result && result.articles) {
+        if(result.articlesCount == 0){
+        }
+      }
+    }) 
 
   }
-  
 
 }

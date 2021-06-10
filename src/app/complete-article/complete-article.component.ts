@@ -34,10 +34,9 @@ export class CompleteArticleComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.userName = params.get("username")
    })
-   console.log(this.userName)
+  console.log(this.userName)
   this.token = localStorage.getItem("token");
   // this.data = this.authService.getData()
-  // console.log(this.data)\
   this.authService.getclickedBlog(this.userName).subscribe(result=>{
     if(result){
       this.data = result
@@ -50,9 +49,12 @@ export class CompleteArticleComponent implements OnInit {
       this.userProfile = result.user
       console.log(this.userProfile)
     }
-    if(this.userProfile.user.username == this.data.author.username) {
+    console.log(this.profile)
+    if(this.userProfile.username == this.data.author.username) {
       this.profile = this.profile? false:true
     }  
+    console.log(this.profile)
+
 })
   
   if(this.data.author.following == true)
@@ -109,10 +111,7 @@ editArticle(data:any){
       if(result){
       }
     })
-    console.log(this.comments.indexOf('id'))
     this.comments = this.comments.filter((v:any,i:any) => i !== id); 
-    console.log(id,"hi")
-    
   }
   follow(data:any){
     if(this.token) {
@@ -159,11 +158,6 @@ editArticle(data:any){
     }
   }
   showProfile(blog:any) {
-    // console.log(blog)
-    // this.userData = blog
-    // this.authService.setProfile2(this.userData)
     this.router.navigate(['/profile', blog.author.username]);
-
-    // this.router.navigateByUrl('/profile')
   }
 }

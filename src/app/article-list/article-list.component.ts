@@ -35,12 +35,24 @@ export class ArticleListComponent implements OnInit {
 
   // paged items
   pagedItems: any[];
-  
+  GetData(data:any){    
+    this.authService.getFeed(this.token,data).subscribe(result=> {
+      if(result && result.articles) {
+        this.articleCount = (result.articlesCount/10)
+        if(result.articlesCount == 0){
+          this.show = this.show ? false:true
+        }
+        this.userPost = result.articles          
+      }
+      for (let i = 0; i < this.articleCount; i++) {
+        this.article.push(i)
+      }
+    }) 
+  }
   GetChildData(data:any){  
     console.log(data);  
   }
   ngOnChanges(): void{
-    console.log(this.filterPost)
     if(this.myinputMsg ==1 ){
       this.authService.getFeed(this.token,this.filterPost).subscribe(result=> {
         if(result && result.articles) {
@@ -50,7 +62,7 @@ export class ArticleListComponent implements OnInit {
           this.userPost = result.articles 
         }
       }) 
-    }
+    } 
     if(this.myinputMsg ==2 ) {
       this.authService.getPost().subscribe(result=> {
         if(result && result.articles) {
@@ -75,18 +87,25 @@ export class ArticleListComponent implements OnInit {
     })
   }
   if(this.filterPost != undefined){
-    alert("callerd")
     this.authService.getFeed(this.token,this.filterPost).subscribe(result=> {
       if(result && result.articles) {
+        this.articleCount = (result.articlesCount/this.filterPost)
+        this.myInputMessage = this.articleCount
         if(result.articlesCount == 0){
           this.show = this.show ? false:true
         }
         this.userPost = result.articles 
+      } this. article = []
+      for (let i = 0; i < this.articleCount; i++) { 
+        this.article.push(i)
+
       }
+      this.length = this.article.length
     }) 
   }
 }
   ngOnInit(): void {
+
     this.token = localStorage.getItem("token");
     if(!this.token){
       this.authService.getPost().subscribe(result=> {
@@ -101,7 +120,6 @@ export class ArticleListComponent implements OnInit {
         if(result && result.articles) {
           this.articleCount = (result.articlesCount/10)
           this.myInputMessage = this.articleCount
-          console.log(this.myInputMessage,"hel")
           if(result.articlesCount == 0){
             this.show = this.show ? false:true
           }
@@ -111,36 +129,36 @@ export class ArticleListComponent implements OnInit {
           this.article.push(i)
         }
         this.length = this.article.length
-        this.allItems = result;
+        this.allItems = result.articles;
+        console.log(this.allItems)
         this.setPage(1);
       }) 
     }
-    if(this.filter){
-      alert("ghjk")
-    }
   }
   setPage(page: number) {
+    alert(page)
     if (page < 1 || page > this.pager.totalPages) {
         return;
     }
 
     // get pager object from service
     this.pager = this.authService.getPager(this.allItems.length, page);
+    console.log(this.pager,"d")
+    console.log(this.pager.pages.length)
+    console.log(this.pager.currentPage)
 
     // get current page of items
     this.pagedItems = this.allItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
 }
-  showFeed(blog:any)
+  showFeed(blog:any)    
   {
     this.userBlog = blog  
     this.authService.setData(this.userBlog)
-    console.log(this.userBlog)
     this.router.navigate(['/complete-article', blog.slug])
   }
   showProfile(blog:any)
   {
     this.userBlog = blog.author.username
-    // console.log(this.userBlog.author.username)
     // this.authService.setProfile1(this.userBlog)
     this.router.navigate(['/profile', blog.author.username]);
   }
@@ -188,7 +206,6 @@ export class ArticleListComponent implements OnInit {
     }
     else {
     this.value = this.value-1
-    console.log(this.value)
     }
     this.authService.getFeed(this.token,this.value).subscribe(result=> {
       if(result && result.articles) {
@@ -201,7 +218,6 @@ export class ArticleListComponent implements OnInit {
   }
   next(){
     this.value = this.value+1
-    console.log(this.value)
     this.authService.getFeed(this.token,this.value).subscribe(result=> {
       if(result && result.articles) {
         if(result.articlesCount == 0){
@@ -212,4 +228,5 @@ export class ArticleListComponent implements OnInit {
     }) 
 
   }
+   
 }
