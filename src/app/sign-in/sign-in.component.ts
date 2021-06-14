@@ -24,7 +24,7 @@ export class SignInComponent implements OnInit {
       'password' : new FormControl(null,[Validators.required,Validators.minLength(8)]),
     });
   }
-  register(){
+  register() {
     this.router.navigateByUrl('/register');
   }
   onSubmit() {

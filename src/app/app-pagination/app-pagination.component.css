@@ -1,0 +1,17 @@
+/* /* nav{
+    line-break: strict;
+
+}
+nav {
+    display: inline !important;
+}*/
+li .line{
+    display:block;
+ }
+/* nav{
+    display:inline-block;
+ } */
+li .inline{
+    display:inline-block;
+
+}

@@ -1,4 +1,4 @@
-<div class="article-page">
+<div class="article-page"  *ngIf="data">
     <div class="banner">
         <div class="container">
             <h1>{{data.title}}</h1>
@@ -45,12 +45,12 @@
             </div>    
         </div>
         <hr>
-        <div class="center">
+        <div class="center" *ngIf="data">
             <div class="article-meta">
                 <a href="">
                     <img src='{{data.author.image}}' onerror="this.src='https://as1.ftcdn.net/v2/jpg/01/71/25/36/1000_F_171253635_8svqUJc0BnLUtrUOP5yOMEwFwA8SZayX.jpg'">
                 </a>
-                <div class="info">
+                <div class="info" *ngIf="data.author.username">
                     <a class="author">{{data.author.username}}</a>
                     <span class="date">{{data.createdAt | date }}</span>
                 </div>

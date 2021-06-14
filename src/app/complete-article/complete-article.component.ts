@@ -20,58 +20,42 @@ export class CompleteArticleComponent implements OnInit {
   userData:any
   userName:any
   constructor(private authService:AuthServiceService,private router:Router,private route:ActivatedRoute) { }
-
-  // ngOnChanges(): void{
-  //   this.authService.getComment(this.data.slug).subscribe(result=> {
-  //     if(result){
-  //       this.comm=result
-  //       this.comments = this.comm.comments
-  //     }
-  //   })  
-  // }
   
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.userName = params.get("username")
-   })
-  console.log(this.userName)
-  this.token = localStorage.getItem("token");
-  // this.data = this.authService.getData()
-  this.authService.getclickedBlog(this.userName).subscribe(result=>{
-    if(result){
-      this.data = result
-      this.data=this.data.article
-      console.log(this.data)
-    }
-  })
-  this.authService.getUser().subscribe(result=> {
-    if(result){
-      this.userProfile = result.user
-      console.log(this.userProfile)
-    }
-    console.log(this.profile)
-    if(this.userProfile.username == this.data.author.username) {
-      this.profile = this.profile? false:true
-    }  
-    console.log(this.profile)
-
-})
-  
-  if(this.data.author.following == true)
-  {
-    this.profileFollow = this.profileFollow ? false : true;
-  }
-
-  if(this.data.favorited == true)
-  {
-    this.articleLike = this.articleLike ? false : true;
-  }
-  this.authService.getComment(this.data.slug).subscribe(result=> {
-    if(result){
-      this.comm=result
-      this.comments = this.comm.comments
-    }
-  })
+    })
+    this.authService.getComment(this.userName).subscribe(result=> {
+      if(result){
+        this.comm=result
+        this.comments = this.comm.comments
+      }
+    })
+    this.token = localStorage.getItem("token");
+    // this.data = this.authService.getData()
+    this.authService.getclickedBlog(this.userName).subscribe(result=>{
+      if(result){
+        this.data = result
+        this.data=this.data.article
+      }
+      if(this.data.author.following == true) {
+        this.profileFollow = this.profileFollow ? false : true;
+      }
+      if(this.data.favorited == true) {
+        this.articleLike = this.articleLike ? false : true;
+      }
+    })
+    this.authService.getUser().subscribe(result=> {
+      if(result){
+        this.userProfile = result.user
+      }
+      if(this.userProfile.username == this.data.author.username) {
+        this.profile = this.profile? false:true
+      }  
+    })
+    if(this.data.author.following == true) {
+      this.profileFollow = this.profileFollow ? false : true;
+    }    
 }
 delete(data:any){
   var value={

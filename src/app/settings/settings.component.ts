@@ -25,7 +25,6 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = localStorage.getItem("token");
-    console.log(this.token)
     this.updateData = new FormGroup({
       'image' : new FormControl(''),
       'username' : new FormControl('',Validators.required),

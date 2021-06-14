@@ -27,28 +27,17 @@ export class AppPaginationComponent implements OnInit,OnChanges {
     this.value = number 
   }
   pervious(){
-
     if(this.value == 0){
     }
     else {
     this.value = this.value-1
     }
-    this.authService.getFeed(this.token,this.value).subscribe(result=> {
-      if(result && result.articles) {
-        if(result.articlesCount == 0){
-        }        
-      }
-    }) 
+    this.myOutput.emit(this.value)
   }
   next(){
     this.value = this.value+1
-    this.authService.getFeed(this.token,this.value).subscribe(result=> {
-      if(result && result.articles) {
-        if(result.articlesCount == 0){
-        }
-      }
-    }) 
-
+    this.myOutput.emit(this.value)
   }
+  
 
 }

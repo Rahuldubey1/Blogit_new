@@ -20,7 +20,7 @@ export class UserProflieComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.data = params.get("username")
    })
-    this.authService.getSelectedProfile(this.data).subscribe(result=>{
+    this.authService.getSelectedProfile(this.data,'').subscribe(result=>{
       if(result){
         if(result.articlesCount == 0){
           this.favArticle = this.favArticle ? false : true;
@@ -44,7 +44,7 @@ export class UserProflieComponent implements OnInit {
     }
   }
   showFavBlog(data:any){
-    this.authService.showFavBlog(data).subscribe(result=>{
+    this.authService.showFavBlog(data,'').subscribe(result=>{
       if(result){
         if(result.articlesCount == 0){
             if(this.favArticle == false){
@@ -73,7 +73,7 @@ export class UserProflieComponent implements OnInit {
       this.favArticle = this.favArticle ? false : true;
     }
     this.condition = this.condition ? false : true;
-    this.authService.getSelectedProfile(this.data).subscribe(result=>{
+    this.authService.getSelectedProfile(this.data,'').subscribe(result=>{
       if(result){
         this.selectedUserPost = result.articles
         if(result.articlesCount == 0){

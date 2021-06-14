@@ -19,61 +19,126 @@ export class ProfileComponent implements OnInit {
   profile:any
   selectedUser:any
   userName:any
-  constructor(private authService:AuthServiceService,private router:Router, private route:ActivatedRoute ) { }
- 
-  ngOnInit(): void {
-  // this.userName = parseInt(this.route.snapshot.paramMap.get('username')!)
-  this.route.paramMap.subscribe(params => {
-    this.userName = params.get("username")
- })
-  this.token = localStorage.getItem("token");
-  // this.data = this.authService.getProfile1()
-  this.profile = this.authService.getProfile2()
-  if(this.userName){
-    this.authService.getSelectedProfile(this.userName).subscribe(result=>{
+  name:any
+  name1:any
+  articleCount:any
+  myInputMessage:any
+
+  constructor(private authService:AuthServiceService,private router:Router, private route:ActivatedRoute ) {
+      route.params.subscribe(val => {
+        this.token = localStorage.getItem("token");
+        this.authService.getUser().subscribe(result=>{
+          if(result){
+            this.name = result.user.username
+
+          }
+        })
+        if(val.username){
+          this.authService.getSelectedProfile(val.username,'').subscribe(result=>{
+            if(result){
+              this.selectedUserPost = result.articles
+              this.articleCount = (result.articlesCount/10)
+              this.myInputMessage = this.articleCount
+              if(this.selectedUserPost[0].favorited == true){}
+            }
+          })
+          this.authService.getUserProfile(val.username).subscribe(result=>{
+            if(result){
+              this.selectedUser = result
+              this.selectedUser = this.selectedUser.profile
+              this.name1 = this.selectedUser.username
+              if(this.selectedUser.following == true)
+              {
+                this.profileFollow = this.profileFollow ? false : true;
+
+              }
+            }
+          })
+        } else {
+        }
+    });
+  }
+  GetData(data:any){ 
+    this.authService.getSelectedProfile(this.userName,data).subscribe(result=>{
       if(result){
         console.log(result)
+
         this.selectedUserPost = result.articles
         if(this.selectedUserPost[0].favorited == true){}
       }
     })
-    this.authService.getUserProfile(this.userName).subscribe(result=>{
+
+    this.authService.showFavBlog(this.userName,data).subscribe(result=>{
       if(result){
-        console.log(result)
-        this.selectedUser = result
-        this.selectedUser = this.selectedUser.profile
-        if(this.selectedUser.following == true)
-        {
-          this.profileFollow = this.profileFollow ? false : true;
+        this.articleCount = (result.articlesCount/10)
+        this.myInputMessage = this.articleCount
+        this.selectedUserPost = result.articles
+        this.condition = this.condition ? false : true;
+        if(result.articlesCount == 0){
+          this.favArticle = this.favArticle ? false : true;
         }
       }
     })
-  } else {
-    // this.authService.getSelectedProfile(this.profile.author.username).subscribe(result=>{
-    //   if(result){
-    //     this.selectedUserPost = result.articles
-    //     if(this.selectedUserPost[0].author.following == true)
-    //     {
-    //       this.profileFollow = this.profileFollow ? false : true;
-    //     }
-    //   }
-    // })
-    // this.authService.getUserProfile(this.profile.author.username).subscribe(result=>{
-    //   if(result){
-    //     this.selectedUser = result
-    //     if(this.selectedUser.profile.following == true)
-    //     {
-    //       this.profileFollow = this.profileFollow ? false : true;
-    //     }
-    //   }
-    // })
-    }
+  }
+
+  ngOnInit(): void {
+
+    this.route.paramMap.subscribe(params => {
+      this.userName = params.get("username")
+    })
+
+  this.token = localStorage.getItem("token");
+
+  // this.authService.getUser().subscribe(result=>{
+  //   alert("4")
+  //   if(result){
+  //     console.log(result)
+
+  //     this.name = result.user.username
+  //   }
+  // })
+  // if(this.userName){
+  //   alert("5")
+  //   this.authService.getSelectedProfile(this.userName).subscribe(result=>{
+  //     if(result){
+  //       console.log(result)
+  //       console.log(this.profileFollow)
+
+  //       this.selectedUserPost = result.articles
+  //       if(this.selectedUserPost[0].favorited == true){
+  //       }
+  //     }
+  //   })
+  //   this.authService.getUserProfile(this.userName).subscribe(result=>{
+  //     alert("6")
+  //     if(result){
+  //       console.log(result)
+  //       this.selectedUser = result
+  //       this.selectedUser = this.selectedUser.profile
+  //       this.name1 = this.selectedUser.username
+  //       console.log(this.profileFollow)
+  //       if(this.selectedUser.following == true)
+  //       {
+  //         this.profileFollow = this.profileFollow ? false : true;
+  //       }
+  //     }
+  //   })
+  // } else {
+  //   }
   }
   showFeed(blog:any)
   {
     this.userBlog = blog  
     this.authService.setData(this.userBlog)
     this.router.navigate(['/complete-article',this.userBlog.slug])
+  }
+  showProfile(blog:any) { 
+    if(blog.author.username == this.data){
+  } else {
+      this.userBlog = blog
+      // this.authService.setProfile1(this.userBlog)
+      this.router.navigate(['/profile',this.userBlog.author.username])
+    }
   }
   follow(data:any){
     if(this.token) {
@@ -98,8 +163,11 @@ export class ProfileComponent implements OnInit {
     }
   }
   showFavBlog(data:any){
-    this.authService.showFavBlog(data).subscribe(result=>{
+    this.authService.showFavBlog(data,'').subscribe(result=>{
       if(result){
+        this.articleCount = (result.articlesCount/10)
+        this.myInputMessage = this.articleCount
+        alert(this.myInputMessage)
         this.selectedUserPost = result.articles
         this.condition = this.condition ? false : true;
         if(result.articlesCount == 0){
@@ -114,8 +182,10 @@ export class ProfileComponent implements OnInit {
     }
     this.condition = this.condition ? false : true;
     if(this.userName) {
-      this.authService.getSelectedProfile(this.userName).subscribe(result=>{
+      this.authService.getSelectedProfile(this.userName,'').subscribe(result=>{
         if(result){
+          this.articleCount = (result.articlesCount/10)
+          this.myInputMessage = this.articleCount
           this.selectedUserPost = result.articles
           if(result.articlesCount == 0){
               this.favArticle = this.favArticle ? false : true;
@@ -123,7 +193,7 @@ export class ProfileComponent implements OnInit {
         }
       })
     } else {
-      this.authService.getSelectedProfile(this.profile.author.username).subscribe(result=>{
+      this.authService.getSelectedProfile(this.profile.author.username,'').subscribe(result=>{
         if(result){
           this.selectedUserPost = result.articles
           if(result.articlesCount == 0){
@@ -154,5 +224,8 @@ export class ProfileComponent implements OnInit {
     } else {
       this.router.navigateByUrl('/login')
     }
+  }
+  edit(){
+    this.router.navigateByUrl('/settings')
   }
 }

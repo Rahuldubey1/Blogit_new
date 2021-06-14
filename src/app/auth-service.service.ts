@@ -143,7 +143,6 @@ export class AuthServiceService {
     return this.http.post(`https://conduit.productionready.io/api/users`,user);
   }
   getUser():Observable<any>{
-    
     var token:any = localStorage.getItem("token");
     return this.http.get(`https://conduit.productionready.io/api/user`,{
       headers: new HttpHeaders({
@@ -152,8 +151,22 @@ export class AuthServiceService {
     });
 
   }
-  getPost():Observable<any> {
-    return this.http.get(`https://conduit.productionready.io/api/articles`)
+  getPost(number:any):Observable<any> {
+    if((number == 10 || number == 20 || number == 50)){
+      this.offset = 0
+      this.limit = number
+    } else {
+      if(this.limit == 20){
+        this.offset = number * 20
+      } 
+      else if(this.limit == 50){
+        this.offset = number * 50
+      }
+      else {
+        this.offset = number * 10
+      }
+    }
+    return this.http.get(`https://conduit.productionready.io/api/articles?limit=${this.limit}&offset=${this.offset}`)
   }
   getToken() {
     return  localStorage.getItem("token");
@@ -162,11 +175,6 @@ export class AuthServiceService {
     if((number == 10 || number == 20 || number == 50)){
       this.offset = 0
       this.limit = number
-    //   return this.http.get(`https://conduit.productionready.io/api/articles/feed?limit=${this.limit}&offset=${this.offset}`,{
-    //   headers: new HttpHeaders({
-    //     'Authorization': 'Token '+ data
-    //   })
-    // })
     } else {
       if(this.limit == 20){
         this.offset = number * 20
@@ -241,23 +249,46 @@ export class AuthServiceService {
     const headers = { 'Authorization':'Token '+ token };
     return this.http.delete(` https://conduit.productionready.io/api/profiles/${data}/follow`,{headers});
   }
-  getFilteredBlog(data:any):Observable<any>{
-    return this.http.get(`https://conduit.productionready.io/api/articles/?tag=${data}`);
+  getFilteredBlog(data:any,number:any):Observable<any>{
+    if((number == 10 || number == 20 || number == 50)){
+      this.offset = 0
+      this.limit = number
+    } else {
+      if(this.limit == 20){
+        this.offset = number * 20
+      } 
+      else if(this.limit == 50){
+        this.offset = number * 50
+      }
+      else {
+        this.offset = number * 10
+      }
+    }
+    return this.http.get(`https://conduit.productionready.io/api/articles/?limit=${this.limit}&offset=${this.offset}?tag=${data}`);
   }
-  getSelectedProfile(data:any):Observable<any>{
+  getSelectedProfile(data:any,number:any):Observable<any>{
     var token:any = localStorage.getItem("token");
     const headers = { 'Authorization':'Token '+ token };
+    this.limit=10
+    this.offset = number * 10
     if(token) {
-      return this.http.get(`https://conduit.productionready.io/api/articles/?author=${data}`,{headers});
+      return this.http.get(`https://conduit.productionready.io/api/articles/?author=${data}&limit=${this.limit}&offset=${this.offset}`,{headers});
     } else {
-      return this.http.get(`https://conduit.productionready.io/api/articles/?author=${data}`,);
+      return this.http.get(`https://conduit.productionready.io/api/articles/?author=${data}&limit=${this.limit}&offset=${this.offset}`,);
 
     }
   }
-  showFavBlog(data:any):Observable<any>{
+  showFavBlog(data:any,number:any):Observable<any>{
     var token:any = localStorage.getItem("token");
     const headers = { 'Authorization':'Token '+ token };
-    return this.http.get(`https://conduit.productionready.io/api/articles/?favorited=${data}`);
+    this.limit=10
+    this.offset = number * 10
+    if(token){
+      return this.http.get(`https://conduit.productionready.io/api/articles/?favorited=${data}&limit=${this.limit}&offset=${this.offset}`,{headers});
+    } else {
+      return this.http.get(`https://conduit.productionready.io/api/articles/?favorited=${data}&limit=${this.limit}&offset=${this.offset}`);
+
+    }
   }
   getComment(data:any){
     return this.http.get(`https://conduit.productionready.io/api/articles/${data}/comments`);

@@ -19,7 +19,8 @@ export class AppComponent {
   checkUser:boolean = false 
   collapsed = true;
   constructor(public authService:AuthServiceService){
-    
+    this.token= this.authService.getToken()
+    console.log(this.token)
   }
   ngOnChange(){
     this.authService.getUser().subscribe(result=> {
@@ -27,18 +28,20 @@ export class AppComponent {
         this.userData = result.user
         this.authService.setProfile(this.userData)
       } else {
+        alert("errro")
       }
     })
   }
   ngOnInit(): void {
-    this.token= this.authService.getToken()
+
+    console.log(this.token)
 
     this.authService.getUser().subscribe(result=> {
       if(result && result.user) {
         this.userData = result.user
-        console.log(this.userData)
         this.authService.setProfile(this.userData)
       } else {
+        alert("errro")
       }
     })
   

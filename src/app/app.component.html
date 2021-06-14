@@ -76,9 +76,9 @@
                     <a class="nav-link" routerLink="/settings" routerLinkActive="active">Settings</a>
                 </li>
             </div>
-            <div *ngIf="authService.getToken() && userData">
+            <div *ngIf="authService.getToken()">
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/user-profile/{{userData.username}}" routerLinkActive="active">{{userData.username}}</a>
+                    <a class="nav-link" routerLink="/profile/{{userData.username}}" routerLinkActive="active">{{userData.username}}</a>
                 </li>
             </div>    
         </ul>
