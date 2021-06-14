@@ -250,6 +250,8 @@ export class AuthServiceService {
     return this.http.delete(` https://conduit.productionready.io/api/profiles/${data}/follow`,{headers});
   }
   getFilteredBlog(data:any,number:any):Observable<any>{
+    var token:any = localStorage.getItem("token");
+    const headers = { 'Authorization':'Token '+ token };
     if((number == 10 || number == 20 || number == 50)){
       this.offset = 0
       this.limit = number
@@ -264,7 +266,11 @@ export class AuthServiceService {
         this.offset = number * 10
       }
     }
-    return this.http.get(`https://conduit.productionready.io/api/articles/?limit=${this.limit}&offset=${this.offset}?tag=${data}`);
+    if(token){
+      return this.http.get(`https://conduit.productionready.io/api/articles/?tag=${data}&limit=${this.limit}&offset=${this.offset}`,{headers});
+    } else {
+      return this.http.get(`https://conduit.productionready.io/api/articles/?tag=${data}&limit=${this.limit}&offset=${this.offset}`);
+    }
   }
   getSelectedProfile(data:any,number:any):Observable<any>{
     var token:any = localStorage.getItem("token");

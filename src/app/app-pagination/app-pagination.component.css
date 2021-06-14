@@ -1,17 +1,16 @@
-/* /* nav{
-    line-break: strict;
 
+ .pagination {
+    display: inline-block;
 }
-nav {
-    display: inline !important;
-}*/
-li .line{
-    display:block;
- }
-/* nav{
-    display:inline-block;
- } */
-li .inline{
-    display:inline-block;
-
+.page-item {
+    display: inline;
+}
+.page-link {
+    float: left;
+    padding: .5rem .75rem;
+    color:rgb(52 204 229);
+}
+.active{
+    color: white;
+    background: rgb(52 204 229);
 }

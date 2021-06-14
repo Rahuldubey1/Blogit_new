@@ -23,6 +23,7 @@ export class ProfileComponent implements OnInit {
   name1:any
   articleCount:any
   myInputMessage:any
+  number:number
 
   constructor(private authService:AuthServiceService,private router:Router, private route:ActivatedRoute ) {
       route.params.subscribe(val => {
@@ -36,6 +37,10 @@ export class ProfileComponent implements OnInit {
         if(val.username){
           this.authService.getSelectedProfile(val.username,'').subscribe(result=>{
             if(result){
+              console.log(result)
+              if(result.articlesCount == 0){
+                this.favArticle = this.favArticle ? false : true;
+              }
               this.selectedUserPost = result.articles
               this.articleCount = (result.articlesCount/10)
               this.myInputMessage = this.articleCount
@@ -45,6 +50,7 @@ export class ProfileComponent implements OnInit {
           this.authService.getUserProfile(val.username).subscribe(result=>{
             if(result){
               this.selectedUser = result
+console.log(this.selectedUser)
               this.selectedUser = this.selectedUser.profile
               this.name1 = this.selectedUser.username
               if(this.selectedUser.following == true)
@@ -59,26 +65,28 @@ export class ProfileComponent implements OnInit {
     });
   }
   GetData(data:any){ 
-    this.authService.getSelectedProfile(this.userName,data).subscribe(result=>{
-      if(result){
-        console.log(result)
-
-        this.selectedUserPost = result.articles
-        if(this.selectedUserPost[0].favorited == true){}
-      }
-    })
-
-    this.authService.showFavBlog(this.userName,data).subscribe(result=>{
-      if(result){
-        this.articleCount = (result.articlesCount/10)
-        this.myInputMessage = this.articleCount
-        this.selectedUserPost = result.articles
-        this.condition = this.condition ? false : true;
-        if(result.articlesCount == 0){
-          this.favArticle = this.favArticle ? false : true;
+    if(this.number == 2) {
+      this.authService.showFavBlog(this.userName,data).subscribe(result=>{
+        if(result){
+          this.articleCount = (result.articlesCount/10)
+          this.myInputMessage = this.articleCount
+          this.selectedUserPost = result.articles
+          this.condition = this.condition ? false : true;
+          if(result.articlesCount == 0){
+            this.favArticle = this.favArticle ? false : true;
+          }
         }
-      }
-    })
+      })
+    } else {
+      this.authService.getSelectedProfile(this.userName,data).subscribe(result=>{
+        if(result){
+          console.log(result)
+  
+          this.selectedUserPost = result.articles
+          if(this.selectedUserPost[0].favorited == true){}
+        }
+      })
+    }
   }
 
   ngOnInit(): void {
@@ -162,17 +170,25 @@ export class ProfileComponent implements OnInit {
     this.router.navigateByUrl('/login')
     }
   }
-  showFavBlog(data:any){
+  showFavBlog(data:any,number:number){
+    this.number = number
     this.authService.showFavBlog(data,'').subscribe(result=>{
       if(result){
+        if(result.articlesCount == 0){
+          if(this.favArticle == true){
+          } else {
+          this.favArticle = this.favArticle ? false : true;
+          }
+        } else {
+          if(this.favArticle == false){
+          } else{
+          this.favArticle = this.favArticle ? false : true;
+          }
+        }
         this.articleCount = (result.articlesCount/10)
         this.myInputMessage = this.articleCount
-        alert(this.myInputMessage)
         this.selectedUserPost = result.articles
         this.condition = this.condition ? false : true;
-        if(result.articlesCount == 0){
-          this.favArticle = this.favArticle ? false : true;
-        }
       }
     })
   }
@@ -218,6 +234,17 @@ export class ProfileComponent implements OnInit {
           if(result){
             blog.favoritesCount = blog.favoritesCount - 1
             blog.favorited = false
+            this.authService.showFavBlog(this.userName,'').subscribe(result=>{
+              if(result){
+                console.log(result)
+                this.selectedUserPost = result.articles
+                this.articleCount = (result.articlesCount/10)
+                this.myInputMessage = this.articleCount
+                if(result.articlesCount == 0){
+                  this.favArticle = this.favArticle ? false : true;
+                }
+              }
+            })
           }
         })
       }

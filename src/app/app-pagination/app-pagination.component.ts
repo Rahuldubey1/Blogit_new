@@ -38,6 +38,9 @@ export class AppPaginationComponent implements OnInit,OnChanges {
     this.value = this.value+1
     this.myOutput.emit(this.value)
   }
+  class(){
+    active:true
+  }
   
 
 }

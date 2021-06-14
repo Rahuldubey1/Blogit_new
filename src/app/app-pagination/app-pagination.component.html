@@ -1,7 +1,7 @@
-<nav aria-label="Page navigation example" class="mt-5 col-md-8" *ngIf="article != '' ">
-    <ul class="pagination clearfix" >
-        <li class="page-item clearfix line" (click)="pervious()" ><a class="page-link" ><i class="fa fa-angle-double-left"></i></a></li>
-        <li class="page-item clearfix inline "  *ngFor="let number of article"><a class="page-link clearfix" (click)="pagination(number)">{{number+1}}</a></li>
-        <li class="page-item clearfix line" (click)="next()"><a class="page-link clearfix"><i class="fa fa-angle-double-right"></i></a></li>
+<nav aria-label="Page navigation example" class="mt-5" *ngIf="article != '' ">
+    <ul class="pagination">
+        <li class="page-item" (click)="pervious()" ><a class="page-link" ><i class="fa fa-angle-double-left"></i></a></li>
+        <li class="page-item" *ngFor="let number of article; let i = index"><a class="page-link" (click)="pagination(number)" [ngClass]="{'active' : value == i}">{{number+1}}</a></li>
+        <li class="page-item" (click)="next()"><a class="page-link"><i class="fa fa-angle-double-right"></i></a></li>
     </ul>
 </nav>

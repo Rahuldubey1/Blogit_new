@@ -19,6 +19,7 @@ export class CompleteArticleComponent implements OnInit {
   profile:boolean = false
   userData:any
   userName:any
+  name:any
   constructor(private authService:AuthServiceService,private router:Router,private route:ActivatedRoute) { }
   
   ngOnInit(): void {
@@ -27,16 +28,20 @@ export class CompleteArticleComponent implements OnInit {
     })
     this.authService.getComment(this.userName).subscribe(result=> {
       if(result){
+        console.log(result)
         this.comm=result
         this.comments = this.comm.comments
       }
     })
     this.token = localStorage.getItem("token");
-    // this.data = this.authService.getData()
     this.authService.getclickedBlog(this.userName).subscribe(result=>{
       if(result){
+
+        console.log(result)
         this.data = result
         this.data=this.data.article
+        this.name=this.data.author.username
+        console.log(this.name)
       }
       if(this.data.author.following == true) {
         this.profileFollow = this.profileFollow ? false : true;
@@ -47,9 +52,13 @@ export class CompleteArticleComponent implements OnInit {
     })
     this.authService.getUser().subscribe(result=> {
       if(result){
+        console.log(result)
         this.userProfile = result.user
+        // console.log(this.userProfile.username)
       }
-      if(this.userProfile.username == this.data.author.username) {
+      console.log(this.userProfile.username)
+      console.log(this.name)
+      if(this.userProfile.username == this.name) {
         this.profile = this.profile? false:true
       }  
     })

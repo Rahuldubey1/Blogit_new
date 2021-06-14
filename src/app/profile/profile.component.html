@@ -32,7 +32,7 @@
                             <a class="nav-link" [ngClass]="{'active' : !condition}"(click)="show()">My Posts</a>
                         </li>
                         <li *ngIf="userName" class="nav-item">
-                            <a class="nav-link" [ngClass]="{'active' : condition}" (click)="showFavBlog(userName)">Favorited Posts</a>
+                            <a class="nav-link" [ngClass]="{'active' : condition}" (click)="showFavBlog(userName,2)">Favorited Posts</a>
                         </li>
                         <!-- <li *ngIf="profile" class="nav-item">
                             <a class="nav-link" [ngClass]="{'active' : condition}" (click)="showFavBlog(profile.author.username)">Favorited Posts</a>
@@ -46,7 +46,7 @@
                     <div class="article-preview">   
                         <div class="article-meta">
                             <a (click)="showProfile(blog)">
-                                <a href="">
+                                <a>
                                     <img src='{{blog.author.image}}' onerror="this.src='https://as1.ftcdn.net/v2/jpg/01/71/25/36/1000_F_171253635_8svqUJc0BnLUtrUOP5yOMEwFwA8SZayX.jpg'">
                                 </a>
                                 <div class="info">

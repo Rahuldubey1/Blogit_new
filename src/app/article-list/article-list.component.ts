@@ -36,7 +36,8 @@ export class ArticleListComponent implements OnInit {
 
   // paged items
   pagedItems: any[];
-  GetData(data:any){  
+  GetData(data:any){ 
+    
     if(!this.token){
       this.authService.getPost(data).subscribe(result=> {
         if(result && result.articles) {
@@ -47,7 +48,10 @@ export class ArticleListComponent implements OnInit {
       })
     }
     if (this.myinputMsg ==2){
+      console.log(data) 
+
     this.authService.getPost(data).subscribe(result=> {
+      console.log(data)
       if(result && result.articles) {
         this.articleCount = (result.articlesCount/10)
         if(result.articlesCount == 0){
@@ -63,7 +67,7 @@ export class ArticleListComponent implements OnInit {
    else if (this.myinputMsg == 3) {
     this.authService.getFilteredBlog(this.tags,data).subscribe(result=>{
       if(result){
-        if(result.articlesCount == 0){
+        if(result.articlesCount == 0) {
           this.show = this.show ? false:true
         }
         if(this.filterPost == undefined){
@@ -105,7 +109,7 @@ export class ArticleListComponent implements OnInit {
         this.authService.getFeed(this.token,this.filterPost).subscribe(result=> {
           if(result && result.articles) {
             if(result.articlesCount == 0){
-              this.show = this.show ? false:true
+              this.show = this.show ? false:true 
             }
             if(this.filterPost == undefined){
               this.filterPost = 10 
@@ -164,7 +168,6 @@ export class ArticleListComponent implements OnInit {
             if(result.articlesCount == 0){
               this.show = this.show ? false:true
             }
-          
             this.articleCount = (result.articlesCount/10)
             this.myInputMessage = this.articleCount
             this.userPost = result.articles 
@@ -173,11 +176,16 @@ export class ArticleListComponent implements OnInit {
       } 
       if(this.myinputMsg ==2)  {
         this.authService.getPost(this.filterPost).subscribe(result=> {
+          if(this.show == true){
+            this.show = this.show ? false:true
+          }
           if(result && result.articles) {
             if(result.articlesCount == 0){
+              if(this.show == true){
+              } else {
               this.show = this.show ? false:true
-          }
-          
+              }
+            }
             this.articleCount = (result.articlesCount/10)
             this.myInputMessage = this.articleCount
             this.userPost = result.articles 
@@ -191,11 +199,16 @@ export class ArticleListComponent implements OnInit {
       }
       if(this.myinputMsg ==3) {
         this.authService.getFilteredBlog(this.tags,this.filterPost).subscribe(result=>{
-          if(result){
-            if(result.articlesCount == 0){
-              this.show = this.show ? false:true
-            }
-            
+      if(this.show == true){
+        this.show = this.show ? false:true
+      }
+      if(result && result.articles) {
+        if(result.articlesCount == 0){
+          if(this.show == true){
+          } else {
+          this.show = this.show ? false:true
+          }
+        }
             this.articleCount = (result.articlesCount/10)
             this.myInputMessage = this.articleCount
             this.userPost=result.articles
@@ -242,11 +255,12 @@ export class ArticleListComponent implements OnInit {
     } else {
       if(this.token){
         this.authService.getFeed(this.token,this.filterPost).subscribe(result=> {
-        if(result && result.articles) {
+          if(result && result.articles) {
           this.articleCount = (result.articlesCount/10)
           this.myInputMessage = this.articleCount
-          if(result.articlesCount == 0){
+          if(result.articlesCount == 0){console.log(this.show)
             this.show = this.show ? false:true
+            console.log(this.show)
           }
           this.userPost = result.articles          
         }
@@ -254,24 +268,11 @@ export class ArticleListComponent implements OnInit {
           this.article.push(i)
         }
         this.length = this.article.length
-        this.allItems = result.articles;
-        this.setPage(1);
       }) 
     }
   }
   }
-  setPage(page: number) {
-
-    if (page < 1 || page > this.pager.totalPages) {
-        return;
-    }
-
-    // get pager object from service
-    this.pager = this.authService.getPager(this.allItems.length, page);
-
-    // get current page of items
-    this.pagedItems = this.allItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
-}
+  
   showFeed(blog:any)    
   {
     this.userBlog = blog  
