@@ -1,6 +1,7 @@
 
  .pagination {
     display: inline-block;
+    cursor: pointer;
 }
 .page-item {
     display: inline;
@@ -14,3 +15,8 @@
     color: white;
     background: rgb(52 204 229);
 }
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+    background: rgb(230 236 237);
+  }

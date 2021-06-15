@@ -6,7 +6,7 @@
 </div>
 <div class="container page">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="feed-toggle">
                 <ul class="nav nav-pills outline-active">
                     <li class="nav-item">
@@ -18,28 +18,18 @@
                     <li class="nav-item" *ngIf="filter">
                         <a class="nav-link" [ngClass]="{'active' : condition==3}" (click)="checkBlogs(3)">{{save}}</a>
                     </li>
+                    <li class="nav-link">
+                        <select (change)="selectChangeHandler($event)">
+                            <option value="10">  10  </option>
+                            <option value="20">  20  </option>
+                            <option value="50">  50  </option>
+                        </select>
+                    </li>
                 </ul>
             </div>
             <app-article-list [myinputMsg]="selectedTab" [tags]="save" [filterPost]="value"></app-article-list>
         </div>
-        <div class="col-md-2">
-            <div class="dropdown">
-                <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown button
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div> -->
-                <select (change)="selectChangeHandler($event)">
-                    <option value="10">  10  </option>
-                    <option value="20">  20  </option>
-                    <option value="50">  50  </option>
-                </select>
-            </div>
-        </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="tagbar">
                 <p>Popular Tags</p>
                 <div class="tag-list" *ngFor="let tag of list" >

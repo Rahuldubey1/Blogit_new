@@ -22,7 +22,7 @@ export class CompleteArticleComponent implements OnInit {
   name:any
   constructor(private authService:AuthServiceService,private router:Router,private route:ActivatedRoute) { }
   
-  ngOnInit(): void {
+  async ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.userName = params.get("username")
     })
@@ -34,10 +34,10 @@ export class CompleteArticleComponent implements OnInit {
       }
     })
     this.token = localStorage.getItem("token");
-    this.authService.getclickedBlog(this.userName).subscribe(result=>{
-      if(result){
+    const response = await this.authService.getclickedBlog(this.userName).subscribe(result=>{
+        if(result) {
 
-        console.log(result)
+           
         this.data = result
         this.data=this.data.article
         this.name=this.data.author.username
@@ -57,7 +57,6 @@ export class CompleteArticleComponent implements OnInit {
         // console.log(this.userProfile.username)
       }
       console.log(this.userProfile.username)
-      console.log(this.name)
       if(this.userProfile.username == this.name) {
         this.profile = this.profile? false:true
       }  

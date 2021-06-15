@@ -37,7 +37,7 @@ export class ArticleListComponent implements OnInit {
   // paged items
   pagedItems: any[];
   GetData(data:any){ 
-    
+    console.log(this.myInputMessage)
     if(!this.token){
       this.authService.getPost(data).subscribe(result=> {
         if(result && result.articles) {
