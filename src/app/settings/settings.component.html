@@ -9,7 +9,7 @@
                             <input class="form-control"
                             formControlName="image" placeholder="URL of profile picture" type="text">
                         </fieldset>
-                        <fieldset class="form-group">
+                        <fieldset class="form-group" *ngIf="userData">
                             <input class="form-control form-control-lg"
                             formControlName="username" placeholder="Username" type="text" 
                             bind-value="userData.username">
@@ -21,7 +21,7 @@
                             <textarea class="form-control form-control-lg"
                             formControlName="bio" placeholder="Short bio about you" rows="8"></textarea>
                         </fieldset>
-                        <fieldset class="form-group">
+                        <fieldset class="form-group" *ngIf="userData">
                             <input class="form-control form-control-lg" 
                             formControlName="email" placeholder="Email" type="email" [value]="userData.email">
                             <small class="text-danger"

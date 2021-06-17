@@ -48,6 +48,7 @@ export class SignInComponent implements OnInit {
             this.authService.setProfile(result.user)
             localStorage.setItem("token",result.user.token)
             this.router.navigateByUrl('/')
+            this.authService.setUserData()
           } else {
             alert("this is error");
           }

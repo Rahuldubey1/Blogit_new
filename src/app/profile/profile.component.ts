@@ -69,7 +69,10 @@ export class ProfileComponent implements OnInit {
           this.articleCount = (result.articlesCount/10)
           this.myInputMessage = this.articleCount
           this.selectedUserPost = result.articles
-          this.condition = this.condition ? false : true;
+          if(this.condition == true) {
+          } else {
+            this.condition = this.condition ? false : true;
+          }
           if(result.articlesCount == 0){
             this.favArticle = this.favArticle ? false : true;
           }
@@ -168,6 +171,8 @@ export class ProfileComponent implements OnInit {
   }
   showFavBlog(data:any,number:number){
     this.number = number
+    if(this.myInputMessage == 0) {
+    } else {
     this.authService.showFavBlog(data,'').subscribe(result=>{
       if(result){
         if(result.articlesCount == 0){
@@ -184,11 +189,16 @@ export class ProfileComponent implements OnInit {
         this.articleCount = (result.articlesCount/10)
         this.myInputMessage = this.articleCount
         this.selectedUserPost = result.articles
-        this.condition = this.condition ? false : true;
+        if(this.condition == true){
+        } else {
+          this.condition = this.condition ? false : true;
+        }
       }
     })
   }
+  }
   show(){
+    this.number=1
     if(this.favArticle == true){
       this.favArticle = this.favArticle ? false : true;
     }

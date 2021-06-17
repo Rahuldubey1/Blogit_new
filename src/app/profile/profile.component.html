@@ -2,9 +2,9 @@
     <div class="user-info">
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-md-10 offset-md-1">
-                    <img *ngIf="userName" class="user-img" src='{{selectedUser.image}}' onerror="this.src='https://as1.ftcdn.net/v2/jpg/01/71/25/36/1000_F_171253635_8svqUJc0BnLUtrUOP5yOMEwFwA8SZayX.jpg'">
-                    <h4 *ngIf="userName">{{selectedUser.username}}</h4>
+                <div class="col-xs-12 col-md-10 offset-md-1"*ngIf="selectedUser">
+                    <img class="user-img" src='{{selectedUser.image}}' onerror="this.src='https://as1.ftcdn.net/v2/jpg/01/71/25/36/1000_F_171253635_8svqUJc0BnLUtrUOP5yOMEwFwA8SZayX.jpg'">
+                    <h4>{{selectedUser.username}}</h4>
                     <div *ngIf="name != name1">
                         <button *ngIf="!profileFollow && userName" class="btn btn-sm action-btn btn-outline-secondary" (click)="follow(selectedUser)">
                             <i class="fa fa-plus">&nbsp;Follow {{selectedUser.username}}</i>

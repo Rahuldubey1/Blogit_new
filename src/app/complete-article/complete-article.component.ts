@@ -34,20 +34,18 @@ export class CompleteArticleComponent implements OnInit {
     })
     this.token = localStorage.getItem("token");
     this.getclickedBlog();
-    if(this.data.author.following == true) {
-      this.profileFollow = this.profileFollow ? false : true;
-    }    
+    // if(this.data.author.following == true) {
+    //   this.profileFollow = this.profileFollow ? false : true;
+    // }    
   }
   getclickedBlog(){
     this.authService.getclickedBlog(this.userName).subscribe(result=>{
       if(result) {
-        console.log(result)
         this.data = result
         this.data=this.data.article
         this.name=this.data.author.username
         this.authService.getUser().subscribe(result=> {
           if(result){
-            console.log(result)
             this.userProfile = result.user
           }
           if(this.userProfile.username == this.name) {

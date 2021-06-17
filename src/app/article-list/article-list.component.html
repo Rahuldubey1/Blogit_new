@@ -29,7 +29,7 @@
         <div *ngIf="show">
             <p class="favArticle"> No articles are here... yet.</p>
         </div>  
-        <app-app-pagination [myinputMsg]="myInputMessage" (myOutput) ="GetData($event)"></app-app-pagination> 
+        <app-app-pagination [myinputMsg]="myInputMessage" [pageValue]="myinputMsg" (myOutput) ="GetData($event)"></app-app-pagination> 
         <!-- <div>
             <div class="container">
                 <div class="text-center">

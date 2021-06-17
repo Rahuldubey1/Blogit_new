@@ -66,7 +66,6 @@ export class BlogsComponent implements OnInit {
     if(!this.token && tab==1){
       this.router.navigateByUrl('/login')
     }
-  
   }
   complete_blog(blog:any) {
     this.showBlogs = blog
@@ -92,22 +91,19 @@ export class BlogsComponent implements OnInit {
         this.comments=result
       }
     })
-
   }  
   newArticle(){
     this.showNewContent = this.showNewContent ? false : true;
-    
   }
   filterBlogs(tag:any){
     this.selectedTab = 3
       this.save=tag
-    if(this.filter == false){
-    this.filter = this.filter ? false : true;
-  }
+    if(this.filter == false) {
+      this.filter = this.filter ? false : true;
+    }
     this.condition = 3
   }
   selectChangeHandler (event: any) {
     this.value = event.target.value
   }
-
 }
