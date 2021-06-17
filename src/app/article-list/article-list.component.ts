@@ -37,7 +37,6 @@ export class ArticleListComponent implements OnInit {
   // paged items
   pagedItems: any[];
   GetData(data:any){ 
-    console.log(this.myInputMessage)
     if(!this.token){
       this.authService.getPost(data).subscribe(result=> {
         if(result && result.articles) {
@@ -48,10 +47,7 @@ export class ArticleListComponent implements OnInit {
       })
     }
     if (this.myinputMsg ==2){
-      console.log(data) 
-
     this.authService.getPost(data).subscribe(result=> {
-      console.log(data)
       if(result && result.articles) {
         this.articleCount = (result.articlesCount/10)
         if(result.articlesCount == 0){
@@ -258,9 +254,8 @@ export class ArticleListComponent implements OnInit {
           if(result && result.articles) {
           this.articleCount = (result.articlesCount/10)
           this.myInputMessage = this.articleCount
-          if(result.articlesCount == 0){console.log(this.show)
+          if(result.articlesCount == 0){
             this.show = this.show ? false:true
-            console.log(this.show)
           }
           this.userPost = result.articles          
         }

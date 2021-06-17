@@ -37,7 +37,6 @@ export class ProfileComponent implements OnInit {
         if(val.username){
           this.authService.getSelectedProfile(val.username,'').subscribe(result=>{
             if(result){
-              console.log(result)
               if(result.articlesCount == 0){
                 this.favArticle = this.favArticle ? false : true;
               }
@@ -50,7 +49,6 @@ export class ProfileComponent implements OnInit {
           this.authService.getUserProfile(val.username).subscribe(result=>{
             if(result){
               this.selectedUser = result
-console.log(this.selectedUser)
               this.selectedUser = this.selectedUser.profile
               this.name1 = this.selectedUser.username
               if(this.selectedUser.following == true)
@@ -80,8 +78,6 @@ console.log(this.selectedUser)
     } else {
       this.authService.getSelectedProfile(this.userName,data).subscribe(result=>{
         if(result){
-          console.log(result)
-  
           this.selectedUserPost = result.articles
           if(this.selectedUserPost[0].favorited == true){}
         }
@@ -236,7 +232,6 @@ console.log(this.selectedUser)
             blog.favorited = false
             this.authService.showFavBlog(this.userName,'').subscribe(result=>{
               if(result){
-                console.log(result)
                 this.selectedUserPost = result.articles
                 this.articleCount = (result.articlesCount/10)
                 this.myInputMessage = this.articleCount

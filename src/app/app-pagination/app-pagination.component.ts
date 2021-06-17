@@ -15,7 +15,6 @@ export class AppPaginationComponent implements OnInit,OnChanges {
   num:number
   constructor(private authService:AuthServiceService) { }
   ngOnChanges(){ 
-    console.log(this.myinputMsg)
     this.article = []
       for (let i = 0; i < this.myinputMsg; i++) { 
         this.article.push(i)
@@ -31,7 +30,6 @@ export class AppPaginationComponent implements OnInit,OnChanges {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   }
   pervious(){
-    alert(this.value)
     if(this.value == 0){
       (<HTMLInputElement> document.getElementById("pervious")).disabled = true;
     }
@@ -41,7 +39,6 @@ export class AppPaginationComponent implements OnInit,OnChanges {
     this.myOutput.emit(this.value)
   }
   next(){
-    console.log(this.value)
     this.value = this.value+1
     this.myOutput.emit(this.value)
   }

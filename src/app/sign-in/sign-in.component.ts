@@ -54,7 +54,9 @@ export class SignInComponent implements OnInit {
         },
         error => {
           this.errorMessage = error.error.errors;
-          this.error = this.error ? false:true
+          if(this.error == false) {
+            this.error = this.error ? false:true
+          }
         })
       }     
     }

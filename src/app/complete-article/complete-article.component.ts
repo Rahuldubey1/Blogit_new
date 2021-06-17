@@ -28,7 +28,6 @@ export class CompleteArticleComponent implements OnInit {
     })
     this.authService.getComment(this.userName).subscribe(result=> {
       if(result){
-        console.log(result)
         this.comm=result
         this.comments = this.comm.comments
       }
@@ -36,12 +35,9 @@ export class CompleteArticleComponent implements OnInit {
     this.token = localStorage.getItem("token");
     const response = await this.authService.getclickedBlog(this.userName).subscribe(result=>{
         if(result) {
-
-           
         this.data = result
         this.data=this.data.article
         this.name=this.data.author.username
-        console.log(this.name)
       }
       if(this.data.author.following == true) {
         this.profileFollow = this.profileFollow ? false : true;
@@ -52,11 +48,8 @@ export class CompleteArticleComponent implements OnInit {
     })
     this.authService.getUser().subscribe(result=> {
       if(result){
-        console.log(result)
         this.userProfile = result.user
-        // console.log(this.userProfile.username)
       }
-      console.log(this.userProfile.username)
       if(this.userProfile.username == this.name) {
         this.profile = this.profile? false:true
       }  
@@ -91,8 +84,6 @@ editArticle(data:any){
         this.commentss = ''
       }
     })
-      
-
   } 
   deleteComment(data:any,id:number){
     var value={
@@ -134,6 +125,8 @@ editArticle(data:any){
       if(blog.favorited == false) {
         this.authService.addLike(blog.slug).subscribe(result=> {
           if(result){
+            this.data = result
+            this.data=this.data.article
             this.articleLike = true
           }
         })
@@ -141,6 +134,8 @@ editArticle(data:any){
       else {
         this.authService.removeLike(blog.slug).subscribe(result=> {
           if(result){
+            this.data = result
+            this.data=this.data.article
             this.articleLike = false
           }
         })

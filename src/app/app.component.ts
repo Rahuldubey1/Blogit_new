@@ -19,8 +19,6 @@ export class AppComponent {
   checkUser:boolean = false 
   collapsed = true;
   constructor(public authService:AuthServiceService){
-    this.token= this.authService.getToken()
-    console.log(this.token)
   }
   ngOnChange(){
     this.authService.getUser().subscribe(result=> {
@@ -33,18 +31,17 @@ export class AppComponent {
     })
   }
   ngOnInit(): void {
-
-    console.log(this.token)
-
-    this.authService.getUser().subscribe(result=> {
-      if(result && result.user) {
-        this.userData = result.user
-        this.authService.setProfile(this.userData)
-      } else {
-        alert("errro")
-      }
-    })
-  
+    this.token= this.authService.getToken()
+    if(this.token){
+      this.authService.getUser().subscribe(result=> {
+        if(result && result.user) {
+          this.userData = result.user
+          this.authService.setProfile(this.userData)
+        } else {
+          alert("errro")
+        }
+      })
+    }
     if(this.token){
       this.checkUser = this.checkUser ? false : true;
     }
