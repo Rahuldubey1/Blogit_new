@@ -20,18 +20,23 @@ export class AppPaginationComponent implements OnInit,OnChanges {
         this.article.push(i)
     }
     this.value = 0
+    alert("value")
+    console.log(this.value)
   }
   ngOnInit(): void {
+    alert("123")
     this.token = this.authService.getToken()
   }
   pagination(number:any){
+    alert("bnm")
     this.myOutput.emit(number)
     this.value = number 
+    console.log(this.value)
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   }
   pervious(){
     if(this.value == 0){
-      (<HTMLInputElement> document.getElementById("pervious")).disabled = true;
+      // (<HTMLInputElement> document.getElementById("pervious")).disabled = true;
     }
     else {
     this.value = this.value-1

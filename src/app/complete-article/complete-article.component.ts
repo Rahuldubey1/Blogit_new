@@ -22,7 +22,7 @@ export class CompleteArticleComponent implements OnInit {
   name:any
   constructor(private authService:AuthServiceService,private router:Router,private route:ActivatedRoute) { }
   
-  async ngOnInit() {
+  ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.userName = params.get("username")
     })
@@ -33,11 +33,27 @@ export class CompleteArticleComponent implements OnInit {
       }
     })
     this.token = localStorage.getItem("token");
-    const response = await this.authService.getclickedBlog(this.userName).subscribe(result=>{
-        if(result) {
+    this.getclickedBlog();
+    if(this.data.author.following == true) {
+      this.profileFollow = this.profileFollow ? false : true;
+    }    
+  }
+  getclickedBlog(){
+    this.authService.getclickedBlog(this.userName).subscribe(result=>{
+      if(result) {
+        console.log(result)
         this.data = result
         this.data=this.data.article
         this.name=this.data.author.username
+        this.authService.getUser().subscribe(result=> {
+          if(result){
+            console.log(result)
+            this.userProfile = result.user
+          }
+          if(this.userProfile.username == this.name) {
+            this.profile = this.profile? false:true
+          }  
+        })
       }
       if(this.data.author.following == true) {
         this.profileFollow = this.profileFollow ? false : true;
@@ -46,18 +62,7 @@ export class CompleteArticleComponent implements OnInit {
         this.articleLike = this.articleLike ? false : true;
       }
     })
-    this.authService.getUser().subscribe(result=> {
-      if(result){
-        this.userProfile = result.user
-      }
-      if(this.userProfile.username == this.name) {
-        this.profile = this.profile? false:true
-      }  
-    })
-    if(this.data.author.following == true) {
-      this.profileFollow = this.profileFollow ? false : true;
-    }    
-}
+  }
 delete(data:any){
   var value={
     slug:data.slug

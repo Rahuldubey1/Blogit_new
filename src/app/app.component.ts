@@ -21,14 +21,7 @@ export class AppComponent {
   constructor(public authService:AuthServiceService){
   }
   ngOnChange(){
-    this.authService.getUser().subscribe(result=> {
-      if(result && result.user) {
-        this.userData = result.user
-        this.authService.setProfile(this.userData)
-      } else {
-        alert("errro")
-      }
-    })
+    alert("change")
   }
   ngOnInit(): void {
     this.token= this.authService.getToken()

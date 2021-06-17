@@ -102,10 +102,14 @@ export class ArticleListComponent implements OnInit {
         }
       }
       if(this.myinputMsg ==1 ){
+        alert("1")
         this.authService.getFeed(this.token,this.filterPost).subscribe(result=> {
           if(result && result.articles) {
             if(result.articlesCount == 0){
+              console.log(this.show)
               this.show = this.show ? false:true 
+              console.log(this.show)
+
             }
             if(this.filterPost == undefined){
               this.filterPost = 10 
@@ -122,11 +126,21 @@ export class ArticleListComponent implements OnInit {
         }
       }
       if(this.myinputMsg ==2)  {
+        alert("2")
+
         this.authService.getPost(this.filterPost).subscribe(result=> {
           if(result && result.articles) {
             if(result.articlesCount == 0){
+              console.log(this.show)
+
               this.show = this.show ? false:true
-          }
+              console.log(this.show)
+
+            } else {
+              if(this.show == true){
+              this.show = this.show ? false:true
+              }
+            }
             if(this.filterPost == undefined){
               this.filterPost = 10 
             }
@@ -134,7 +148,11 @@ export class ArticleListComponent implements OnInit {
             this.myInputMessage = this.articleCount
             this.userPost = result.articles 
               if(this.articleCount == 0){
+              console.log(this.show)
+
                 this.show = this.show ? false:true
+              console.log(this.show)
+
               }
           } else {
             alert("There is error")
@@ -142,7 +160,7 @@ export class ArticleListComponent implements OnInit {
         })     
       }
       if(this.myinputMsg ==3) {
-
+        alert("3")
         this.authService.getFilteredBlog(this.tags,this.filterPost).subscribe(result=>{
           if(result){
             if(result.articlesCount == 0){
@@ -152,13 +170,14 @@ export class ArticleListComponent implements OnInit {
               this.filterPost = 10 
             }
             this.articleCount = (result.articlesCount/this.filterPost)
-            this.myInputMessage = this.articleCount
+            this.myInputMessage = 49
             this.userPost=result.articles
           }
         })
       }
     } else {
       if(this.myinputMsg ==1 ){
+        alert("11")
         this.authService.getFeed(this.token,this.filterPost).subscribe(result=> {
           if(result && result.articles) {
             if(result.articlesCount == 0){
@@ -166,11 +185,14 @@ export class ArticleListComponent implements OnInit {
             }
             this.articleCount = (result.articlesCount/10)
             this.myInputMessage = this.articleCount
+            console.log(this.myInputMessage)
             this.userPost = result.articles 
           }
         }) 
       } 
       if(this.myinputMsg ==2)  {
+        alert("12")
+
         this.authService.getPost(this.filterPost).subscribe(result=> {
           if(this.show == true){
             this.show = this.show ? false:true
@@ -184,6 +206,8 @@ export class ArticleListComponent implements OnInit {
             }
             this.articleCount = (result.articlesCount/10)
             this.myInputMessage = this.articleCount
+            console.log(this.myInputMessage)
+
             this.userPost = result.articles 
               if(this.articleCount == 0){
                 this.show = this.show ? false:true
@@ -194,24 +218,26 @@ export class ArticleListComponent implements OnInit {
         })     
       }
       if(this.myinputMsg ==3) {
+        alert("13")
+
         this.authService.getFilteredBlog(this.tags,this.filterPost).subscribe(result=>{
-      if(this.show == true){
-        this.show = this.show ? false:true
-      }
-      if(result && result.articles) {
-        if(result.articlesCount == 0){
           if(this.show == true){
-          } else {
-          this.show = this.show ? false:true
+            this.show = this.show ? false:true
           }
-        }
+          if(result && result.articles) {
+            if(result.articlesCount == 0){
+              if(this.show == true){
+              } else {
+              this.show = this.show ? false:true
+              }
+            }
             this.articleCount = (result.articlesCount/10)
             this.myInputMessage = this.articleCount
             this.userPost=result.articles
           }
-      })
+        })
+      }
     }
-  }
   // if(this.myinputMsg ==3 || this.myinputMsg ==1 || this.myinputMsg ==2 ) {
   //   alert("9")
 
