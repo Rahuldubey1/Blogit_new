@@ -42,6 +42,8 @@ export class AppComponent {
     }
   }
   incrementCount(){
+    alert("1")
+    console.log(this.userData)
     this.token= this.authService.getToken()
     if(this.token){
       this.authService.getUser().subscribe(result=> {

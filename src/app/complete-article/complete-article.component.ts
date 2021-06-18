@@ -67,7 +67,7 @@ delete(data:any){
   }
   this.authService.deleteArticle(value).subscribe(result=> {
   if(result){
-    this.router.navigateByUrl('/user-profile')
+    this.router.navigateByUrl('/profile')
   }
   })
 }

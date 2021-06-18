@@ -170,11 +170,13 @@ export class ProfileComponent implements OnInit {
     }
   }
   showFavBlog(data:any,number:number){
+    alert(this.myInputMessage)
     this.number = number
-    if(this.myInputMessage == 0) {
-    } else {
+    // if(this.myInputMessage == 0) {
+    // } else {
     this.authService.showFavBlog(data,'').subscribe(result=>{
       if(result){
+        console.log(result)
         if(result.articlesCount == 0){
           if(this.favArticle == true){
           } else {
@@ -195,7 +197,7 @@ export class ProfileComponent implements OnInit {
         }
       }
     })
-  }
+  // }
   }
   show(){
     this.number=1
