@@ -170,7 +170,6 @@ export class ProfileComponent implements OnInit {
     }
   }
   showFavBlog(data:any,number:number){
-    alert(this.myInputMessage)
     this.number = number
     // if(this.myInputMessage == 0) {
     // } else {
