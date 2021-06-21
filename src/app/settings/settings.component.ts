@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../auth-service.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -18,6 +18,7 @@ export class SettingsComponent implements OnInit {
   showUsernameError:boolean=false
   showEmailError:boolean=false
 
+
   constructor(private authService:AuthServiceService,private router:Router) { 
 
   }
@@ -28,11 +29,11 @@ export class SettingsComponent implements OnInit {
     this.updateData = new FormGroup({
       'image' : new FormControl(''),
       'username' : new FormControl('',Validators.required),
-      'bio' : new FormControl(''),
+      'bio' : new FormControl('',[Validators.required,Validators.maxLength(200),Validators.minLength(20)]),
       'email' : new FormControl('',[Validators.email,Validators.required]),
       'password' : new FormControl('',[Validators.minLength(8),Validators.required,])
     });
-
+    console.log(this.updateData.value.bio.lenght)
     this.authService.getUser().subscribe(result=> {
       if(result && result.user) {
         this.userData = result.user
@@ -44,6 +45,10 @@ export class SettingsComponent implements OnInit {
       } 
     })
   }
+  get userName() {
+    return this.updateData.get('bio')
+  }
+
 
   public logout()
   {

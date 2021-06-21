@@ -20,6 +20,18 @@
                         <fieldset class="form-group">
                             <textarea class="form-control form-control-lg"
                             formControlName="bio" placeholder="Short bio about you" rows="8"></textarea>
+                            <div *ngIf="userName?.errors?.minlength">
+                                <small class="text-danger">                            
+                                Please enter more then 20 characters.</small>
+                            </div>
+                            <div *ngIf="userName?.errors?.maxlength">
+                                <small class="text-danger">                            
+                                Please enter less then 200 characters.</small>
+                            </div>
+                            <div *ngIf="(updateData.get('bio')!.invalid && updateData.get('bio')!.touched)">
+                                <small class="text-danger">                            
+                                Please enter valid input</small>
+                            </div>
                         </fieldset>
                         <fieldset class="form-group" *ngIf="userData">
                             <input class="form-control form-control-lg" 

@@ -15,12 +15,19 @@ export class AppPaginationComponent implements OnInit,OnChanges {
   token:any
   num:number
   tab:number = 1
+  rahul:any = new Array(10)
+  
   constructor(private authService:AuthServiceService) { }
   ngOnChanges(){ 
     this.article = []
-      for (let i = 0; i < this.myinputMsg; i++) { 
-        this.article.push(i)
+    if((Math.floor(this.myinputMsg) === this.myinputMsg) == true){
+    this.article = new Array(this.myinputMsg)
+    } else {
+      this.myinputMsg = Math.floor(this.myinputMsg+1)
+      this.article = new Array(this.myinputMsg)
     }
+    this.article = new Array(this.myinputMsg)
+    console.log(this.article)
     if(this.pageValue){
       this.value = 0
     }    
@@ -31,7 +38,7 @@ export class AppPaginationComponent implements OnInit,OnChanges {
   pagination(number:any){
     this.myOutput.emit(number)
     this.value = number 
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   }
   pervious(){
     if(this.value == 0){
@@ -39,7 +46,7 @@ export class AppPaginationComponent implements OnInit,OnChanges {
     }
     else {
     this.value = this.value-1
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
 
     }
     this.myOutput.emit(this.value)
@@ -47,6 +54,6 @@ export class AppPaginationComponent implements OnInit,OnChanges {
   next(){
     this.value = this.value+1
     this.myOutput.emit(this.value)
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   }
 }

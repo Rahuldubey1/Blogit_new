@@ -1,7 +1,7 @@
 <nav aria-label="Page navigation example" class="mt-5" *ngIf="article != '' ">
     <ul class="pagination">
         <li class="page-item" (click)="pervious()" ><a class="page-link" [ngClass]="{'disabled': value == 0}" ><i class="fa fa-angle-double-left"></i></a></li>
-        <li class="page-item" *ngFor="let number of article; let i = index"><a class="page-link" (click)="pagination(number)" [ngClass]="{'active' : value == i}">{{number+1}}</a></li>
+        <li class="page-item" *ngFor="let number of article; let i = index"><a class="page-link" (click)="pagination(i)" [ngClass]="{'active' : value == i}">{{i+1}}</a></li>
         <li class="page-item" (click)="next()"><a class="page-link" [ngClass]="{'disabled': value == (myinputMsg-1) || myinputMsg < 1 ||  value > (myinputMsg-1)}" ><i class="fa fa-angle-double-right"></i></a></li>
     </ul>
 </nav>

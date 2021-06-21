@@ -10,6 +10,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { NewArticleComponent } from './new-article/new-article.component';
 import { UserProflieComponent } from './user-proflie/user-proflie.component';
 import { AuthGuard } from './auth.guard';
+import { FormComponent } from './form/form.component';
+
 
 // import { AuthGuard } from './helper';
 
@@ -26,6 +28,7 @@ const routes: Routes = [
   {path:"new-article", component:NewArticleComponent},
   {path:"user-profile", component:UserProflieComponent},
   {path:"user-profile/:username", component:UserProflieComponent},
+  {path:"form", component:FormComponent},
   {path:"**", component:BlogsComponent},
 
 ];
@@ -43,5 +46,6 @@ export const routingComponent = [
   CompleteArticleComponent,
   ProfileComponent,
   NewArticleComponent,
-  UserProflieComponent
+  UserProflieComponent,
+  FormComponent
 ]
