@@ -10,62 +10,79 @@
                                 <input type="text" formControlName="firstName" class="form-control" placeholder="First Name *" />
                             </div>
                             <small class="text-danger"
-                            *ngIf="(updateData.get('firstName')!.invalid && updateData.get('firstName')!.touched)">                            
-                            Please enter valid firstName!</small>
+                            *ngIf="(updateData.get('firstName')!.invalid && updateData.get('firstName')!.touched) || (updateData.get('firstName')!.untouched && submitted)"> 
+                                <span *ngIf="f.firstName.errors.pattern">Only char allowed</span>                              
+                                <span *ngIf="f.firstName.errors.required">Please enter valid firstName!</span>   
+                            </small>
                             <div class="form-group">
                                 <input type="text" formControlName="lastName" class="form-control" placeholder="Last Name *"/>
                             </div>
                             <small class="text-danger"
-                            *ngIf="(updateData.get('lastName')!.invalid && updateData.get('lastName')!.touched)">                            
-                            Please enter valid lastName!</small>
+                            *ngIf="(updateData.get('lastName')!.invalid && updateData.get('lastName')!.touched)  || (updateData.get('lastName')!.untouched && submitted)">                            
+                                <span *ngIf="f.lastName.errors.pattern">Only char allowed</span>                              
+                                <span *ngIf="f.lastName.errors.required">Please enter valid firstName!</span>  
+                            </small>
                             <div class="form-group">
                                 <input type="text" formControlName="username" class="form-control" placeholder="UserName"/>
                             </div>
                             <small class="text-danger"
-                            *ngIf="(updateData.get('username')!.invalid && updateData.get('username')!.touched)">                            
+                            *ngIf="(updateData.get('username')!.invalid && updateData.get('username')!.touched) || (updateData.get('username')!.untouched && submitted)">                            
                             <span *ngIf="updateData.get('username').errors['required']!">Username is not valid!</span>
                             <span *ngIf="updateData.get('username').errors['nameisnotallowed']!">{{updateData.get('username').value}} is not allowed</span>
                             </small>
                             <div class="form-group">
-                                <input type="password" formControlName="password" class="form-control" placeholder="Password *"/>
+                                <input type="password" formControlName="password" maxlength="20" class="form-control" placeholder="Password *"/>
                             </div>
                             <small class="text-danger"
-                            *ngIf="(updateData.get('password')!.invalid && updateData.get('password')!.touched)">                            
-                            Please enter valid password!</small>
+                            *ngIf="(submitted && f.password.errors) || (updateData.get('password')!.invalid && updateData.get('password')!.touched)"> 
+                            <span *ngIf="f.password.errors.required">Please enter valid password!</span>                           
+                            <span *ngIf="f.password.errors.minlength">Please enter min 8 char!</span>                           
+                            <span *ngIf="f.password.errors.maxlength">Please enter max 20 char!</span>                           
+                            </small>
                             <div class="form-group">
-                                <input type="password" formControlName="confirmPassword" class="form-control"  placeholder="Confirm Password *" />
+                                <input type="password" formControlName="confirmPassword" maxlength="20" class="form-control"  placeholder="Confirm Password *" />
                             </div>
                             <small class="text-danger"
-                            *ngIf="(updateData.get('confirmPassword')!.invalid && updateData.get('confirmPassword')!.touched)">                            
-                            Please enter valid confirmPassword!</small>
+                            *ngIf="f.confirmPassword.errors && submitted"> 
+                            <!-- <span *ngIf="f.confirmPassword.errors.required">Please enter valid confirmPassword!</span>   -->
+                            <!-- <span *ngIf="f.confirmPassword.errors.minlength">Please enter min 8 char!</span>                          -->
+                            <span *ngIf="f.confirmPassword.errors.maxlength">Please enter min 8 char!</span>                         
+                            <span *ngIf="f.confirmPassword.errors.mustMatch">Password does not match!</span>                           
+                            </small>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <input type="email" formControlName="email" class="form-control" placeholder="Your Email *" />
                             </div>
                             <small class="text-danger"
-                            *ngIf="(updateData.get('email')!.invalid && updateData.get('email')!.touched)">                            
+                            *ngIf="(updateData.get('email')!.invalid && updateData.get('email')!.touched)  || (updateData.get('email')!.untouched && submitted)">                            
                             Please enter valid email!</small>
                             <div class="form-group">
                                 <input type="text" formControlName="number" minlength="10" maxlength="10"class="form-control" placeholder="Your number *" />
                             </div>
                             <small class="text-danger"
-                            *ngIf="(updateData.get('number')!.invalid && updateData.get('number')!.touched)">                            
-                            Please enter valid number!</small>
+                            *ngIf="(updateData.get('number')!.invalid && updateData.get('number')!.touched)  || (updateData.get('number')!.untouched && submitted)">                            
+                            <span *ngIf="f.number.errors.minlength">Please enter 10 digits!</span>
+                            <span *ngIf="f.number.errors.pattern">Please enter only digits!</span>
+                            <span *ngIf="f.number.errors.required"> Please enter valid number!</span>
+                            </small>
                             <div class="form-group">
                                 <input type="textarea" formControlName="about" class="form-control" placeholder="Enter about you *"/>
                             </div>
                             <small class="text-danger"
-                            *ngIf="(updateData.get('about')!.invalid && updateData.get('about')!.touched)">                            
-                            Please enter valid about!</small>
-                            <div class="form-group" formArrayName="skills">
-                                <ng-container *ngFor="let skill of updateData.get('skills').value; index as i">
-                                    <input type="text" formControlName="{{i}}" class="form-control mt-2" placeholder="Enter Your skills *"/>
+                            *ngIf="(updateData.get('about')!.invalid && updateData.get('about')!.touched)  || (updateData.get('about')!.untouched && submitted)">                            
+                            <span *ngIf="f.about.errors.minlength">Please enter more then 20 char!</span>
+                            <span *ngIf="f.about.errors.maxlength">Please enter less then 200 char!</span>
+                            <span *ngIf="f.about.errors.required"> Please enter valid input!</span>
+                            </small>
+                            <div class="form-group" formArrayName="itemRows">
+                                <ng-container *ngFor="let skill of updateData.controls.itemRows.value; let i = index">
+                                    <input type="text" [formGroupName]="i" class="form-control mt-2" placeholder="Enter Your skills *"/>
                                 </ng-container>
-                                <button (click)=addskills() class="btn btn-light btn-sm mt-3 btn-add"><i>+</i>Add Skills</button>
+                                <a (click)=addskills() class="btn btn-light btn-sm mt-3 btn-add"><i>+</i>Add Skills</a>
                             </div>
                             <small class="text-danger"
-                            *ngIf="(updateData.get('skills')!.invalid && updateData.get('skills')!.touched)">                            
+                            *ngIf="(updateData.get('skills')!.invalid && updateData.get('skills')!.touched  || submitted)">                            
                             Please enter valid skills!</small>
                         </div>
                     <button class="btn btn-lg btn-primary pull-xs-right" type="submit"> Submit</button>

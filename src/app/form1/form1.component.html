@@ -1,0 +1,30 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="reactiveForm">
+    <input type="text" name="username" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"><br>
+    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+       <div *ngIf="f.username.errors.required">Username Is Required</div>
+    </div>
+    <input type="checkbox" name="checkvalid" formControlName="checkvalid" [ngClass]="{ 'is-invalid': submitted && f.checkvalid.errors }"><br>
+    <div *ngIf="submitted && f.checkvalid.errors" class="invalid-feedback">
+       <div *ngIf="f.checkvalid.errors.required">Username Is Required</div>
+    </div>
+    <input type="checkbox" (change)="ch($event.target)" name="check" formControlName="check"><br>
+    <div class="form-row">
+       <div class="form-group col">
+          <label>Password</label>
+          <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+             <div *ngIf="f.password.errors.required">Password is required</div>
+             <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+          </div>
+       </div>
+       <div class="form-group col">
+          <label>Confirm Password</label>
+          <input type="password" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+          <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+             <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+             <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+          </div>
+       </div>
+    </div>
+    <button type="submit">Click</button>
+    </form>
